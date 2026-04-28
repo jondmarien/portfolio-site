@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jon Marien — chrono</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:         #0d0d0d;
+      --bg-surface: #111111;
+      --bg-hover:   #161616;
+      --border:     #222222;
+      --border-dim: #1a1a1a;
+      --text:       #d4d4d4;
+      --text-dim:   #6e6e6e;
+      --text-muted: #3a3a3a;
+      --accent:     #a78bfa;
+      --accent-dim: #7c5cc7;
+      --green:      #4ec994;
+      --orange:     #e8a56e;
+      --red:        #e06c75;
+      --purple:     #c4a8fb;
+      --mono:       'JetBrains Mono', 'Fira Code', monospace;
+      --sans:       'Inter', system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ─────────────────────────────────────── */
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── Sidebar ─────────────────────────────────────── */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .sidebar-brand {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    .sidebar-brand .path {
+      color: var(--text-dim);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .sidebar-section-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .sidebar nav a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 5px 8px;
+      border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar nav a:hover {
+      background: var(--bg-hover);
+      color: var(--text);
+    }
+
+    .sidebar nav a .icon {
+      color: var(--text-muted);
+      font-size: 11px;
+      width: 14px;
+      text-align: center;
+    }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .sidebar-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-links a:hover { color: var(--accent); }
+
+    .sidebar-links a .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* ── Main ─────────────────────────────────────── */
+    .main {
+      padding: 48px 56px;
+      max-width: 740px;
+    }
+
+    /* ── Sections ─────────────────────────────────────── */
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .section-header h2 {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .section-header .hash {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      margin-bottom: 52px;
+    }
+
+    .hero-prompt {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-prompt .caret { color: var(--green); }
+
+    .hero h1 {
+      font-family: var(--mono);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .hero h1 .name-accent { color: var(--accent); }
+
+    .hero .tagline {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .hero .tagline .sep { color: var(--text-muted); margin: 0 8px; }
+
+    .hero-body {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.75;
+      max-width: 580px;
+    }
+
+    .hero-body p + p { margin-top: 12px; }
+
+    .inline-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 1px 7px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      background: var(--bg-surface);
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
+
+    /* ── Projects ─────────────────────────────────────── */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-dim);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.1s;
+    }
+
+    .project-item:first-child {
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .project-item:hover {
+      background: var(--bg-hover);
+      margin: 0 -12px;
+      padding-left: 12px;
+      padding-right: 12px;
+      border-radius: 4px;
+    }
+
+    .project-name {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .project-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .tag.ts    { border-color: #2d1f4a; color: #a78bfa; }
+    .tag.js    { border-color: #3a2f00; color: #c9a227; }
+    .tag.py    { border-color: #1a3320; color: var(--green); }
+    .tag.java  { border-color: #3a1a1a; color: var(--red); }
+    .tag.rs    { border-color: #3a2010; color: var(--orange); }
+    .tag.go    { border-color: #1a2a3a; color: #5dc9e8; }
+    .tag.sec   { border-color: #2a1a3a; color: var(--purple); }
+    .tag.web   { border-color: #1e2e1a; color: #6db36d; }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent-dim);
+      text-decoration: none;
+      white-space: nowrap;
+      padding-top: 3px;
+      transition: color 0.15s;
+    }
+
+    .project-link:hover { color: var(--accent); }
+
+    /* ── Security entries ─────────────────────────────── */
+    .writeup-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .writeup-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .writeup-item:first-child { border-top: 1px solid var(--border-dim); }
+
+    .writeup-title {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .writeup-title:hover { color: var(--accent); }
+
+    .writeup-meta {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 3px;
+      font-family: var(--mono);
+    }
+
+    .writeup-meta .type {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-right: 8px;
+    }
+
+    .writeup-meta .type.cve  { border: 1px solid #3a1a1a; color: var(--red); }
+    .writeup-meta .type.ctf  { border: 1px solid #1a3a20; color: var(--green); }
+    .writeup-meta .type.blog { border: 1px solid #2a1a3a; color: var(--purple); }
+
+    /* ── Community ─────────────────────────────────────── */
+    .community-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .community-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .community-item:first-child { border-top: 1px solid var(--border-dim); }
+
+    .community-name {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .community-role {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-dim);
+      margin-bottom: 5px;
+    }
+
+    .community-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── Contact ─────────────────────────────────────── */
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .contact-label {
+      width: 110px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .contact-value {
+      color: var(--text-dim);
+    }
+
+    .contact-value a {
+      color: var(--accent-dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .contact-value a:hover { color: var(--accent); }
+
+    /* ── Breadcrumb ─────────────────────────────────────── */
+    .breadcrumb {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .breadcrumb .sep { color: var(--text-muted); }
+    .breadcrumb .current { color: var(--text-dim); }
+
+    /* ── Scrollbar ─────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 20px;
+        gap: 20px;
+      }
+
+      .sidebar-brand { flex-basis: 100%; }
+      .sidebar-section { flex: 1; min-width: 120px; }
+
+      .main {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+
+    <!-- ── Sidebar ──────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div>~/chrono</div>
+        <div class="path">Jon Marien</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Navigation</div>
+        <nav>
+          <a href="#about"><span class="icon">~</span> about</a>
+          <a href="#projects"><span class="icon">⌥</span> projects</a>
+          <a href="#security"><span class="icon">⚑</span> security</a>
+          <a href="#community"><span class="icon">◈</span> community</a>
+          <a href="#contact"><span class="icon">@</span> contact</a>
+        </nav>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Links</div>
+        <div class="sidebar-links">
+          <a href="https://github.com/jondmarien" target="_blank" rel="noopener">
+            <span class="dot"></span>github
+          </a>
+          <a href="https://chron0.link" target="_blank" rel="noopener">
+            <span class="dot"></span>chron0.link
+          </a>
+          <a href="https://quartz.chron0.tech" target="_blank" rel="noopener">
+            <span class="dot"></span>blog
+          </a>
+          <a href="https://d-sports.org" target="_blank" rel="noopener">
+            <span class="dot"></span>d-sports
+          </a>
+          <a href="https://linkedin.com/in/jondmarien" target="_blank" rel="noopener">
+            <span class="dot"></span>linkedin
+          </a>
+          <a href="https://twitch.tv/sirchronoblaze" target="_blank" rel="noopener">
+            <span class="dot"></span>twitch
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Main ─────────────────────────────────────── -->
+    <main class="main">
+
+      <div class="breadcrumb">
+        <span>~</span>
+        <span class="sep">/</span>
+        <span>jon-marien</span>
+        <span class="sep">/</span>
+        <span class="current">index</span>
+      </div>
+
+      <!-- Hero -->
+      <div class="hero" id="about">
+        <div class="hero-prompt">
+          <span class="caret">❯</span>
+          <span>whoami</span>
+        </div>
+        <h1>Jon Marien <span class="name-accent">// chrono</span></h1>
+        <div class="tagline">
+          CTO @ D-Sports
+          <span class="sep">·</span>
+          Security Researcher
+          <span class="sep">·</span>
+          Sheridan College
+        </div>
+        <div class="hero-body">
+          <p>
+            Cybersecurity grad building things at the intersection of sports, crypto, and code.
+            CTO of <a href="https://d-sports.org" target="_blank" rel="noopener" style="color: var(--accent-dim); text-decoration: none;">D-Sports</a> —
+            a hockey-focused fan engagement platform with digital collectibles, leaderboards, and on-chain wallets.
+            100+ users across 3 countries.
+          </p>
+          <p>
+            I spend most of my time writing TypeScript, breaking things on TryHackMe and HackTheBox,
+            co-organizing BearHacks, and running the ISSessions CTF at Sheridan.
+            The alias has been <span class="inline-tag">chrono</span> for years — it fits.
+          </p>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="section" id="projects">
+        <div class="section-header">
+          <span class="hash">#</span>
+          <h2>projects</h2>
+        </div>
+        <div class="project-list" id="project-list">
+
+          <a class="project-item" href="https://d-sports.org" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">D-Sports</div>
+              <div class="project-desc">Sports + blockchain fan engagement platform. Hockey-focused. Pack opening, digital collectibles, crypto wallets, global leaderboards. 100+ users, 3 countries.</div>
+              <div class="project-tags">
+                <span class="tag ts">TypeScript</span>
+                <span class="tag web">blockchain</span>
+                <span class="tag web">hockey</span>
+              </div>
+            </div>
+            <span class="project-link">d-sports.org ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/bearhacks-web-portals" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">BearHacks Web Portals</div>
+              <div class="project-desc">Registration and admin portals for BearHacks 2026 — Sheridan College's hybrid hackathon. Actively in development.</div>
+              <div class="project-tags">
+                <span class="tag ts">TypeScript</span>
+                <span class="tag web">web</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://c2.chron0.tech" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">Nexus C2</div>
+              <div class="project-desc">Python C2 framework. Encrypted agent comms (Fernet), Rich TUI operator console, multi-platform payload delivery (Windows/Linux/macOS), Gatekeeper bypass, screenshot/webcam capture, hardware fingerprinting, loot auto-save, Ghost VPN social-engineering landing page. Live at c2.chron0.tech.</div>
+              <div class="project-tags">
+                <span class="tag py">Python</span>
+                <span class="tag sec">security</span>
+                <span class="tag sec">C2</span>
+              </div>
+            </div>
+            <span class="project-link">c2.chron0.tech ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/automotive-security-capstone" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">Automotive Security Capstone</div>
+              <div class="project-desc">RTL-SDR V4 + Raspberry Pi Pico W for real-time automotive RF/NFC security monitoring. Detects jamming, replay attacks, and brute force on wireless car entry. Rich CLI dashboard with session export.</div>
+              <div class="project-tags">
+                <span class="tag py">Python</span>
+                <span class="tag sec">security</span>
+                <span class="tag web">hardware</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/Burpcord" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">Burpcord</div>
+              <div class="project-desc">BurpSuite extension for Discord rich presence. Shows your active scan target and state in your Discord status. Published to the PortSwigger BApp Store.</div>
+              <div class="project-tags">
+                <span class="tag java">Java</span>
+                <span class="tag sec">security</span>
+                <span class="tag web">BApp Store</span>
+              </div>
+            </div>
+            <span class="project-link">bappstore ↗</span>
+          </a>
+
+          <!-- show more toggle -->
+          <div id="projects-more" style="display:none">
+
+          <a class="project-item" href="https://github.com/jondmarien/Health-Companion-Plan" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">Health Companion</div>
+              <div class="project-desc">Personal health app monorepo. Expo Router mobile app (iOS/Android/Web) + Express API + PostgreSQL + Drizzle ORM. pnpm workspace with generated OpenAPI types and React Native client.</div>
+              <div class="project-tags">
+                <span class="tag ts">TypeScript</span>
+                <span class="tag web">mobile</span>
+                <span class="tag web">Expo</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/ctfd-live-scoreboard" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">CTFd Live Scoreboard</div>
+              <div class="project-desc">Real-time scoreboard overlay for CTFd. Used at ISSessions competitions — live-polls the CTFd API and renders rankings.</div>
+              <div class="project-tags">
+                <span class="tag ts">TypeScript</span>
+                <span class="tag sec">CTF</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/MemoryAnalysis.Powershell" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">MemoryAnalysis.Powershell</div>
+              <div class="project-desc">PowerShell module wrapping vol3, pyo3, and .NET for memory dump forensics. Includes a Rust bridge for performance-critical analysis paths.</div>
+              <div class="project-tags">
+                <span class="tag rs">Rust</span>
+                <span class="tag sec">security</span>
+                <span class="tag web">forensics</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/qrcoder" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">QRCoder</div>
+              <div class="project-desc">Custom QR code generator — branded QR codes with logo embedding and styling options.</div>
+              <div class="project-tags">
+                <span class="tag ts">TypeScript</span>
+                <span class="tag web">web</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/mediacoder" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">MediaCoder</div>
+              <div class="project-desc">Media file converter and background removal tool. Built alongside QRCoder as a personal utility duo.</div>
+              <div class="project-tags">
+                <span class="tag ts">TypeScript</span>
+                <span class="tag web">web</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/HemoStat" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">HemoStat</div>
+              <div class="project-desc">Health vitals monitoring and alert system. Canada DevOps Hackathon Toronto, Nov 2025 — Team 1 project.</div>
+              <div class="project-tags">
+                <span class="tag py">Python</span>
+                <span class="tag web">hackathon</span>
+                <span class="tag web">monitoring</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/TuneFlow" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">TuneFlow</div>
+              <div class="project-desc">YouTube description/chapters/comments parser that auto-generates Spotify, YouTube, SoundCloud, and Apple Music playlists.</div>
+              <div class="project-tags">
+                <span class="tag ts">TypeScript</span>
+                <span class="tag web">music</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/dVulnDB" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">dVulnDB</div>
+              <div class="project-desc">Web3 vulnerability disclosure and bug bounty platform. On-chain vuln registry with structured disclosure flows for security researchers.</div>
+              <div class="project-tags">
+                <span class="tag ts">TypeScript</span>
+                <span class="tag sec">security</span>
+                <span class="tag web">Web3</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/contextual-discord" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">Contextual</div>
+              <div class="project-desc">AI-powered GIF picker for Discord. Reads conversation context and suggests the perfect reaction GIF.</div>
+              <div class="project-tags">
+                <span class="tag py">Python</span>
+                <span class="tag web">AI</span>
+                <span class="tag web">Discord</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          <a class="project-item" href="https://github.com/jondmarien/AoC-2025" target="_blank" rel="noopener">
+            <div>
+              <div class="project-name">Advent of Code 2025</div>
+              <div class="project-desc">AoC 2025 solutions written in Go — language learning through competitive algorithmic puzzles.</div>
+              <div class="project-tags">
+                <span class="tag go">Go</span>
+              </div>
+            </div>
+            <span class="project-link">github ↗</span>
+          </a>
+
+          </div><!-- /projects-more -->
+
+          <button id="projects-toggle" onclick="(function(){
+            var m = document.getElementById('projects-more');
+            var b = document.getElementById('projects-toggle');
+            if (m.style.display === 'none') {
+              m.style.display = 'block';
+              b.textContent = '↑ show less';
+            } else {
+              m.style.display = 'none';
+              b.textContent = '+ show more (' + 10 + ' projects)';
+            }
+          })()" style="
+            margin-top: 12px;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            transition: border-color 0.15s, color 0.15s;
+          " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'">
+            + show more (10 projects)
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="section" id="security">
+        <div class="section-header">
+          <span class="hash">#</span>
+          <h2>security research</h2>
+        </div>
+        <div class="writeup-list">
+
+          <div class="writeup-item">
+            <a class="writeup-title" href="https://quartz.chron0.tech/ISSessions/Articles/24-25-Season/Fall-24/Session-5---2024-12-03/The-7-Zip-Vulnerability-Discovery-(CVE-2024-11477)" target="_blank" rel="noopener">
+              The 7-Zip Vulnerability Discovery — CVE-2024-11477
+            </a>
+            <div class="writeup-meta">
+              <span class="type cve">CVE</span>
+              7-Zip MarkZipBook out-of-bounds write. Remote code execution via crafted archive.
+            </div>
+          </div>
+
+          <div class="writeup-item">
+            <a class="writeup-title" href="https://quartz.chron0.tech/TryHackMe/PaperCut/PaperCut-CVE-2023-27350" target="_blank" rel="noopener">
+              PaperCut Authentication Bypass — CVE-2023-27350
+            </a>
+            <div class="writeup-meta">
+              <span class="type cve">CVE</span>
+              Unauthenticated RCE via the PaperCut NG/MF print management platform.
+            </div>
+          </div>
+
+          <div class="writeup-item">
+            <a class="writeup-title" href="https://quartz.chron0.tech/ISSessions/Articles/24-25-Season/Fall-24/Session-3---2024-10-29/GameFreak-Teraleak" target="_blank" rel="noopener">
+              GameFreak Teraleak Analysis
+            </a>
+            <div class="writeup-meta">
+              <span class="type blog">ANALYSIS</span>
+              Source code leak post-mortem — what was exposed and what it reveals about game dev security.
+            </div>
+          </div>
+
+          <div class="writeup-item">
+            <a class="writeup-title" href="https://quartz.chron0.tech/TryHackMe/Mr.-Robot/Mr.-Robot-CTF---Writeup" target="_blank" rel="noopener">
+              Mr. Robot CTF — Writeup
+            </a>
+            <div class="writeup-meta">
+              <span class="type ctf">CTF</span>
+              Full walkthrough: robots.txt recon, Hydra brute force, privilege escalation via SUID bit.
+            </div>
+          </div>
+
+          <div class="writeup-item">
+            <a class="writeup-title" href="https://quartz.chron0.tech/tags/bscp" target="_blank" rel="noopener">
+              PortSwigger BSCP Labs
+            </a>
+            <div class="writeup-meta">
+              <span class="type ctf">LABS</span>
+              Web security labs — SQLi, XSS, SSRF, access control, business logic flaws.
+            </div>
+          </div>
+
+          <div class="writeup-item">
+            <a class="writeup-title" href="https://quartz.chron0.tech" target="_blank" rel="noopener">
+              More writeups → Chrono's Cyber Chronicles
+            </a>
+            <div class="writeup-meta">
+              <span class="type blog">BLOG</span>
+              TryHackMe, HackTheBox, ISSessions CTF writeups — ongoing.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Community -->
+      <div class="section" id="community">
+        <div class="section-header">
+          <span class="hash">#</span>
+          <h2>community</h2>
+        </div>
+        <div class="community-list">
+
+          <div class="community-item">
+            <div class="community-name">BearHacks 2025</div>
+            <div class="community-role">Co-Chair</div>
+            <div class="community-desc">
+              Co-organized Sheridan College's first-ever hybrid hackathon — 36 hours, 100+ participants, Hazel McCallion campus, March 2025.
+              Now building the web portals for BearHacks 2026.
+            </div>
+          </div>
+
+          <div class="community-item">
+            <div class="community-name">ISSessions CTF</div>
+            <div class="community-role">Coordinator — ISS Club, Sheridan College</div>
+            <div class="community-desc">
+              Runs the ISSessions cybersecurity competition series. Built and maintains the live scoreboard tool (CTFd API).
+              Publishes challenge writeups at quartz.chron0.tech.
+            </div>
+          </div>
+
+          <div class="community-item">
+            <div class="community-name">Canada DevOps Hackathon Toronto</div>
+            <div class="community-role">Competitor — Team 1, November 2025</div>
+            <div class="community-desc">
+              Built HemoStat — a health vitals monitoring and alert system — during a time-pressured hackathon environment.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="section" id="contact">
+        <div class="section-header">
+          <span class="hash">#</span>
+          <h2>contact</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-row">
+            <span class="contact-label">email</span>
+            <span class="contact-value"><a href="mailto:jon@d-sports.org">jon@d-sports.org</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-label">github</span>
+            <span class="contact-value"><a href="https://github.com/jondmarien" target="_blank" rel="noopener">jondmarien</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-label">linkedin</span>
+            <span class="contact-value"><a href="https://linkedin.com/in/jondmarien" target="_blank" rel="noopener">jondmarien</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-label">site</span>
+            <span class="contact-value"><a href="https://chron0.link" target="_blank" rel="noopener">chron0.link</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-label">blog</span>
+            <span class="contact-value"><a href="https://quartz.chron0.tech" target="_blank" rel="noopener">quartz.chron0.tech</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-label">twitch</span>
+            <span class="contact-value"><a href="https://twitch.tv/sirchronoblaze" target="_blank" rel="noopener">sirchronoblaze</a></span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>
