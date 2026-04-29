@@ -37,7 +37,7 @@ export const projects = [
   },
   {
     id: 'link-shortener',
-    name: 'Link Shortener',
+    name: 'LinkCoder',
     href: 'https://github.com/jondmarien/linkcoder',
     description:
       'Cloudflare Workers link shortener with auth, dashboard, redirect caching, abuse reporting, admin review, and analytics.',
@@ -51,6 +51,36 @@ export const projects = [
       { label: 'TypeScript', type: 'ts' },
       { label: 'Cloudflare', type: 'web' },
       { label: 'links', type: 'web' },
+    ],
+  },
+  {
+    id: 'qrcoder',
+    name: 'QRCoder',
+    href: 'https://github.com/jondmarien/qrcoder',
+    description: 'Custom QR code generator — branded QR codes with logo embedding and styling options.',
+    linkLabel: 'github ↗',
+    links: [
+      { href: 'https://github.com/jondmarien/qrcoder', label: 'github ↗' },
+      { href: 'https://qrcoder.chron0.tech', label: 'qrcoder.chron0.tech ↗' },
+    ],
+    tags: [
+      { label: 'TypeScript', type: 'ts' },
+      { label: 'web', type: 'web' },
+    ],
+  },
+  {
+    id: 'mediacoder',
+    name: 'MediaCoder',
+    href: 'https://github.com/jondmarien/mediacoder',
+    description: 'Media file converter and background removal tool. Built alongside QRCoder as a personal utility duo.',
+    linkLabel: 'github ↗',
+    links: [
+      { href: 'https://github.com/jondmarien/mediacoder', label: 'github ↗' },
+      { href: 'https://mediacoder.chron0.tech', label: 'mediacoder.chron0.tech ↗' },
+    ],
+    tags: [
+      { label: 'TypeScript', type: 'ts' },
+      { label: 'web', type: 'web' },
     ],
   },
   {
@@ -131,36 +161,6 @@ export const projects = [
       { label: 'Rust', type: 'rs' },
       { label: 'security', type: 'sec' },
       { label: 'forensics', type: 'web' },
-    ],
-  },
-  {
-    id: 'qrcoder',
-    name: 'QRCoder',
-    href: 'https://github.com/jondmarien/qrcoder',
-    description: 'Custom QR code generator — branded QR codes with logo embedding and styling options.',
-    linkLabel: 'github ↗',
-    links: [
-      { href: 'https://github.com/jondmarien/qrcoder', label: 'github ↗' },
-      { href: 'https://qrcoder.chron0.tech', label: 'qrcoder.chron0.tech ↗' },
-    ],
-    tags: [
-      { label: 'TypeScript', type: 'ts' },
-      { label: 'web', type: 'web' },
-    ],
-  },
-  {
-    id: 'mediacoder',
-    name: 'MediaCoder',
-    href: 'https://github.com/jondmarien/mediacoder',
-    description: 'Media file converter and background removal tool. Built alongside QRCoder as a personal utility duo.',
-    linkLabel: 'github ↗',
-    links: [
-      { href: 'https://github.com/jondmarien/mediacoder', label: 'github ↗' },
-      { href: 'https://mediacoder.chron0.tech', label: 'mediacoder.chron0.tech ↗' },
-    ],
-    tags: [
-      { label: 'TypeScript', type: 'ts' },
-      { label: 'web', type: 'web' },
     ],
   },
   {
