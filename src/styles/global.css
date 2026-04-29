@@ -270,6 +270,13 @@ body {
   transition: background 0.1s;
 }
 
+.project-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
 .project-item:first-child {
   border-top: 1px solid var(--border-dim);
 }
@@ -364,7 +371,8 @@ body {
   transition: color 0.15s;
 }
 
-.project-link:hover {
+.project-link:hover,
+.project-link:focus-visible {
   color: var(--accent);
 }
 

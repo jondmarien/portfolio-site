@@ -6,6 +6,10 @@ export const projects = [
     description:
       'Sports + blockchain fan engagement platform. Hockey-focused. Pack opening, digital collectibles, crypto wallets, global leaderboards. 100+ users, 3 countries.',
     linkLabel: 'd-sports.org ↗',
+    links: [
+      { href: 'https://d-sports.org', label: 'd-sports.org ↗' },
+      { href: 'https://app.d-sports.org', label: 'app.d-sports.org ↗' },
+    ],
     featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
@@ -20,10 +24,33 @@ export const projects = [
     description:
       "Registration and admin portals for BearHacks 2026 — Sheridan College's hybrid hackathon. Actively in development.",
     linkLabel: 'github ↗',
+    links: [
+      { href: 'https://github.com/jondmarien/bearhacks-web-portals', label: 'github ↗' },
+      { href: 'https://me.bearhacks.com', label: 'me.bearhacks.com ↗' },
+      { href: 'https://admin.bearhacks.com', label: 'admin.bearhacks.com ↗' },
+    ],
     featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'web', type: 'web' },
+    ],
+  },
+  {
+    id: 'link-shortener',
+    name: 'Link Shortener',
+    href: 'https://github.com/jondmarien/linkcoder',
+    description:
+      'Cloudflare Workers link shortener with auth, dashboard, redirect caching, abuse reporting, admin review, and analytics.',
+    linkLabel: 'github ↗',
+    links: [
+      { href: 'https://github.com/jondmarien/linkcoder', label: 'github ↗' },
+      { href: 'https://link.chron0.tech', label: 'link.chron0.tech ↗' },
+    ],
+    featured: true,
+    tags: [
+      { label: 'TypeScript', type: 'ts' },
+      { label: 'Cloudflare', type: 'web' },
+      { label: 'links', type: 'web' },
     ],
   },
   {
@@ -112,6 +139,10 @@ export const projects = [
     href: 'https://github.com/jondmarien/qrcoder',
     description: 'Custom QR code generator — branded QR codes with logo embedding and styling options.',
     linkLabel: 'github ↗',
+    links: [
+      { href: 'https://github.com/jondmarien/qrcoder', label: 'github ↗' },
+      { href: 'https://qrcoder.chron0.tech', label: 'qrcoder.chron0.tech ↗' },
+    ],
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'web', type: 'web' },
@@ -123,6 +154,10 @@ export const projects = [
     href: 'https://github.com/jondmarien/mediacoder',
     description: 'Media file converter and background removal tool. Built alongside QRCoder as a personal utility duo.',
     linkLabel: 'github ↗',
+    links: [
+      { href: 'https://github.com/jondmarien/mediacoder', label: 'github ↗' },
+      { href: 'https://mediacoder.chron0.tech', label: 'mediacoder.chron0.tech ↗' },
+    ],
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'web', type: 'web' },

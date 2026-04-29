@@ -1,9 +1,11 @@
 import { ExternalLink } from './ExternalLink.jsx';
 
 export function ProjectItem({ project }) {
+  const links = project.links ?? [{ href: project.href, label: project.linkLabel }];
+
   return (
-    <ExternalLink className="project-item" href={project.href}>
-      <article>
+    <article className="project-item">
+      <div>
         <div className="project-name">{project.name}</div>
         <div className="project-desc">{project.description}</div>
         <div className="project-tags" aria-label={`${project.name} technologies`}>
@@ -13,8 +15,14 @@ export function ProjectItem({ project }) {
             </span>
           ))}
         </div>
-      </article>
-      <span className="project-link">{project.linkLabel}</span>
-    </ExternalLink>
+      </div>
+      <div className="project-links" aria-label={`${project.name} links`}>
+        {links.map((link) => (
+          <ExternalLink className="project-link" href={link.href} key={link.href}>
+            {link.label}
+          </ExternalLink>
+        ))}
+      </div>
+    </article>
   );
 }
