@@ -44,14 +44,15 @@ describe('ProjectList', () => {
 
     expect(detailsButton).toHaveAttribute('aria-pressed', 'true');
     expect(screen.queryByText(/Registration and admin portals/)).not.toBeInTheDocument();
-    expect(screen.getByText('Builder / maintainer')).toBeInTheDocument();
-    expect(screen.getByText('2 live portals')).toBeInTheDocument();
+    expect(screen.getByText('Dev Lead / Core Organizer')).toBeInTheDocument();
+    expect(screen.getByText('119 visitors')).toBeInTheDocument();
+    expect(screen.getByText('15 page views')).toBeInTheDocument();
     const adminLink = screen.getByRole('link', { name: 'admin.bearhacks.com ↗' });
     expect(adminLink).toHaveAttribute('href', 'https://admin.bearhacks.com');
 
     fireEvent.click(adminLink);
 
     expect(detailsButton).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByText('Builder / maintainer')).toBeInTheDocument();
+    expect(screen.getByText('Dev Lead / Core Organizer')).toBeInTheDocument();
   });
 });

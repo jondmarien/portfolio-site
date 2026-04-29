@@ -2,9 +2,9 @@ export const community = [
   {
     id: 'bearhacks-2025',
     name: 'BearHacks 2025–2026',
-    role: 'Co-Chair',
+    role: 'Co-Chair / Dev Lead / Core Organizer',
     description:
-      "Co-organized Sheridan College's first-ever hybrid hackathon, BearHacks 2025 (in 4 weeks!), and helped organize and run BearHacks 2026, including the attendee and admin web portals.",
+      "Co-organized Sheridan College's first-ever hybrid hackathon, BearHacks 2025 (in 4 weeks!), then helped organize and run BearHacks 2026 as Dev Lead and core organizer, including the attendee and admin web portals.",
   },
   {
     id: 'issessions-ctf',
