@@ -63,6 +63,7 @@ export const projects = [
       { href: 'https://github.com/jondmarien/qrcoder', label: 'github ↗' },
       { href: 'https://qrcoder.chron0.tech', label: 'qrcoder.chron0.tech ↗' },
     ],
+    featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'web', type: 'web' },
@@ -78,6 +79,7 @@ export const projects = [
       { href: 'https://github.com/jondmarien/mediacoder', label: 'github ↗' },
       { href: 'https://mediacoder.chron0.tech', label: 'mediacoder.chron0.tech ↗' },
     ],
+    featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'web', type: 'web' },

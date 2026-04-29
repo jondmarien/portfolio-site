@@ -13,13 +13,13 @@ describe('ProjectList', () => {
     expect(screen.getByText('D-Sports')).toBeInTheDocument();
     expect(screen.getByText('Burpcord')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'link.chron0.tech ↗' })).toHaveAttribute('href', 'https://link.chron0.tech');
+    expect(screen.getByRole('link', { name: 'qrcoder.chron0.tech ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
+    expect(screen.getByRole('link', { name: 'mediacoder.chron0.tech ↗' })).toHaveAttribute('href', 'https://mediacoder.chron0.tech');
     expect(screen.queryByText('Health Companion')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: `+ show more (${extraProjectCount} projects)` }));
 
     expect(screen.getByText('Health Companion')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'qrcoder.chron0.tech ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
-    expect(screen.getByRole('link', { name: 'mediacoder.chron0.tech ↗' })).toHaveAttribute('href', 'https://mediacoder.chron0.tech');
     expect(screen.getByRole('button', { name: '↑ show less' })).toHaveAttribute('aria-expanded', 'true');
   });
 
