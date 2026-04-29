@@ -17,6 +17,6 @@ export const community = [
     id: 'canada-devops-hackathon-toronto',
     name: 'Canada DevOps Hackathon Toronto',
     role: 'Competitor — Team 1, November 2025',
-    description: 'Built HemoStat — a Docker Container Health Monitoring System — during a time-pressured hackathon environment, with a team of 4, in 48 hours.',
+    description: 'Won Most Impactful Project for building HemoStat — a Docker Container Health Monitoring System — during a time-pressured hackathon environment, with a team of 4, in 48 hours.',
   },
 ];
