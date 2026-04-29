@@ -147,6 +147,11 @@ export const projects = [
     description:
       'Real-time scoreboard overlay for CTFd. Used at ISSessions competitions — live-polls the CTFd API and renders rankings.',
     linkLabel: 'github ↗',
+    links: [
+      { href: 'https://github.com/jondmarien/ctfd-live-scoreboard', label: 'github ↗' },
+      { href: 'https://scoreboard.issessions.ca/fantasy-ctf', label: 'fantasy ctf ↗' },
+      { href: 'https://scoreboard.issessions.ca/', label: 'scoreboard ↗' },
+    ],
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'CTF', type: 'sec' },
