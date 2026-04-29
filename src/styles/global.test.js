@@ -11,3 +11,10 @@ describe('global cursor styles', () => {
     expect(css).toContain('cursor: var(--cursor-pointer), pointer;');
   });
 });
+
+describe('global layout scale', () => {
+  it('scales the main site chrome to match the preferred browser zoom level', () => {
+    expect(css).toContain('--site-scale: 1.1;');
+    expect(css).toContain('zoom: var(--site-scale);');
+  });
+});

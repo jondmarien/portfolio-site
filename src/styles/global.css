@@ -15,6 +15,7 @@
   --purple: #c4a8fb;
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
   --sans: 'Inter', system-ui, sans-serif;
+  --site-scale: 1.1;
   --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l12 11-6 .8 3.4 5.2-2.2 1.4-3.4-5.2L4 21z' fill='%230d0d0d' stroke='%23a78bfa' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 4 3;
   --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5' fill='none' stroke='%23a78bfa' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%23c4a8fb'/%3E%3C/svg%3E") 12 12;
 }
@@ -52,6 +53,7 @@ button,
   min-height: 100vh;
   max-width: 1100px;
   margin: 0 auto;
+  zoom: var(--site-scale);
 }
 
 .sidebar {
@@ -687,6 +689,7 @@ button,
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: 1fr;
+    zoom: 1;
   }
 
   .sidebar {
