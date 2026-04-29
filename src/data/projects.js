@@ -33,7 +33,7 @@ export const projects = [
       role: 'Dev Lead / Core Organizer',
       status: 'BearHacks 2026 completed',
       details:
-        'Led development and shipped the attendee and admin portals used for BearHacks 2026. Stats are backed by Vercel Analytics and Observability data; Analytics was enabled Day 2 night, after the main Day 1 event day, so visitor totals undercount the full weekend. The Day 1 boba/momo ordering flow worked for the large majority of 200+ hackers, with only about 5-10 reported issues.',
+        'Led development and shipped the attendee and admin portals used for BearHacks 2026. Stats are backed by Vercel Analytics and Observability data; Analytics was enabled Day 1 night, after the main Day 1 event day, so visitor totals undercount the full weekend. The Day 1 boba/momo ordering flow worked for the large majority of 200+ hackers, with only about 5-10 reported issues.',
       stats: [
         { label: 'Attendee portal', value: '119 visitors' },
         { label: 'Attendee views', value: '312 page views' },
