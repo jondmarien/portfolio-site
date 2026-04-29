@@ -6,15 +6,25 @@ import { projects } from '../data/projects.js';
 
 describe('ProjectList', () => {
   it('renders featured projects first and expands the rest on demand', () => {
+    const extraProjectCount = projects.filter((project) => !project.featured).length;
+
     render(<ProjectList projects={projects} />);
 
     expect(screen.getByText('D-Sports')).toBeInTheDocument();
     expect(screen.getByText('Burpcord')).toBeInTheDocument();
     expect(screen.queryByText('Health Companion')).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: '+ show more (10 projects)' }));
+    fireEvent.click(screen.getByRole('button', { name: `+ show more (${extraProjectCount} projects)` }));
 
     expect(screen.getByText('Health Companion')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '↑ show less' })).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('omits the toggle when every project is featured', () => {
+    const featuredOnlyProjects = projects.filter((project) => project.featured);
+
+    render(<ProjectList projects={featuredOnlyProjects} />);
+
+    expect(screen.queryByRole('button', { name: /show more/i })).not.toBeInTheDocument();
   });
 });

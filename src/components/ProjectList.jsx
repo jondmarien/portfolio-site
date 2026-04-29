@@ -14,14 +14,16 @@ export function ProjectList({ projects }) {
         <ProjectItem key={project.id} project={project} />
       ))}
 
-      <button
-        className="projects-toggle"
-        type="button"
-        onClick={() => setExpanded((current) => !current)}
-        aria-expanded={expanded}
-      >
-        {expanded ? '↑ show less' : `+ show more (${extraProjects.length} projects)`}
-      </button>
+      {extraProjects.length > 0 ? (
+        <button
+          className="projects-toggle"
+          type="button"
+          onClick={() => setExpanded((current) => !current)}
+          aria-expanded={expanded}
+        >
+          {expanded ? '↑ show less' : `+ show more (${extraProjects.length} projects)`}
+        </button>
+      ) : null}
     </div>
   );
 }
