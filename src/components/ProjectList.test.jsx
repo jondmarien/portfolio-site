@@ -55,4 +55,19 @@ describe('ProjectList', () => {
     expect(detailsButton).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByText('Dev Lead / Core Organizer')).toBeInTheDocument();
   });
+
+  it('shows repo-backed details for newly enriched project cards', () => {
+    const hemostat = projects.find((project) => project.id === 'hemostat');
+
+    render(<ProjectList projects={[{ ...hemostat, featured: true }]} />);
+
+    const detailsButton = screen.getByRole('button', { name: /^More info about HemoStat/i });
+
+    expect(screen.getByText(/Autonomous Docker container health monitoring system/)).toBeInTheDocument();
+
+    fireEvent.click(detailsButton);
+
+    expect(screen.getByText('Most Impactful Project winner')).toBeInTheDocument();
+    expect(screen.getByText('Redis pub/sub + shared state')).toBeInTheDocument();
+  });
 });

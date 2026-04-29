@@ -34,17 +34,18 @@ export const profile = {
         ' — a hockey-focused fan engagement platform with digital collectibles, leaderboards, and on-chain wallets. 100+ users across 3 countries.',
       ],
       [
-        'I spend most of my time writing TypeScript, breaking things on TryHackMe and HackTheBox, co-organizing BearHacks, and running the ISSessions CTF at Sheridan. The alias has been ',
+        'I spend most of my time writing TypeScript, breaking things on TryHackMe and HackTheBox, serving as BearHacks Co-Chair / Dev Lead / Core Organizer, and formerly coordinating ISSessions at Sheridan: inter/intra-college events, 20+ Fantasy CTF 2026 challenges, a CTFd live scoreboard, and writeups. The alias has been ',
         {
           text: 'chrono',
           variant: 'tag',
         },
-        ' for years — it fits.',
+        ' for years. It fits.',
       ],
     ],
   },
   contact: [
-    { id: 'email', label: 'email', text: 'jon@d-sports.org', href: 'mailto:jon@d-sports.org' },
+    { id: 'work-email', label: 'work email', text: 'jon@d-sports.org', href: 'mailto:jon@d-sports.org' },
+    { id: 'personal-email', label: 'personal email', text: 'jon@chron0.tech', href: 'mailto:jon@chron0.tech' },
     { id: 'github', label: 'github', text: 'jondmarien', href: 'https://github.com/jondmarien' },
     { id: 'linkedin', label: 'linkedin', text: 'jondmarien', href: 'https://linkedin.com/in/jondmarien' },
     { id: 'site', label: 'site', text: 'chron0.link', href: 'https://chron0.link' },

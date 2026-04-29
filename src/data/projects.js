@@ -80,10 +80,13 @@ export const projects = [
       role: 'Builder / maintainer',
       status: 'Live',
       details:
-        'Runs as a single Cloudflare Worker with auth, link creation, redirects, reporting, admin review, and analytics paths.',
+        'Single Cloudflare Worker for the public landing page, auth, dashboard, link creation, redirects, abuse reports, admin review, and owner analytics.',
       stats: [
-        { label: 'Runtime', value: 'Cloudflare Workers' },
-        { label: 'Database', value: 'D1 + KV' },
+        { label: 'Runtime', value: 'Cloudflare Workers + Hono' },
+        { label: 'Storage', value: 'D1 source of truth + KV hot cache' },
+        { label: 'Auth', value: 'Better Auth magic links + Google OAuth' },
+        { label: 'Analytics', value: 'Cloudflare Analytics Engine' },
+        { label: 'Abuse controls', value: 'rate limits + admin review queue' },
       ],
       screenshots: [],
     },
@@ -107,10 +110,13 @@ export const projects = [
     moreInfo: {
       role: 'Builder',
       status: 'Live',
-      details: 'Personal utility for generating styled QR codes with branding and logo embedding.',
+      details:
+        'Modern QR generator with real-time previews, adjustable size/error correction/colors/margins, and high-quality PNG, SVG, and PDF exports.',
       stats: [
-        { label: 'Live app', value: 'qrcoder.chron0.tech' },
-        { label: 'Focus', value: 'branded QR generation' },
+        { label: 'Framework', value: 'Next.js 16 + React 19' },
+        { label: 'Exports', value: 'PNG, SVG, PDF' },
+        { label: 'UI', value: 'Tailwind CSS v4 + shadcn/ui' },
+        { label: 'Processing', value: 'qrcode.react + Sharp + pdf-lib' },
       ],
       screenshots: [],
     },
@@ -133,10 +139,13 @@ export const projects = [
     moreInfo: {
       role: 'Builder',
       status: 'Live',
-      details: 'Personal media utility for file conversion and background-removal workflows.',
+      details:
+        'Privacy-focused media utility that processes files server-side for image/video conversion, quality controls, and algorithmic background removal.',
       stats: [
-        { label: 'Live app', value: 'mediacoder.chron0.tech' },
-        { label: 'Focus', value: 'media tooling' },
+        { label: 'Framework', value: 'Next.js 16 + Bun' },
+        { label: 'Images', value: 'JPEG, PNG, WebP, AVIF, TIFF' },
+        { label: 'Video', value: 'MP4/H.264 + WebM/VP9 via FFmpeg' },
+        { label: 'Processing', value: 'Sharp + fluent-ffmpeg' },
       ],
       screenshots: [],
     },
@@ -153,6 +162,20 @@ export const projects = [
     description:
       'Python C2 framework. Encrypted agent comms (Fernet), Rich TUI operator console, multi-platform payload delivery (Windows/Linux/macOS), Gatekeeper bypass, screenshot/webcam capture, hardware fingerprinting, loot auto-save, Ghost VPN social-engineering landing page. Live at c2.chron0.tech.',
     linkLabel: 'c2.chron0.tech ↗',
+    moreInfo: {
+      role: 'Security research builder',
+      status: 'Live educational research framework',
+      details:
+        'Operator-focused Python C2 research project with a unified HTTP server/dashboard process, encrypted task/result channels, token auth, deploy routes, and a Ghost VPN landing page.',
+      stats: [
+        { label: 'Operator UI', value: 'Rich terminal dashboard' },
+        { label: 'Crypto', value: 'Fernet task/result encryption' },
+        { label: 'Payloads', value: 'Windows, Linux, macOS stagers' },
+        { label: 'Capture', value: 'screenshot + webcam loot auto-save' },
+        { label: 'Agent intel', value: 'CPU, RAM, GPU, display, disk' },
+      ],
+      screenshots: [],
+    },
     featured: true,
     tags: [
       { label: 'Python', type: 'py' },
@@ -167,6 +190,20 @@ export const projects = [
     description:
       'RTL-SDR V4 + Raspberry Pi Pico W for real-time automotive RF/NFC security monitoring. Detects jamming, replay attacks, and brute force on wireless car entry. Rich CLI dashboard with session export.',
     linkLabel: 'github ↗',
+    moreInfo: {
+      role: '4th-year cybersecurity capstone builder',
+      status: '2025 capstone proof of concept',
+      details:
+        'Automotive RF/NFC security monitor using RTL-SDR V4 hardware, Raspberry Pi Pico W, Python signal processing, and a Rich CLI dashboard for real-time evidence presentation.',
+      stats: [
+        { label: 'Hardware', value: 'RTL-SDR V4 + Raspberry Pi Pico W' },
+        { label: 'Signals', value: '315/433 MHz automotive monitoring' },
+        { label: 'Detection', value: 'replay, jamming, brute force, injection' },
+        { label: 'Validation', value: '>90% target accuracy + 109+ tests' },
+        { label: 'Output', value: 'session export + technical evidence views' },
+      ],
+      screenshots: [],
+    },
     featured: true,
     tags: [
       { label: 'Python', type: 'py' },
@@ -181,6 +218,19 @@ export const projects = [
     description:
       'BurpSuite extension for Discord rich presence. Shows your active scan target and state in your Discord status. Published to the PortSwigger BApp Store.',
     linkLabel: 'bappstore ↗',
+    moreInfo: {
+      role: 'Builder / maintainer',
+      status: 'v2.6.0 release',
+      details:
+        'Burp Suite extension that updates Discord Rich Presence from real-time testing activity across Intercept, Scanner, Proxy, Repeater, Intruder, site map/scope, WebSockets, and Collaborator.',
+      stats: [
+        { label: 'Platform', value: 'Burp Suite Montoya API' },
+        { label: 'Runtime', value: 'Java 21 + Gradle ShadowJar' },
+        { label: 'Reliability', value: 'retry backoff + reload RPC button' },
+        { label: 'UX', value: 'Settings panel + embedded logs' },
+      ],
+      screenshots: [],
+    },
     featured: true,
     tags: [
       { label: 'Java', type: 'java' },
@@ -195,6 +245,19 @@ export const projects = [
     description:
       'Personal health app monorepo. Expo Router mobile app (iOS/Android/Web) + Express API + PostgreSQL + Drizzle ORM. pnpm workspace with generated OpenAPI types and React Native client.',
     linkLabel: 'github ↗',
+    moreInfo: {
+      role: 'Builder',
+      status: 'Active personal app',
+      details:
+        'pnpm workspace for a health companion mobile app and API, with modular Expo Router screens, Express route/service/repository layers, generated OpenAPI clients, and synced health logs.',
+      stats: [
+        { label: 'Mobile', value: 'Expo Router for iOS/Android/Web' },
+        { label: 'API', value: 'Express + Zod contracts' },
+        { label: 'Database', value: 'PostgreSQL + Drizzle' },
+        { label: 'Offline UX', value: 'MMKV cache + sync endpoints' },
+      ],
+      screenshots: [],
+    },
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'mobile', type: 'web' },
@@ -217,10 +280,13 @@ export const projects = [
       role: 'Builder / maintainer',
       status: 'Live',
       details:
-        'Built for ISSessions competitions to render CTFd standings as live scoreboard views for participants and organizers.',
+        'Fantasy-themed live scoreboard for ISSessions Fantasy CTF 2026, with CTFd-backed rankings, quest/challenge views, adventurer stats, First Blood Discord webhooks, and server-side API token proxying.',
       stats: [
-        { label: 'Modes', value: 'standard + fantasy CTF' },
-        { label: 'Data source', value: 'CTFd API' },
+        { label: 'Frontend', value: 'React 19 + TypeScript + Vite 7' },
+        { label: 'Data source', value: 'CTFd API via Vercel proxy' },
+        { label: 'Refresh', value: '30s polling + server-side cache' },
+        { label: 'Events', value: 'First Blood Discord webhook' },
+        { label: 'Views', value: 'scoreboard, guilds, adventurers, quests' },
       ],
       screenshots: [],
     },
@@ -236,6 +302,20 @@ export const projects = [
     description:
       'PowerShell module wrapping vol3, pyo3, and .NET for memory dump forensics. Includes a Rust bridge for performance-critical analysis paths.',
     linkLabel: 'github ↗',
+    moreInfo: {
+      role: 'Builder / maintainer',
+      status: 'Production ready core cmdlets',
+      details:
+        'PowerShell memory forensics module built around Volatility 3 with a Rust/PyO3 bridge, native pipeline support, custom formatting, caching, and performance-focused analysis paths.',
+      stats: [
+        { label: 'Module', value: 'PowerShell 7.6+ / .NET 10' },
+        { label: 'Bridge', value: 'Rust 1.90+ + PyO3 + Python 3.12' },
+        { label: 'Forensics', value: 'Volatility 3 process and DLL analysis' },
+        { label: 'Performance', value: 'LRU cache + parallel processing' },
+        { label: 'Caveat', value: 'Win11 26100 limits network/malware plugins' },
+      ],
+      screenshots: [],
+    },
     tags: [
       { label: 'Rust', type: 'rs' },
       { label: 'security', type: 'sec' },
@@ -246,8 +326,23 @@ export const projects = [
     id: 'hemostat',
     name: 'HemoStat',
     href: 'https://github.com/jondmarien/HemoStat',
-    description: 'Health vitals monitoring and alert system. Canada DevOps Hackathon Toronto, Nov 2025 — Team 1 project.',
+    description:
+      'Autonomous Docker container health monitoring system. Canada DevOps Hackathon Toronto, Nov 2025 — Team 1 project.',
     linkLabel: 'github ↗',
+    moreInfo: {
+      role: 'Team Lead / competitor',
+      status: 'Most Impactful Project winner',
+      details:
+        'Multi-agent container health monitor that detects Docker issues, analyzes root causes with GPT-4/Claude or rule fallback, executes guarded remediation, and sends Slack/dashboard alerts.',
+      stats: [
+        { label: 'Event', value: 'Canada DevOps Hackathon Toronto' },
+        { label: 'Team', value: 'Team 1, 48-hour build' },
+        { label: 'Agents', value: 'Monitor, Analyzer, Responder, Alert' },
+        { label: 'Messaging', value: 'Redis pub/sub + shared state' },
+        { label: 'Dashboard', value: 'Streamlit + Prometheus/Grafana' },
+      ],
+      screenshots: [],
+    },
     tags: [
       { label: 'Python', type: 'py' },
       { label: 'hackathon', type: 'web' },
@@ -261,6 +356,20 @@ export const projects = [
     description:
       'YouTube description/chapters/comments parser that auto-generates Spotify, YouTube, SoundCloud, and Apple Music playlists.',
     linkLabel: 'github ↗',
+    moreInfo: {
+      role: 'Builder',
+      status: 'Playable AI playlist utility',
+      details:
+        'AI-powered playlist generator that parses YouTube descriptions, chapters, and comments, recognizes songs with Gemini/Genkit, and exports playlists to Spotify and regular YouTube playlists.',
+      stats: [
+        { label: 'Framework', value: 'Next.js + Genkit' },
+        { label: 'AI', value: 'Google Gemini song recognition' },
+        { label: 'Music APIs', value: 'Spotify + YouTube' },
+        { label: 'Cache', value: 'Redis album art/API cache' },
+        { label: 'Paused', value: 'SoundCloud integration awaiting API support' },
+      ],
+      screenshots: [],
+    },
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'music', type: 'web' },
@@ -273,6 +382,19 @@ export const projects = [
     description:
       'Web3 vulnerability disclosure and bug bounty platform. On-chain vuln registry with structured disclosure flows for security researchers.',
     linkLabel: 'github ↗',
+    moreInfo: {
+      role: 'Builder',
+      status: 'Prototype / concept platform',
+      details:
+        'Blockchain-powered vulnerability disclosure and bug bounty platform concept with CVSS 4.0/3.0 scoring, wallet-based researcher flows, escrow-style reward ideas, and cyberpunk security tooling.',
+      stats: [
+        { label: 'Frontend', value: 'Next.js 14 + TypeScript' },
+        { label: 'Web3', value: 'Phantom wallet + Solana web3.js' },
+        { label: 'Standards', value: 'CVSS 4.0 + 3.0 severity scoring' },
+        { label: 'Storage', value: 'IPFS planned for decentralized files' },
+      ],
+      screenshots: [],
+    },
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'security', type: 'sec' },
@@ -285,6 +407,19 @@ export const projects = [
     href: 'https://github.com/jondmarien/contextual-discord',
     description: 'AI-powered GIF picker for Discord. Reads conversation context and suggests the perfect reaction GIF.',
     linkLabel: 'github ↗',
+    moreInfo: {
+      role: 'Builder',
+      status: 'Plugin prototype',
+      details:
+        'Natural-language GIF search for Discord through a Vencord plugin, backed by semantic search with a keyword fallback and a privacy-focused no-tracking design.',
+      stats: [
+        { label: 'Frontend', value: 'TypeScript + React Vencord plugin' },
+        { label: 'Backend', value: 'FastAPI + Python' },
+        { label: 'AI search', value: 'Sentence Transformers + Qdrant' },
+        { label: 'Fallback', value: 'hybrid semantic + keyword search' },
+      ],
+      screenshots: [],
+    },
     tags: [
       { label: 'Python', type: 'py' },
       { label: 'AI', type: 'web' },
