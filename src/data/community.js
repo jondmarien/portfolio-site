@@ -4,7 +4,14 @@ export const community = [
     name: 'BearHacks 2025–2026',
     role: 'Co-Chair / Dev Lead / Core Organizer',
     description:
-      "Co-organized Sheridan College's first-ever hybrid hackathon, BearHacks 2025 (in 4 weeks!), then helped organize and run BearHacks 2026 as Dev Lead and core organizer, including the attendee and admin web portals.",
+      "Co-organized Sheridan College's first-ever hybrid hackathon, BearHacks 2025 (in 4 weeks!), then helped organize and run BearHacks 2026 as Dev Lead and core organizer, including the attendee/admin portals and backend API.",
+  },
+  {
+    id: 'bearhacks-backend',
+    name: 'BearHacks Backend',
+    role: 'Backend Lead / Dev Lead',
+    description:
+      'Render-hosted API for BearHacks 2026 powering portal auth, QR claiming, hacker profiles, social networking, admin tooling, email campaigns, wallet passes, and boba/momo ordering. Render export covered 28.4K requests, 77.2K logs, and 7 deploys during the Apr 24-26 event window.',
   },
   {
     id: 'issessions-ctf',

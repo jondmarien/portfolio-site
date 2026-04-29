@@ -34,7 +34,7 @@ export const profile = {
         ' — a hockey-focused fan engagement platform with digital collectibles, leaderboards, and on-chain wallets. 100+ users across 3 countries.',
       ],
       [
-        'I spend most of my time writing TypeScript, breaking things on TryHackMe and HackTheBox, serving as BearHacks Co-Chair / Dev Lead / Core Organizer, and formerly coordinating ISSessions at Sheridan: inter/intra-college events, 20+ Fantasy CTF 2026 challenges, a CTFd live scoreboard, and writeups. The alias has been ',
+        'I spend most of my time writing TypeScript, breaking things on TryHackMe and HackTheBox, serving as BearHacks Co-Chair / Dev Lead / Core Organizer, including the FastAPI/Supabase backend behind the BearHacks portals, and formerly coordinating ISSessions at Sheridan: inter/intra-college events, 20+ Fantasy CTF 2026 challenges, a CTFd live scoreboard, and writeups. The alias has been ',
         {
           text: 'chrono',
           variant: 'tag',

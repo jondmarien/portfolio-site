@@ -66,6 +66,40 @@ export const projects = [
     ],
   },
   {
+    id: 'bearhacks-backend',
+    name: 'BearHacks Backend',
+    href: 'https://github.com/jondmarien/bearhacks-backend',
+    description:
+      'FastAPI backend for BearHacks 2026. Supabase auth/database, QR claiming, hacker profiles, social networking, admin tools, email campaigns, wallet passes, and boba/momo ordering APIs.',
+    linkLabel: 'github ↗',
+    links: [
+      { href: 'https://github.com/jondmarien/bearhacks-backend', label: 'github ↗' },
+      { href: 'https://api.bearhacks.com', label: 'backend api ↗' },
+    ],
+    moreInfo: {
+      role: 'Backend Lead / Dev Lead',
+      status: 'Render-hosted event backend',
+      details:
+        'Production API behind BearHacks 2026 user/admin portals, hosted on Render at api.bearhacks.com and backed by Supabase Auth/PostgreSQL for authenticated event workflows.',
+      stats: [
+        { label: 'Event window', value: 'Apr 24-26, 2026' },
+        { label: 'Traffic', value: '28.4K requests' },
+        { label: 'Render logs', value: '77.2K exported logs' },
+        { label: 'Deploys', value: '7 deploys during event weekend' },
+        { label: 'Latency', value: '~240ms avg p50 / ~923ms avg p99' },
+        { label: 'Top routes', value: 'boba, social, portal, QR, admin' },
+        { label: 'Memory', value: '~142 MB avg / 149 MB max' },
+      ],
+      screenshots: [],
+    },
+    featured: true,
+    tags: [
+      { label: 'Python', type: 'py' },
+      { label: 'FastAPI', type: 'web' },
+      { label: 'Supabase', type: 'web' },
+    ],
+  },
+  {
     id: 'link-shortener',
     name: 'LinkCoder',
     href: 'https://github.com/jondmarien/linkcoder',

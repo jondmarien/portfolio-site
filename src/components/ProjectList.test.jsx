@@ -12,6 +12,7 @@ describe('ProjectList', () => {
 
     expect(screen.getByText('D-Sports')).toBeInTheDocument();
     expect(screen.getByText('Burpcord')).toBeInTheDocument();
+    expect(screen.getByText('BearHacks Backend')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'linkcoder ↗' })).toHaveAttribute('href', 'https://link.chron0.tech');
     expect(screen.getByRole('link', { name: 'qrcoder ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
     expect(screen.getByRole('link', { name: 'mediacoder ↗' })).toHaveAttribute('href', 'https://mediacoder.chron0.tech');
@@ -69,5 +70,22 @@ describe('ProjectList', () => {
 
     expect(screen.getByText('Most Impactful Project winner')).toBeInTheDocument();
     expect(screen.getByText('Redis pub/sub + shared state')).toBeInTheDocument();
+  });
+
+  it('shows Render-backed details for the BearHacks backend project', () => {
+    const backend = projects.find((project) => project.id === 'bearhacks-backend');
+
+    render(<ProjectList projects={[backend]} />);
+
+    const detailsButton = screen.getByRole('button', { name: /^More info about BearHacks Backend/i });
+
+    expect(screen.getByText(/FastAPI backend for BearHacks 2026/)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'backend api ↗' })).toHaveAttribute('href', 'https://api.bearhacks.com');
+
+    fireEvent.click(detailsButton);
+
+    expect(screen.getByText('Render-hosted event backend')).toBeInTheDocument();
+    expect(screen.getByText('28.4K requests')).toBeInTheDocument();
+    expect(screen.getByText('77.2K exported logs')).toBeInTheDocument();
   });
 });
