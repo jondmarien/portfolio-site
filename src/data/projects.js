@@ -22,13 +22,25 @@ export const projects = [
     name: 'BearHacks Web Portals',
     href: 'https://github.com/jondmarien/bearhacks-web-portals',
     description:
-      "Registration and admin portals for BearHacks 2026 — Sheridan College's hybrid hackathon. Actively in development.",
+      "Registration and admin portals for BearHacks 2026 — Sheridan College's hybrid hackathon, completed after the event weekend.",
     linkLabel: 'github ↗',
     links: [
       { href: 'https://github.com/jondmarien/bearhacks-web-portals', label: 'github ↗' },
       { href: 'https://me.bearhacks.com', label: 'me.bearhacks.com ↗' },
       { href: 'https://admin.bearhacks.com', label: 'admin.bearhacks.com ↗' },
     ],
+    moreInfo: {
+      role: 'Builder / maintainer',
+      status: 'BearHacks 2026 completed',
+      details:
+        'Built and shipped the attendee and admin portals used for BearHacks 2026. Screenshot-backed traffic and usage stats can be added here once captured.',
+      stats: [
+        { label: '2 live portals', value: 'me + admin' },
+        { label: 'Attendee portal', value: 'me.bearhacks.com' },
+        { label: 'Admin portal', value: 'admin.bearhacks.com' },
+      ],
+      screenshots: [],
+    },
     featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
@@ -46,6 +58,17 @@ export const projects = [
       { href: 'https://github.com/jondmarien/linkcoder', label: 'github ↗' },
       { href: 'https://link.chron0.tech', label: 'link.chron0.tech ↗' },
     ],
+    moreInfo: {
+      role: 'Builder / maintainer',
+      status: 'Live',
+      details:
+        'Runs as a single Cloudflare Worker with auth, link creation, redirects, reporting, admin review, and analytics paths.',
+      stats: [
+        { label: 'Runtime', value: 'Cloudflare Workers' },
+        { label: 'Database', value: 'D1 + KV' },
+      ],
+      screenshots: [],
+    },
     featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
@@ -63,6 +86,16 @@ export const projects = [
       { href: 'https://github.com/jondmarien/qrcoder', label: 'github ↗' },
       { href: 'https://qrcoder.chron0.tech', label: 'qrcoder.chron0.tech ↗' },
     ],
+    moreInfo: {
+      role: 'Builder',
+      status: 'Live',
+      details: 'Personal utility for generating styled QR codes with branding and logo embedding.',
+      stats: [
+        { label: 'Live app', value: 'qrcoder.chron0.tech' },
+        { label: 'Focus', value: 'branded QR generation' },
+      ],
+      screenshots: [],
+    },
     featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
@@ -79,6 +112,16 @@ export const projects = [
       { href: 'https://github.com/jondmarien/mediacoder', label: 'github ↗' },
       { href: 'https://mediacoder.chron0.tech', label: 'mediacoder.chron0.tech ↗' },
     ],
+    moreInfo: {
+      role: 'Builder',
+      status: 'Live',
+      details: 'Personal media utility for file conversion and background-removal workflows.',
+      stats: [
+        { label: 'Live app', value: 'mediacoder.chron0.tech' },
+        { label: 'Focus', value: 'media tooling' },
+      ],
+      screenshots: [],
+    },
     featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
@@ -152,6 +195,17 @@ export const projects = [
       { href: 'https://scoreboard.issessions.ca/fantasy-ctf', label: 'fantasy ctf ↗' },
       { href: 'https://scoreboard.issessions.ca/', label: 'scoreboard ↗' },
     ],
+    moreInfo: {
+      role: 'Builder / maintainer',
+      status: 'Live',
+      details:
+        'Built for ISSessions competitions to render CTFd standings as live scoreboard views for participants and organizers.',
+      stats: [
+        { label: 'Modes', value: 'standard + fantasy CTF' },
+        { label: 'Data source', value: 'CTFd API' },
+      ],
+      screenshots: [],
+    },
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'CTF', type: 'sec' },

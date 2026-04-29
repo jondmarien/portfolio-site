@@ -1,22 +1,22 @@
 export const community = [
   {
     id: 'bearhacks-2025',
-    name: 'BearHacks 2025',
+    name: 'BearHacks 2025–2026',
     role: 'Co-Chair',
     description:
-      "Co-organized Sheridan College's first-ever hybrid hackathon — 36 hours, 100+ participants, Hazel McCallion campus, March 2025. Now building the web portals for BearHacks 2026.",
+      "Co-organized Sheridan College's first-ever hybrid hackathon, BearHacks 2025 (in 4 weeks!), and helped organize and run BearHacks 2026, including the attendee and admin web portals.",
   },
   {
     id: 'issessions-ctf',
-    name: 'ISSessions CTF',
-    role: 'Coordinator — ISS Club, Sheridan College',
+    name: 'ISSessions',
+    role: 'Former Club Coordinator — ISSessions, Sheridan College',
     description:
-      'Runs the ISSessions cybersecurity competition series. Built and maintains the live scoreboard tool (CTFd API). Publishes challenge writeups at quartz.chron0.tech.',
+      'Ran the inter and intra-college events for the ISSessions security club while at Sheridan. Published 20+ challenges for the 2026 Fantasy CTF. Built and maintained the live scoreboard tool (CTFd API) and published challenge writeups at quartz.chron0.tech.',
   },
   {
     id: 'canada-devops-hackathon-toronto',
     name: 'Canada DevOps Hackathon Toronto',
     role: 'Competitor — Team 1, November 2025',
-    description: 'Built HemoStat — a health vitals monitoring and alert system — during a time-pressured hackathon environment.',
+    description: 'Built HemoStat — a Docker Container Health Monitoring System — during a time-pressured hackathon environment, with a team of 4, in 48 hours.',
   },
 ];

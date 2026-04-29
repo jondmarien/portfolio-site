@@ -28,6 +28,30 @@ describe('ProjectList', () => {
 
     render(<ProjectList projects={featuredOnlyProjects} />);
 
-    expect(screen.queryByRole('button', { name: /show more/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^\+ show more/i })).not.toBeInTheDocument();
+  });
+
+  it('flips a project card to show details without hiding its links', () => {
+    render(<ProjectList projects={[projects.find((project) => project.id === 'bearhacks-web-portals')]} />);
+
+    const detailsButton = screen.getByRole('button', { name: /^More info about BearHacks Web Portals/i });
+
+    expect(screen.getByText(/Registration and admin portals/)).toBeInTheDocument();
+    expect(screen.queryByText('Builder / maintainer')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'me.bearhacks.com ↗' })).toHaveAttribute('href', 'https://me.bearhacks.com');
+
+    fireEvent.click(detailsButton);
+
+    expect(detailsButton).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.queryByText(/Registration and admin portals/)).not.toBeInTheDocument();
+    expect(screen.getByText('Builder / maintainer')).toBeInTheDocument();
+    expect(screen.getByText('2 live portals')).toBeInTheDocument();
+    const adminLink = screen.getByRole('link', { name: 'admin.bearhacks.com ↗' });
+    expect(adminLink).toHaveAttribute('href', 'https://admin.bearhacks.com');
+
+    fireEvent.click(adminLink);
+
+    expect(detailsButton).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByText('Builder / maintainer')).toBeInTheDocument();
   });
 });
