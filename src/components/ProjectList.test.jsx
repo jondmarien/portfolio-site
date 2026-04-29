@@ -12,9 +12,9 @@ describe('ProjectList', () => {
 
     expect(screen.getByText('D-Sports')).toBeInTheDocument();
     expect(screen.getByText('Burpcord')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'link.chron0.tech ↗' })).toHaveAttribute('href', 'https://link.chron0.tech');
-    expect(screen.getByRole('link', { name: 'qrcoder.chron0.tech ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
-    expect(screen.getByRole('link', { name: 'mediacoder.chron0.tech ↗' })).toHaveAttribute('href', 'https://mediacoder.chron0.tech');
+    expect(screen.getByRole('link', { name: 'linkcoder ↗' })).toHaveAttribute('href', 'https://link.chron0.tech');
+    expect(screen.getByRole('link', { name: 'qrcoder ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
+    expect(screen.getByRole('link', { name: 'mediacoder ↗' })).toHaveAttribute('href', 'https://mediacoder.chron0.tech');
     expect(screen.queryByText('Health Companion')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: `+ show more (${extraProjectCount} projects)` }));
@@ -38,7 +38,7 @@ describe('ProjectList', () => {
 
     expect(screen.getByText(/Registration and admin portals/)).toBeInTheDocument();
     expect(screen.queryByText('Builder / maintainer')).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'me.bearhacks.com ↗' })).toHaveAttribute('href', 'https://me.bearhacks.com');
+    expect(screen.getByRole('link', { name: 'user portal ↗' })).toHaveAttribute('href', 'https://me.bearhacks.com');
 
     fireEvent.click(detailsButton);
 
@@ -47,7 +47,7 @@ describe('ProjectList', () => {
     expect(screen.getByText('Dev Lead / Core Organizer')).toBeInTheDocument();
     expect(screen.getByText('119 visitors')).toBeInTheDocument();
     expect(screen.getByText('15 page views')).toBeInTheDocument();
-    const adminLink = screen.getByRole('link', { name: 'admin.bearhacks.com ↗' });
+    const adminLink = screen.getByRole('link', { name: 'admin portal ↗' });
     expect(adminLink).toHaveAttribute('href', 'https://admin.bearhacks.com');
 
     fireEvent.click(adminLink);

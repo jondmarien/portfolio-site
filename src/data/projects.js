@@ -26,8 +26,8 @@ export const projects = [
     linkLabel: 'github ↗',
     links: [
       { href: 'https://github.com/jondmarien/bearhacks-web-portals', label: 'github ↗' },
-      { href: 'https://me.bearhacks.com', label: 'me.bearhacks.com ↗' },
-      { href: 'https://admin.bearhacks.com', label: 'admin.bearhacks.com ↗' },
+      { href: 'https://me.bearhacks.com', label: 'user portal ↗' },
+      { href: 'https://admin.bearhacks.com', label: 'admin portal ↗' },
     ],
     moreInfo: {
       role: 'Dev Lead / Core Organizer',
@@ -74,7 +74,7 @@ export const projects = [
     linkLabel: 'github ↗',
     links: [
       { href: 'https://github.com/jondmarien/linkcoder', label: 'github ↗' },
-      { href: 'https://link.chron0.tech', label: 'link.chron0.tech ↗' },
+      { href: 'https://link.chron0.tech', label: 'linkcoder ↗' },
     ],
     moreInfo: {
       role: 'Builder / maintainer',
@@ -105,7 +105,7 @@ export const projects = [
     linkLabel: 'github ↗',
     links: [
       { href: 'https://github.com/jondmarien/qrcoder', label: 'github ↗' },
-      { href: 'https://qrcoder.chron0.tech', label: 'qrcoder.chron0.tech ↗' },
+      { href: 'https://qrcoder.chron0.tech', label: 'qrcoder ↗' },
     ],
     moreInfo: {
       role: 'Builder',
@@ -134,7 +134,7 @@ export const projects = [
     linkLabel: 'github ↗',
     links: [
       { href: 'https://github.com/jondmarien/mediacoder', label: 'github ↗' },
-      { href: 'https://mediacoder.chron0.tech', label: 'mediacoder.chron0.tech ↗' },
+      { href: 'https://mediacoder.chron0.tech', label: 'mediacoder ↗' },
     ],
     moreInfo: {
       role: 'Builder',
@@ -161,10 +161,10 @@ export const projects = [
     href: 'https://c2.chron0.tech',
     description:
       'Python C2 framework. Encrypted agent comms (Fernet), Rich TUI operator console, multi-platform payload delivery (Windows/Linux/macOS), Gatekeeper bypass, screenshot/webcam capture, hardware fingerprinting, loot auto-save, Ghost VPN social-engineering landing page. Live at c2.chron0.tech.',
-    linkLabel: 'c2.chron0.tech ↗',
+    linkLabel: 'c2 (deployment paused) ↗',
     moreInfo: {
       role: 'Security research builder',
-      status: 'Live educational research framework',
+      status: 'Deployment paused',
       details:
         'Operator-focused Python C2 research project with a unified HTTP server/dashboard process, encrypted task/result channels, token auth, deploy routes, and a Ghost VPN landing page.',
       stats: [
