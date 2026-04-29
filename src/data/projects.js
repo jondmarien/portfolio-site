@@ -160,8 +160,8 @@ export const projects = [
     name: 'Nexus C2',
     href: 'https://c2.chron0.tech',
     description:
-      'Python C2 framework. Encrypted agent comms (Fernet), Rich TUI operator console, multi-platform payload delivery (Windows/Linux/macOS), Gatekeeper bypass, screenshot/webcam capture, hardware fingerprinting, loot auto-save, Ghost VPN social-engineering landing page. Live at c2.chron0.tech.',
-    linkLabel: 'c2 (deployment paused) ↗',
+      'Python C2 framework. Encrypted agent comms (Fernet), Rich TUI operator console, multi-platform payload delivery (Windows/Linux/macOS), Gatekeeper bypass, screenshot/webcam capture, hardware fingerprinting, loot auto-save, Ghost VPN social-engineering landing page.  Deployment paused at c2.chron0.tech.',
+    linkLabel: 'c2 ↗',
     moreInfo: {
       role: 'Security research builder',
       status: 'Deployment paused',
