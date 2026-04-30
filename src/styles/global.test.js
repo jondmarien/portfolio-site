@@ -33,5 +33,7 @@ describe('global UX affordances', () => {
     expect(css).toContain('overflow: hidden;');
     expect(css).toContain('overscroll-behavior: contain;');
     expect(css).toContain('scrollbar-gutter: stable;');
+    expect(css).toContain('scrollbar-width: none;');
+    expect(css).toContain('-ms-overflow-style: none;');
   });
 });
