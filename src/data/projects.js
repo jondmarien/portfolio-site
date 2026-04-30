@@ -1,4 +1,16 @@
-export const projects = [
+const featuredProjectOrder = [
+  'd-sports',
+  'nexus-c2',
+  'automotive-security-capstone',
+  'memoryanalysis-powershell',
+  'burpcord',
+  'ctfd-live-scoreboard',
+  'bearhacks-web-portals',
+];
+
+const archiveProjectOrder = ['link-shortener', 'qrcoder', 'mediacoder'];
+
+const projectEntries = [
   {
     id: 'd-sports',
     name: 'D-Sports',
@@ -10,6 +22,24 @@ export const projects = [
       { href: 'https://d-sports.org', label: 'd-sports.org ↗' },
       { href: 'https://app.d-sports.org', label: 'app.d-sports.org ↗' },
     ],
+    media: {
+      type: 'image',
+      src: '',
+      alt: 'D-Sports app preview',
+    },
+    moreInfo: {
+      role: 'CTO / platform builder',
+      status: 'Live sports engagement ecosystem',
+      details:
+        'Hockey-focused fan engagement platform spanning a Progressive Web App, marketing site, native mobile app, wallet-enabled digital collectibles, leaderboards, and Mic’d Up live audio rooms.',
+      stats: [
+        { label: 'Ecosystem', value: 'PWA, web, native app, live audio' },
+        { label: 'Users', value: '100+ across 3 countries' },
+        { label: 'Collectibles', value: 'pack opening + digital items' },
+        { label: 'Wallets', value: 'on-chain fan engagement' },
+        { label: 'Competition', value: 'global leaderboards' },
+      ],
+    },
     featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
@@ -29,6 +59,15 @@ export const projects = [
       { href: 'https://me.bearhacks.com', label: 'user portal ↗' },
       { href: 'https://admin.bearhacks.com', label: 'admin portal ↗' },
     ],
+    logo: {
+      src: new URL('../../assets/raw/logos/bearhacks.svg', import.meta.url).href,
+      alt: 'BearHacks logo',
+    },
+    media: {
+      type: 'image',
+      src: '',
+      alt: 'BearHacks portal preview',
+    },
     moreInfo: {
       role: 'Dev Lead / Core Organizer',
       status: 'BearHacks 2026 completed',
@@ -58,6 +97,11 @@ export const projects = [
         { label: 'Average deploy time', value: '~12s' },
       ],
       screenshots: [],
+    },
+    media: {
+      type: 'image',
+      src: '',
+      alt: 'BearHacks portal preview',
     },
     featured: true,
     tags: [
@@ -92,7 +136,6 @@ export const projects = [
       ],
       screenshots: [],
     },
-    featured: true,
     tags: [
       { label: 'Python', type: 'py' },
       { label: 'FastAPI', type: 'web' },
@@ -124,7 +167,11 @@ export const projects = [
       ],
       screenshots: [],
     },
-    featured: true,
+    media: {
+      type: 'image',
+      src: '',
+      alt: 'LinkCoder dashboard preview',
+    },
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'Cloudflare', type: 'web' },
@@ -154,7 +201,11 @@ export const projects = [
       ],
       screenshots: [],
     },
-    featured: true,
+    media: {
+      type: 'image',
+      src: '',
+      alt: 'QRCoder generator preview',
+    },
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'web', type: 'web' },
@@ -183,7 +234,11 @@ export const projects = [
       ],
       screenshots: [],
     },
-    featured: true,
+    media: {
+      type: 'image',
+      src: '',
+      alt: 'MediaCoder converter preview',
+    },
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'web', type: 'web' },
@@ -310,12 +365,24 @@ export const projects = [
       { href: 'https://scoreboard.issessions.ca/fantasy-ctf', label: 'fantasy ctf ↗' },
       { href: 'https://scoreboard.issessions.ca/', label: 'scoreboard ↗' },
     ],
+    logo: {
+      src: new URL('../../assets/raw/logos/issessions.svg', import.meta.url).href,
+      alt: 'ISSessions logo',
+    },
+    media: {
+      type: 'image',
+      src: '',
+      alt: 'CTFd live scoreboard preview',
+    },
     moreInfo: {
       role: 'Builder / maintainer',
-      status: 'Live',
+      status: '3-day live event scoreboard',
       details:
-        'Fantasy-themed live scoreboard for ISSessions Fantasy CTF 2026, with CTFd-backed rankings, quest/challenge views, adventurer stats, First Blood Discord webhooks, and server-side API token proxying.',
+        'Fantasy-themed live scoreboard for ISSessions Fantasy CTF 2026, with CTFd-backed rankings, quest/challenge views, adventurer stats, First Blood Discord webhooks, and server-side API token proxying. It supported a 300+ attendee hybrid event for 3 days and only needed two live patches during the event.',
       stats: [
+        { label: 'Event scale', value: '300+ hybrid attendees' },
+        { label: 'Uptime window', value: '3 days live' },
+        { label: 'Live maintenance', value: '2 event patches' },
         { label: 'Frontend', value: 'React 19 + TypeScript + Vite 7' },
         { label: 'Data source', value: 'CTFd API via Vercel proxy' },
         { label: 'Refresh', value: '30s polling + server-side cache' },
@@ -324,6 +391,7 @@ export const projects = [
       ],
       screenshots: [],
     },
+    featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'CTF', type: 'sec' },
@@ -350,6 +418,12 @@ export const projects = [
       ],
       screenshots: [],
     },
+    media: {
+      type: 'image',
+      src: '',
+      alt: 'MemoryAnalysis.PowerShell forensic analysis preview',
+    },
+    featured: true,
     tags: [
       { label: 'Rust', type: 'rs' },
       { label: 'security', type: 'sec' },
@@ -469,3 +543,20 @@ export const projects = [
     tags: [{ label: 'Go', type: 'go' }],
   },
 ];
+
+export const projects = [...projectEntries].sort((firstProject, secondProject) => {
+  const firstOrder = getProjectOrder(firstProject);
+  const secondOrder = getProjectOrder(secondProject);
+
+  return firstOrder - secondOrder;
+});
+
+function getProjectOrder(project) {
+  if (project.featured) {
+    const featuredIndex = featuredProjectOrder.indexOf(project.id);
+    return featuredIndex === -1 ? 100 : featuredIndex;
+  }
+
+  const archiveIndex = archiveProjectOrder.indexOf(project.id);
+  return archiveIndex === -1 ? 200 : 100 + archiveIndex;
+}

@@ -36,18 +36,10 @@ export function ProjectItem({ project }) {
 }
 
 function ProjectFront({ project }) {
-  const [screenshot] = project.moreInfo?.screenshots ?? [];
-
   return (
     <div className="project-card-face project-card-front">
-      {screenshot ? (
-        <img
-          className="project-media"
-          src={screenshot.src}
-          alt={screenshot.alt ?? `${project.name} preview`}
-          loading="lazy"
-        />
-      ) : null}
+      {project.featured ? <ProjectMedia media={project.media} name={project.name} /> : null}
+      <ProjectLogo logo={project.logo} name={project.name} />
       <div className="project-name">{project.name}</div>
       <div className="project-desc">{project.description}</div>
       <div className="project-tags" aria-label={`${project.name} technologies`}>
@@ -70,6 +62,8 @@ function ProjectBack({ project }) {
 
   return (
     <div className="project-card-face project-card-back">
+      {!project.featured ? <ProjectMedia media={project.media} name={project.name} /> : null}
+      <ProjectLogo logo={project.logo} name={project.name} />
       <div className="project-meta-row">
         {moreInfo.role ? <span>{moreInfo.role}</span> : null}
         {moreInfo.status ? <span>{moreInfo.status}</span> : null}
@@ -87,4 +81,29 @@ function ProjectBack({ project }) {
       ) : null}
     </div>
   );
+}
+
+function ProjectLogo({ logo, name }) {
+  if (!logo?.src) {
+    return null;
+  }
+
+  return <img className="project-logo" src={logo.src} alt={logo.alt ?? `${name} logo`} loading="lazy" />;
+}
+
+function ProjectMedia({ media, name }) {
+  if (!media?.src) {
+    return null;
+  }
+
+  if (media.type === 'video') {
+    return (
+      <video className="project-media" controls muted playsInline preload="metadata">
+        <source src={media.src} type={media.mimeType ?? 'video/mp4'} />
+        {media.alt ?? `${name} demo video`}
+      </video>
+    );
+  }
+
+  return <img className="project-media" src={media.src} alt={media.alt ?? `${name} preview`} loading="lazy" />;
 }

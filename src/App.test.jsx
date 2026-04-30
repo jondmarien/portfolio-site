@@ -57,7 +57,7 @@ describe('App', () => {
     render(<App />);
 
     expect(screen.getByText(/FastAPI\/Supabase backend behind the BearHacks portals/)).toBeInTheDocument();
-    expect(screen.getAllByText('BearHacks Backend')).toHaveLength(2);
+    expect(screen.getByText('BearHacks Backend')).toBeInTheDocument();
     expect(screen.getByText(/Render-hosted API for BearHacks 2026/)).toBeInTheDocument();
   });
 });

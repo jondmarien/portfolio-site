@@ -5,24 +5,34 @@ import { ProjectList } from './ProjectList.jsx';
 import { projects } from '../data/projects.js';
 
 describe('ProjectList', () => {
-  it('renders featured projects first and expands the rest on demand', () => {
+  it('renders cool-tech featured projects first and expands the archive on demand', () => {
     const extraProjectCount = projects.filter((project) => !project.featured).length;
 
     render(<ProjectList projects={projects} />);
 
-    expect(screen.getByText('D-Sports')).toBeInTheDocument();
-    expect(screen.getByText('Burpcord')).toBeInTheDocument();
-    expect(screen.getByText('BearHacks Backend')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'linkcoder ↗' })).toHaveAttribute('href', 'https://link.chron0.tech');
-    expect(screen.getByRole('link', { name: 'qrcoder ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
-    expect(screen.getByRole('link', { name: 'mediacoder ↗' })).toHaveAttribute('href', 'https://mediacoder.chron0.tech');
     expect(screen.getByRole('region', { name: 'Flagship projects' })).toBeInTheDocument();
     expect(screen.getByRole('region', { name: 'Project archive' })).toBeInTheDocument();
-    expect(screen.queryByText('Health Companion')).not.toBeInTheDocument();
+
+    const featuredNames = projects.filter((project) => project.featured).map((project) => project.name);
+    expect(featuredNames).toEqual([
+      'D-Sports',
+      'Nexus C2',
+      'Automotive Security Capstone',
+      'MemoryAnalysis.Powershell',
+      'Burpcord',
+      'CTFd Live Scoreboard',
+      'BearHacks Web Portals',
+    ]);
+    expect(screen.queryByText('LinkCoder')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: `+ show more (${extraProjectCount} projects)` }));
 
-    expect(screen.getByText('Health Companion')).toBeInTheDocument();
+    const archiveNames = projects.filter((project) => !project.featured).map((project) => project.name);
+    expect(archiveNames.slice(0, 3)).toEqual(['LinkCoder', 'QRCoder', 'MediaCoder']);
+    expect(screen.getByText('LinkCoder')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'linkcoder ↗' })).toHaveAttribute('href', 'https://link.chron0.tech');
+    expect(screen.getByRole('link', { name: 'qrcoder ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
+    expect(screen.getByRole('link', { name: 'mediacoder ↗' })).toHaveAttribute('href', 'https://mediacoder.chron0.tech');
     expect(screen.getByRole('button', { name: '↑ show less' })).toHaveAttribute('aria-expanded', 'true');
   });
 
@@ -76,10 +86,55 @@ describe('ProjectList', () => {
     expect(screen.getByText('Redis pub/sub + shared state')).toBeInTheDocument();
   });
 
+  it('surfaces event scale and reliability context for the CTFd scoreboard', () => {
+    const scoreboard = projects.find((project) => project.id === 'ctfd-live-scoreboard');
+
+    render(<ProjectList projects={[scoreboard]} />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Show details about CTFd Live Scoreboard/i }));
+
+    expect(screen.getByText('300+ hybrid attendees')).toBeInTheDocument();
+    expect(screen.getByText('3 days live')).toBeInTheDocument();
+    expect(screen.getByText('2 event patches')).toBeInTheDocument();
+  });
+
+  it('shows featured project media up front and archive media only after details open', () => {
+    const featuredProject = {
+      ...projects.find((project) => project.id === 'd-sports'),
+      media: {
+        type: 'image',
+        src: '/assets/projects/d-sports-placeholder.png',
+        alt: 'D-Sports app preview placeholder',
+      },
+    };
+    const archiveProject = {
+      ...projects.find((project) => project.id === 'link-shortener'),
+      featured: false,
+      media: {
+        type: 'image',
+        src: '/assets/projects/linkcoder-placeholder.png',
+        alt: 'LinkCoder dashboard placeholder',
+      },
+    };
+
+    render(<ProjectList projects={[featuredProject, archiveProject]} />);
+
+    expect(screen.getByAltText('D-Sports app preview placeholder')).toBeInTheDocument();
+    expect(screen.queryByAltText('LinkCoder dashboard placeholder')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: '+ show more (1 projects)' }));
+    expect(screen.queryByAltText('LinkCoder dashboard placeholder')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /^Show details about LinkCoder/i }));
+    expect(screen.getByAltText('LinkCoder dashboard placeholder')).toBeInTheDocument();
+  });
+
   it('shows Render-backed details for the BearHacks backend project', () => {
     const backend = projects.find((project) => project.id === 'bearhacks-backend');
 
     render(<ProjectList projects={[backend]} />);
+
+    fireEvent.click(screen.getByRole('button', { name: '+ show more (1 projects)' }));
 
     const detailsButton = screen.getByRole('button', { name: /^Show details about BearHacks Backend/i });
 
