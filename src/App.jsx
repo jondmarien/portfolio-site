@@ -15,12 +15,12 @@ export default function App() {
     <Layout profile={profile}>
       <Hero profile={profile} />
 
-      <Section id="projects" title="projects">
-        <ProjectList projects={projects} />
-      </Section>
-
       <Section id="security" title="security research">
         <SecurityList entries={securityResearch} />
+      </Section>
+
+      <Section id="projects" title="projects">
+        <ProjectList projects={projects} />
       </Section>
 
       <Section id="community" title="community">

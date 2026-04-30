@@ -6,6 +6,7 @@ export const securityResearch = [
     type: 'CVE',
     typeClass: 'cve',
     description: '7-Zip MarkZipBook out-of-bounds write. Remote code execution via crafted archive.',
+    impact: 'Remote code execution research with real-world patching relevance across a widely installed archive tool.',
   },
   {
     id: 'papercut-cve-2023-27350',
@@ -14,6 +15,7 @@ export const securityResearch = [
     type: 'CVE',
     typeClass: 'cve',
     description: 'Unauthenticated RCE via the PaperCut NG/MF print management platform.',
+    impact: 'Shows practical exploitation risk in enterprise print infrastructure and the value of fast patch validation.',
   },
   {
     id: 'gamefreak-teraleak',
@@ -22,6 +24,7 @@ export const securityResearch = [
     type: 'ANALYSIS',
     typeClass: 'blog',
     description: 'Source code leak post-mortem — what was exposed and what it reveals about game dev security.',
+    impact: 'Connects incident response, source exposure, and developer security lessons in a public analysis format.',
   },
   {
     id: 'mr-robot-ctf',
@@ -30,6 +33,7 @@ export const securityResearch = [
     type: 'CTF',
     typeClass: 'ctf',
     description: 'Full walkthrough: robots.txt recon, Hydra brute force, privilege escalation via SUID bit.',
+    impact: 'Demonstrates end-to-end attack-path reasoning from reconnaissance through privilege escalation.',
   },
   {
     id: 'portswigger-bscp',
@@ -38,6 +42,7 @@ export const securityResearch = [
     type: 'LABS',
     typeClass: 'ctf',
     description: 'Web security labs — SQLi, XSS, SSRF, access control, business logic flaws.',
+    impact: 'Documents repeated practice across the web vulnerability classes most relevant to application security.',
   },
   {
     id: 'chrono-cyber-chronicles',
@@ -46,5 +51,6 @@ export const securityResearch = [
     type: 'BLOG',
     typeClass: 'blog',
     description: 'TryHackMe, HackTheBox, ISSessions CTF writeups — ongoing.',
+    impact: 'Keeps the research trail visible beyond a single homepage section.',
   },
 ];

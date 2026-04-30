@@ -6,8 +6,8 @@ export const profile = {
   breadcrumb: ['~', 'jon-marien', 'index'],
   navigation: [
     { id: 'about', label: 'about', icon: '~' },
-    { id: 'projects', label: 'projects', icon: '⌥' },
     { id: 'security', label: 'security', icon: '⚑' },
+    { id: 'projects', label: 'projects', icon: '⌥' },
     { id: 'community', label: 'community', icon: '◈' },
     { id: 'contact', label: 'contact', icon: '@' },
   ],

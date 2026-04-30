@@ -16,6 +16,8 @@ describe('ProjectList', () => {
     expect(screen.getByRole('link', { name: 'linkcoder ↗' })).toHaveAttribute('href', 'https://link.chron0.tech');
     expect(screen.getByRole('link', { name: 'qrcoder ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
     expect(screen.getByRole('link', { name: 'mediacoder ↗' })).toHaveAttribute('href', 'https://mediacoder.chron0.tech');
+    expect(screen.getByRole('region', { name: 'Flagship projects' })).toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'Project archive' })).toBeInTheDocument();
     expect(screen.queryByText('Health Companion')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: `+ show more (${extraProjectCount} projects)` }));
@@ -35,19 +37,21 @@ describe('ProjectList', () => {
   it('flips a project card to show details without hiding its links', () => {
     render(<ProjectList projects={[projects.find((project) => project.id === 'bearhacks-web-portals')]} />);
 
-    const detailsButton = screen.getByRole('button', { name: /^More info about BearHacks Web Portals/i });
+    const detailsButton = screen.getByRole('button', { name: /^Show details about BearHacks Web Portals/i });
 
     expect(screen.getByText(/Registration and admin portals/)).toBeInTheDocument();
     expect(screen.queryByText('Builder / maintainer')).not.toBeInTheDocument();
+    expect(detailsButton).toHaveTextContent('view details');
     expect(screen.getByRole('link', { name: 'user portal ↗' })).toHaveAttribute('href', 'https://me.bearhacks.com');
 
     fireEvent.click(detailsButton);
 
     expect(detailsButton).toHaveAttribute('aria-pressed', 'true');
+    expect(detailsButton).toHaveTextContent('back to summary');
     expect(screen.queryByText(/Registration and admin portals/)).not.toBeInTheDocument();
     expect(screen.getByText('Dev Lead / Core Organizer')).toBeInTheDocument();
     expect(screen.getByText('119 visitors')).toBeInTheDocument();
-    expect(screen.getByText('15 page views')).toBeInTheDocument();
+    expect(screen.getByText('29K')).toBeInTheDocument();
     const adminLink = screen.getByRole('link', { name: 'admin portal ↗' });
     expect(adminLink).toHaveAttribute('href', 'https://admin.bearhacks.com');
 
@@ -62,7 +66,7 @@ describe('ProjectList', () => {
 
     render(<ProjectList projects={[{ ...hemostat, featured: true }]} />);
 
-    const detailsButton = screen.getByRole('button', { name: /^More info about HemoStat/i });
+    const detailsButton = screen.getByRole('button', { name: /^Show details about HemoStat/i });
 
     expect(screen.getByText(/Autonomous Docker container health monitoring system/)).toBeInTheDocument();
 
@@ -77,7 +81,7 @@ describe('ProjectList', () => {
 
     render(<ProjectList projects={[backend]} />);
 
-    const detailsButton = screen.getByRole('button', { name: /^More info about BearHacks Backend/i });
+    const detailsButton = screen.getByRole('button', { name: /^Show details about BearHacks Backend/i });
 
     expect(screen.getByText(/FastAPI backend for BearHacks 2026/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'backend api ↗' })).toHaveAttribute('href', 'https://api.bearhacks.com');

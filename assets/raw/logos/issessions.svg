@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">IS Sessions logo</title>
+  <desc id="desc">A clean vector version of the IS Sessions logo on a dark navy background.</desc>
+  <rect width="1536" height="1024" fill="#111722"/>
+  <g fill="#f8fafc">
+    <path fill-rule="evenodd" d="
+      M768 251 L989 317 V493
+      C989 539 970 580 933 613
+      C899 643 850 673 768 721
+      C686 673 637 643 603 613
+      C566 580 547 539 547 493 V317 Z
+      M768 285 L580 342 V493
+      C580 527 596 558 626 586
+      C654 612 696 638 768 680
+      C840 638 882 612 910 586
+      C940 558 956 527 956 493 V342 Z"/>
+    <path d="M742 322 L768 314 L794 322 V625 L768 640 L742 625 Z"/>
+    <path d="
+      M609 363 L715 331 V381
+      L657 399 V416
+      L715 455 V515
+      L609 442 Z"/>
+    <path d="
+      M609 478 L715 558 V609
+      L667 580
+      C649 569 634 557 623 544
+      C613 529 608 512 608 492 V480 Z"/>
+    <path d="
+      M821 331 L927 363 V459
+      L882 427 L881 399
+      L821 381 Z"/>
+    <path d="
+      M821 419 L927 492
+      C923 513 916 531 905 548
+      C891 568 865 588 821 609 V561
+      L856 538
+      L876 516
+      L821 478 Z"/>
+  </g>
+</svg>
