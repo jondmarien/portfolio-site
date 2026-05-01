@@ -329,7 +329,7 @@ button,
   display: inline-flex;
   height: 100%;
   align-items: center;
-  opacity: 0.95;
+  opacity: 0;
 }
 
 .hero h1 .hero-alias-ascii {

@@ -30,9 +30,9 @@ void main() {
   float time = uTime;
   vec2 pos = vUv;
 
-  float r = texture2D(uTexture, pos + cos(time + pos.x) * 0.004).r;
-  float g = texture2D(uTexture, pos + tan(time * 0.5 + pos.x - time) * 0.0035).g;
-  float b = texture2D(uTexture, pos - cos(time + pos.y) * 0.004).b;
+  float r = texture2D(uTexture, pos + vec2(cos(time + pos.x) * 0.002, 0.0)).r;
+  float g = texture2D(uTexture, pos + vec2(0.0, sin(time * 0.7 + pos.y) * 0.0015)).g;
+  float b = texture2D(uTexture, pos - vec2(cos(time + pos.y) * 0.002, 0.0)).b;
   float a = texture2D(uTexture, pos).a;
   gl_FragColor = vec4(r, g, b, a);
 }
@@ -345,15 +345,15 @@ class CanvAscii {
     const time = Date.now() * 0.001;
     this.textCanvas.render();
     this.texture.needsUpdate = true;
-    this.mesh.material.uniforms.uTime.value = Math.sin(time);
+    this.mesh.material.uniforms.uTime.value = time * 0.45;
 
     this.updateRotation();
     this.filter.render(this.scene, this.camera);
   }
 
   updateRotation() {
-    const x = mapRange(this.mouse.y, 0, this.height, 0.5, -0.5);
-    const y = mapRange(this.mouse.x, 0, this.width, -0.5, 0.5);
+    const x = mapRange(this.mouse.y, 0, this.height, 0.12, -0.12);
+    const y = mapRange(this.mouse.x, 0, this.width, -0.14, 0.14);
 
     this.mesh.rotation.x += (x - this.mesh.rotation.x) * 0.05;
     this.mesh.rotation.y += (y - this.mesh.rotation.y) * 0.05;
