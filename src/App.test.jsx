@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import App from './App.jsx';
 import { profile } from './data/profile.js';
@@ -73,5 +73,23 @@ describe('App', () => {
     expect(screen.getByText(/FastAPI\/Supabase backend behind the BearHacks portals/)).toBeInTheDocument();
     expect(screen.getByText('BearHacks Backend')).toBeInTheDocument();
     expect(screen.getByText(/Render-hosted API for BearHacks 2026/)).toBeInTheDocument();
+  });
+
+  it('shows directional cursor classes while wheel scrolling', () => {
+    vi.useFakeTimers();
+    render(<App />);
+
+    const root = document.documentElement;
+    fireEvent.wheel(window, { deltaY: 120 });
+    expect(root).toHaveClass('is-scrolling-down');
+
+    fireEvent.wheel(window, { deltaY: -120 });
+    expect(root).toHaveClass('is-scrolling-up');
+    expect(root).not.toHaveClass('is-scrolling-down');
+
+    vi.advanceTimersByTime(200);
+    expect(root).not.toHaveClass('is-scrolling-up');
+    expect(root).not.toHaveClass('is-scrolling-down');
+    vi.useRealTimers();
   });
 });

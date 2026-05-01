@@ -7,8 +7,12 @@ describe('global cursor styles', () => {
   it('uses custom URL cursors with mandatory keyword fallbacks', () => {
     expect(css).toContain('--cursor-default: url("data:image/svg+xml');
     expect(css).toContain('--cursor-pointer: url("data:image/svg+xml');
+    expect(css).toContain('--cursor-scroll-up: url("data:image/svg+xml');
+    expect(css).toContain('--cursor-scroll-down: url("data:image/svg+xml');
     expect(css).toContain('cursor: var(--cursor-default), auto;');
     expect(css).toContain('cursor: var(--cursor-pointer), pointer;');
+    expect(css).toContain('cursor: var(--cursor-scroll-up), ns-resize !important;');
+    expect(css).toContain('cursor: var(--cursor-scroll-down), ns-resize !important;');
   });
 });
 

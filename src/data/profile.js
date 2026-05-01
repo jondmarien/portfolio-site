@@ -24,7 +24,7 @@ export const profile = {
     name: 'Jon Marien',
     alias: '// chrono',
     tagline: ['CTO @ D-Sports', 'Security Researcher', 'Sheridan College'],
-    badges: ['Graduated from Sheridan College in December 2025, honors bachelor degree'],
+    badges: ['Graduated from Sheridan College in December 2025, Honors Bachelor Degree, Cyber Security'],
     paragraphs: [
       [
         'Cybersecurity grad building things at the intersection of sports, crypto, and code. CTO of ',
