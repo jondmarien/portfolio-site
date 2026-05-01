@@ -6,6 +6,7 @@ import { ExternalLink } from './ExternalLink.jsx';
 export function Hero({ profile }) {
   const { hero } = profile;
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [asciiReady, setAsciiReady] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return undefined;
@@ -26,15 +27,17 @@ export function Hero({ profile }) {
       </div>
       <h1>
         <span className="hero-name">{hero.name}</span>
-        <span className="name-accent hero-alias hero-alias-line">
+        <span className={`name-accent hero-alias hero-alias-line${asciiReady ? ' hero-alias--ascii-ready' : ''}`}>
           <span className="hero-alias-fallback">{hero.alias}</span>
           <span className="hero-alias-ascii" aria-hidden="true">
             <ASCIIText
               text={hero.alias}
               enableWaves={!prefersReducedMotion}
               asciiFontSize={8}
-              textFontSize={340}
-              planeBaseHeight={11}
+              textFontSize={200}
+              planeBaseHeight={8}
+              onReady={() => setAsciiReady(true)}
+              onError={() => setAsciiReady(false)}
             />
           </span>
         </span>

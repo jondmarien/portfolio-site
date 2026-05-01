@@ -1,55 +1,66 @@
+// Component ported and enhanced from https://codepen.io/JuanFuentes/pen/eYEeoyE
+
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import './ASCIIText.css';
 
 const vertexShader = `
 varying vec2 vUv;
 uniform float uTime;
+uniform float mouse;
 uniform float uEnableWaves;
 
 void main() {
-  vUv = uv;
-  float time = uTime * 5.0;
-  float waveFactor = uEnableWaves;
-  vec3 transformed = position;
+    vUv = uv;
+    float time = uTime * 5.;
 
-  transformed.x += sin(time + position.y) * 0.24 * waveFactor;
-  transformed.y += cos(time + position.z) * 0.08 * waveFactor;
-  transformed.z += sin(time + position.x) * 0.42 * waveFactor;
+    float waveFactor = uEnableWaves;
 
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
+    vec3 transformed = position;
+
+    transformed.x += sin(time + position.y) * 0.5 * waveFactor;
+    transformed.y += cos(time + position.z) * 0.15 * waveFactor;
+    transformed.z += sin(time + position.x) * waveFactor;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
 }
 `;
 
 const fragmentShader = `
 varying vec2 vUv;
+uniform float mouse;
 uniform float uTime;
 uniform sampler2D uTexture;
 
 void main() {
-  float time = uTime;
-  vec2 pos = vUv;
-
-  float r = texture2D(uTexture, pos + vec2(cos(time + pos.x) * 0.002, 0.0)).r;
-  float g = texture2D(uTexture, pos + vec2(0.0, sin(time * 0.7 + pos.y) * 0.0015)).g;
-  float b = texture2D(uTexture, pos - vec2(cos(time + pos.y) * 0.002, 0.0)).b;
-  float a = texture2D(uTexture, pos).a;
-  gl_FragColor = vec4(r, g, b, a);
+    float time = uTime;
+    vec2 pos = vUv;
+    
+    float move = sin(time + mouse) * 0.01;
+    float r = texture2D(uTexture, pos + cos(time * 2. - time + pos.x) * .01).r;
+    float g = texture2D(uTexture, pos + tan(time * .5 + pos.x - time) * .01).g;
+    float b = texture2D(uTexture, pos - cos(time * 2. + time + pos.y) * .01).b;
+    float a = texture2D(uTexture, pos).a;
+    gl_FragColor = vec4(r, g, b, a);
 }
 `;
 
-function mapRange(value, inMin, inMax, outMin, outMax) {
-  return ((value - inMin) / (inMax - inMin)) * (outMax - outMin) + outMin;
-}
+Math.map = function map(n, start, stop, start2, stop2) {
+  return ((n - start) / (stop - start)) * (stop2 - start2) + start2;
+};
+
+const PX_RATIO = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
 
 class AsciiFilter {
   constructor(renderer, { fontSize, fontFamily, charset, invert } = {}) {
     this.renderer = renderer;
     this.domElement = document.createElement('div');
-    this.domElement.className = 'ascii-filter';
+    this.domElement.style.position = 'absolute';
+    this.domElement.style.top = '0';
+    this.domElement.style.left = '0';
+    this.domElement.style.width = '100%';
+    this.domElement.style.height = '100%';
 
     this.pre = document.createElement('pre');
-    this.pre.className = 'ascii-filter-pre';
     this.domElement.appendChild(this.pre);
 
     this.canvas = document.createElement('canvas');
@@ -61,15 +72,12 @@ class AsciiFilter {
     this.fontSize = fontSize ?? 12;
     this.fontFamily = fontFamily ?? "'Courier New', monospace";
     this.charset =
-      charset ??
-      " .'`^\",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+      charset ?? " .'`^\",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
-    if (this.context) {
-      this.context.webkitImageSmoothingEnabled = false;
-      this.context.mozImageSmoothingEnabled = false;
-      this.context.msImageSmoothingEnabled = false;
-      this.context.imageSmoothingEnabled = false;
-    }
+    this.context.webkitImageSmoothingEnabled = false;
+    this.context.mozImageSmoothingEnabled = false;
+    this.context.msImageSmoothingEnabled = false;
+    this.context.imageSmoothingEnabled = false;
 
     this.onMouseMove = this.onMouseMove.bind(this);
     document.addEventListener('mousemove', this.onMouseMove);
@@ -86,38 +94,43 @@ class AsciiFilter {
   }
 
   reset() {
-    if (!this.context) return;
-
     this.context.font = `${this.fontSize}px ${this.fontFamily}`;
-    const charWidth = this.context.measureText('A').width || this.fontSize;
+    const charWidth = this.context.measureText('A').width;
 
-    this.cols = Math.max(1, Math.floor(this.width / (this.fontSize * (charWidth / this.fontSize))));
-    this.rows = Math.max(1, Math.floor(this.height / this.fontSize));
+    this.cols = Math.floor(this.width / (this.fontSize * (charWidth / this.fontSize)));
+    this.rows = Math.floor(this.height / this.fontSize);
 
     this.canvas.width = this.cols;
     this.canvas.height = this.rows;
-
     this.pre.style.fontFamily = this.fontFamily;
     this.pre.style.fontSize = `${this.fontSize}px`;
+    this.pre.style.margin = '0';
+    this.pre.style.padding = '0';
+    this.pre.style.lineHeight = '1em';
+    this.pre.style.position = 'absolute';
+    this.pre.style.left = '0';
+    this.pre.style.top = '0';
+    this.pre.style.zIndex = '9';
+    this.pre.style.backgroundAttachment = 'fixed';
+    this.pre.style.mixBlendMode = 'difference';
   }
 
   render(scene, camera) {
-    if (!this.context) return;
-
     this.renderer.render(scene, camera);
 
     const w = this.canvas.width;
     const h = this.canvas.height;
     this.context.clearRect(0, 0, w, h);
-    this.context.drawImage(this.renderer.domElement, 0, 0, w, h);
+    if (this.context && w && h) {
+      this.context.drawImage(this.renderer.domElement, 0, 0, w, h);
+    }
 
     this.asciify(this.context, w, h);
     this.hue();
   }
 
   onMouseMove(e) {
-    const ratio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
-    this.mouse = { x: e.clientX * ratio, y: e.clientY * ratio };
+    this.mouse = { x: e.clientX * PX_RATIO, y: e.clientY * PX_RATIO };
   }
 
   get dx() {
@@ -129,36 +142,37 @@ class AsciiFilter {
   }
 
   hue() {
-    // Keep color stable for compact inline placements.
-    this.domElement.style.filter = 'none';
+    const deg = (Math.atan2(this.dy, this.dx) * 180) / Math.PI;
+    this.deg += (deg - this.deg) * 0.075;
+    this.domElement.style.filter = `hue-rotate(${this.deg.toFixed(1)}deg)`;
   }
 
   asciify(ctx, w, h) {
-    const imgData = ctx.getImageData(0, 0, w, h).data;
-    let str = '';
+    if (w && h) {
+      const imgData = ctx.getImageData(0, 0, w, h).data;
+      let str = '';
+      for (let y = 0; y < h; y += 1) {
+        for (let x = 0; x < w; x += 1) {
+          const i = x * 4 + y * 4 * w;
+          const r = imgData[i];
+          const g = imgData[i + 1];
+          const b = imgData[i + 2];
+          const a = imgData[i + 3];
 
-    for (let y = 0; y < h; y += 1) {
-      for (let x = 0; x < w; x += 1) {
-        const i = x * 4 + y * 4 * w;
-        const r = imgData[i];
-        const g = imgData[i + 1];
-        const b = imgData[i + 2];
-        const a = imgData[i + 3];
+          if (a === 0) {
+            str += ' ';
+            continue;
+          }
 
-        if (a === 0) {
-          str += ' ';
-          continue;
+          const gray = (0.3 * r + 0.6 * g + 0.1 * b) / 255;
+          let idx = Math.floor((1 - gray) * (this.charset.length - 1));
+          if (this.invert) idx = this.charset.length - idx - 1;
+          str += this.charset[idx];
         }
-
-        const gray = (0.3 * r + 0.6 * g + 0.1 * b) / 255;
-        let idx = Math.floor((1 - gray) * (this.charset.length - 1));
-        if (this.invert) idx = this.charset.length - idx - 1;
-        str += this.charset[idx];
+        str += '\n';
       }
-      str += '\n';
+      this.pre.textContent = str;
     }
-
-    this.pre.textContent = str;
   }
 
   dispose() {
@@ -174,12 +188,11 @@ class CanvasTxt {
     this.fontSize = fontSize;
     this.fontFamily = fontFamily;
     this.color = color;
+
     this.font = `600 ${this.fontSize}px ${this.fontFamily}`;
   }
 
   resize() {
-    if (!this.context) return;
-
     this.context.font = this.font;
     const metrics = this.context.measureText(this.txt);
 
@@ -191,14 +204,13 @@ class CanvasTxt {
   }
 
   render() {
-    if (!this.context) return;
-
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.fillStyle = this.color;
     this.context.font = this.font;
 
     const metrics = this.context.measureText(this.txt);
     const yPos = 10 + metrics.actualBoundingBoxAscent;
+
     this.context.fillText(this.txt, 10, yPos);
   }
 
@@ -242,18 +254,13 @@ class CanvAscii {
   }
 
   async init() {
-    if (document.fonts?.load) {
-      try {
-        await document.fonts.load('600 200px "IBM Plex Mono"');
-        await document.fonts.load('500 12px "IBM Plex Mono"');
-      } catch {
-        // Fall back to browser fonts if loading fails.
-      }
-
-      if (document.fonts.ready) {
-        await document.fonts.ready;
-      }
+    try {
+      await document.fonts.load('600 200px "IBM Plex Mono"');
+      await document.fonts.load('500 12px "IBM Plex Mono"');
+    } catch (e) {
+      // Font loading failed, continue with fallback
     }
+    await document.fonts.ready;
 
     this.setMesh();
     this.setRenderer();
@@ -272,18 +279,20 @@ class CanvAscii {
     this.texture.minFilter = THREE.NearestFilter;
 
     const textAspect = this.textCanvas.width / this.textCanvas.height;
-    const planeHeight = this.planeBaseHeight;
-    const planeWidth = planeHeight * textAspect;
+    const baseH = this.planeBaseHeight;
+    const planeW = baseH * textAspect;
+    const planeH = baseH;
 
-    this.geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 36, 36);
+    this.geometry = new THREE.PlaneGeometry(planeW, planeH, 36, 36);
     this.material = new THREE.ShaderMaterial({
       vertexShader,
       fragmentShader,
       transparent: true,
       uniforms: {
         uTime: { value: 0 },
+        mouse: { value: 1.0 },
         uTexture: { value: this.texture },
-        uEnableWaves: { value: this.enableWaves ? 1 : 0 },
+        uEnableWaves: { value: this.enableWaves ? 1.0 : 0.0 },
       },
     });
 
@@ -293,8 +302,7 @@ class CanvAscii {
 
   setRenderer() {
     this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-    const pixelRatio = typeof window !== 'undefined' ? Math.min(window.devicePixelRatio || 1, 2) : 1;
-    this.renderer.setPixelRatio(pixelRatio);
+    this.renderer.setPixelRatio(1);
     this.renderer.setClearColor(0x000000, 0);
 
     this.filter = new AsciiFilter(this.renderer, {
@@ -307,7 +315,7 @@ class CanvAscii {
     this.setSize(this.width, this.height);
 
     this.container.addEventListener('mousemove', this.onMouseMove);
-    this.container.addEventListener('touchmove', this.onMouseMove, { passive: true });
+    this.container.addEventListener('touchmove', this.onMouseMove);
   }
 
   setSize(w, h) {
@@ -318,6 +326,8 @@ class CanvAscii {
     this.camera.updateProjectionMatrix();
 
     this.filter.setSize(w, h);
+
+    this.center = { x: w / 2, y: h / 2 };
   }
 
   load() {
@@ -325,12 +335,11 @@ class CanvAscii {
   }
 
   onMouseMove(evt) {
-    const point = evt.touches ? evt.touches[0] : evt;
+    const e = evt.touches ? evt.touches[0] : evt;
     const bounds = this.container.getBoundingClientRect();
-    this.mouse = {
-      x: point.clientX - bounds.left,
-      y: point.clientY - bounds.top,
-    };
+    const x = e.clientX - bounds.left;
+    const y = e.clientY - bounds.top;
+    this.mouse = { x, y };
   }
 
   animate() {
@@ -342,18 +351,20 @@ class CanvAscii {
   }
 
   render() {
-    const time = Date.now() * 0.001;
+    const time = new Date().getTime() * 0.001;
+
     this.textCanvas.render();
     this.texture.needsUpdate = true;
-    this.mesh.material.uniforms.uTime.value = time * 0.45;
+
+    this.mesh.material.uniforms.uTime.value = Math.sin(time);
 
     this.updateRotation();
     this.filter.render(this.scene, this.camera);
   }
 
   updateRotation() {
-    const x = mapRange(this.mouse.y, 0, this.height, 0.12, -0.12);
-    const y = mapRange(this.mouse.x, 0, this.width, -0.14, 0.14);
+    const x = Math.map(this.mouse.y, 0, this.height, 0.5, -0.5);
+    const y = Math.map(this.mouse.x, 0, this.width, -0.5, 0.5);
 
     this.mesh.rotation.x += (x - this.mesh.rotation.x) * 0.05;
     this.mesh.rotation.y += (y - this.mesh.rotation.y) * 0.05;
@@ -361,47 +372,51 @@ class CanvAscii {
 
   clear() {
     this.scene.traverse((obj) => {
-      if (obj.isMesh && obj.material && obj.geometry) {
-        if (Array.isArray(obj.material)) {
-          obj.material.forEach((material) => material?.dispose?.());
-        } else {
-          obj.material.dispose?.();
-        }
-        obj.geometry.dispose?.();
+      if (obj.isMesh && typeof obj.material === 'object' && obj.material !== null) {
+        Object.keys(obj.material).forEach((key) => {
+          const matProp = obj.material[key];
+          if (matProp !== null && typeof matProp === 'object' && typeof matProp.dispose === 'function') {
+            matProp.dispose();
+          }
+        });
+        obj.material.dispose();
+        obj.geometry.dispose();
       }
     });
-
     this.scene.clear();
   }
 
   dispose() {
     cancelAnimationFrame(this.animationFrameId);
-
     if (this.filter) {
       this.filter.dispose();
-      if (this.filter.domElement.parentNode === this.container) {
+      if (this.filter.domElement.parentNode) {
         this.container.removeChild(this.filter.domElement);
       }
     }
-
     this.container.removeEventListener('mousemove', this.onMouseMove);
     this.container.removeEventListener('touchmove', this.onMouseMove);
-
     this.clear();
-
-    this.texture?.dispose?.();
-    this.renderer?.dispose?.();
-    this.renderer?.forceContextLoss?.();
+    if (this.texture) {
+      this.texture.dispose();
+      this.texture = null;
+    }
+    if (this.renderer) {
+      this.renderer.dispose();
+      this.renderer.forceContextLoss();
+    }
   }
 }
 
 export default function ASCIIText({
-  text = 'Hello World!',
+  text = 'David!',
   asciiFontSize = 8,
   textFontSize = 200,
   textColor = '#fdf9f3',
   planeBaseHeight = 8,
   enableWaves = true,
+  onReady,
+  onError,
 }) {
   const containerRef = useRef(null);
   const asciiRef = useRef(null);
@@ -410,59 +425,133 @@ export default function ASCIIText({
     if (!containerRef.current) return undefined;
 
     let cancelled = false;
-    let resizeObserver = null;
+    let observer = null;
+    let ro = null;
 
-    const createAndInit = async (container, width, height) => {
+    const createAndInit = async (container, w, h) => {
       const instance = new CanvAscii(
         { text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves },
         container,
-        width,
-        height
+        w,
+        h
       );
-
       await instance.init();
       return instance;
     };
 
     const setup = async () => {
       const { width, height } = containerRef.current.getBoundingClientRect();
-      if (!width || !height) return;
 
-      try {
-        asciiRef.current = await createAndInit(containerRef.current, width, height);
-      } catch {
-        asciiRef.current = null;
+      if (width === 0 || height === 0) {
+        observer = new IntersectionObserver(
+          async ([entry]) => {
+            if (cancelled) return;
+            if (entry.isIntersecting && entry.boundingClientRect.width > 0 && entry.boundingClientRect.height > 0) {
+              const w = entry.boundingClientRect.width;
+              const h = entry.boundingClientRect.height;
+              observer.disconnect();
+              observer = null;
+
+              if (!cancelled) {
+                try {
+                  asciiRef.current = await createAndInit(containerRef.current, w, h);
+                  if (!cancelled && asciiRef.current) {
+                    asciiRef.current.load();
+                    onReady?.();
+                  }
+                } catch (error) {
+                  asciiRef.current = null;
+                  onError?.(error);
+                }
+              }
+            }
+          },
+          { threshold: 0.1 }
+        );
+        observer.observe(containerRef.current);
         return;
       }
 
-      if (cancelled || !asciiRef.current) return;
+      try {
+        asciiRef.current = await createAndInit(containerRef.current, width, height);
+        if (!cancelled && asciiRef.current) {
+          asciiRef.current.load();
+          onReady?.();
 
-      asciiRef.current.load();
-
-      resizeObserver = new ResizeObserver((entries) => {
-        if (!entries[0] || !asciiRef.current) return;
-
-        const { width: nextWidth, height: nextHeight } = entries[0].contentRect;
-        if (nextWidth > 0 && nextHeight > 0) {
-          asciiRef.current.setSize(nextWidth, nextHeight);
+          ro = new ResizeObserver((entries) => {
+            if (!entries[0] || !asciiRef.current) return;
+            const w = entries[0].contentRect.width;
+            const h = entries[0].contentRect.height;
+            if (w > 0 && h > 0) {
+              asciiRef.current.setSize(w, h);
+            }
+          });
+          ro.observe(containerRef.current);
         }
-      });
-
-      resizeObserver.observe(containerRef.current);
+      } catch (error) {
+        asciiRef.current = null;
+        onError?.(error);
+      }
     };
 
     setup();
 
     return () => {
       cancelled = true;
-      resizeObserver?.disconnect();
-
+      if (observer) observer.disconnect();
+      if (ro) ro.disconnect();
       if (asciiRef.current) {
         asciiRef.current.dispose();
         asciiRef.current = null;
       }
     };
-  }, [asciiFontSize, enableWaves, planeBaseHeight, text, textColor, textFontSize]);
+  }, [text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves]);
 
-  return <div ref={containerRef} className="ascii-text-container" />;
+  return (
+    <div
+      ref={containerRef}
+      className="ascii-text-container"
+      style={{
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+        .ascii-text-container canvas {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          image-rendering: optimizeSpeed;
+          image-rendering: -moz-crisp-edges;
+          image-rendering: -o-crisp-edges;
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: optimize-contrast;
+          image-rendering: crisp-edges;
+          image-rendering: pixelated;
+        }
+
+        .ascii-text-container pre {
+          margin: 0;
+          user-select: none;
+          padding: 0;
+          line-height: 1em;
+          text-align: left;
+          position: absolute;
+          left: 0;
+          top: 0;
+          background-image: radial-gradient(circle, #ff6188 0%, #fc9867 50%, #ffd866 100%);
+          background-attachment: fixed;
+          -webkit-text-fill-color: transparent;
+          -webkit-background-clip: text;
+          z-index: 9;
+          mix-blend-mode: difference;
+        }
+      `}</style>
+    </div>
+  );
 }
