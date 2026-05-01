@@ -317,17 +317,19 @@ button,
   margin-bottom: 16px;
 }
 
+.hero-badge-glow {
+  --card-bg: #120f17;
+}
+
 .hero-badge {
-  background: linear-gradient(135deg, rgba(45, 212, 191, 0.16), rgba(167, 139, 250, 0.14));
-  border: 1px solid rgba(45, 212, 191, 0.45);
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.12), 0 0 18px rgba(45, 212, 191, 0.24), 0 0 30px rgba(167, 139, 250, 0.14);
+  background: rgba(10, 12, 16, 0.65);
+  border-radius: 8px;
   color: #d6fffa;
-  text-shadow: 0 0 10px rgba(45, 212, 191, 0.45);
+  text-shadow: 0 0 8px rgba(45, 212, 191, 0.3);
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.04em;
-  padding: 4px 8px;
+  padding: 5px 10px;
 }
 
 .hero-body {

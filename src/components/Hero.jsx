@@ -1,3 +1,4 @@
+import BorderGlow from './BorderGlow.jsx';
 import { ExternalLink } from './ExternalLink.jsx';
 
 export function Hero({ profile }) {
@@ -23,9 +24,22 @@ export function Hero({ profile }) {
       {hero.badges?.length ? (
         <div className="hero-badges" aria-label="Profile badges">
           {hero.badges.map((badge) => (
-            <span className="hero-badge" key={badge}>
-              {badge}
-            </span>
+            <BorderGlow
+              key={badge}
+              className="hero-badge-glow"
+              edgeSensitivity={30}
+              glowColor="182 88 78"
+              backgroundColor="#120f17"
+              borderRadius={8}
+              glowRadius={18}
+              glowIntensity={0.65}
+              coneSpread={22}
+              animated={false}
+              colors={['#2dd4bf', '#a78bfa', '#38bdf8']}
+              fillOpacity={0.22}
+            >
+              <span className="hero-badge">{badge}</span>
+            </BorderGlow>
           ))}
         </div>
       ) : null}
