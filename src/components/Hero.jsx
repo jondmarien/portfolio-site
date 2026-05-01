@@ -1,8 +1,24 @@
+import { useEffect, useState } from 'react';
+import ASCIIText from './ASCIIText.jsx';
 import BorderGlow from './BorderGlow.jsx';
 import { ExternalLink } from './ExternalLink.jsx';
 
 export function Hero({ profile }) {
   const { hero } = profile;
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return undefined;
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    updatePreference();
+
+    mediaQuery.addEventListener('change', updatePreference);
+    return () => mediaQuery.removeEventListener('change', updatePreference);
+  }, []);
+
+  const aliasWidthCh = Math.max(hero.alias.length + 1, 9);
 
   return (
     <section className="hero" id="about">
@@ -11,7 +27,19 @@ export function Hero({ profile }) {
         <span>{hero.prompt}</span>
       </div>
       <h1>
-        {hero.name} <span className="name-accent">{hero.alias}</span>
+        {hero.name}{' '}
+        <span className="name-accent hero-alias" style={{ '--hero-alias-width': `${aliasWidthCh}ch` }}>
+          <span className="hero-alias-fallback">{hero.alias}</span>
+          <span className="hero-alias-ascii" aria-hidden="true">
+            <ASCIIText
+              text={hero.alias}
+              enableWaves={!prefersReducedMotion}
+              asciiFontSize={6}
+              textFontSize={140}
+              planeBaseHeight={5.75}
+            />
+          </span>
+        </span>
       </h1>
       <div className="tagline">
         {hero.tagline.map((item, index) => (
