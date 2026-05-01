@@ -97,8 +97,8 @@ class AsciiFilter {
     this.context.font = `${this.fontSize}px ${this.fontFamily}`;
     const charWidth = this.context.measureText('A').width;
 
-    this.cols = Math.floor(this.width / (this.fontSize * (charWidth / this.fontSize)));
-    this.rows = Math.floor(this.height / this.fontSize);
+    this.cols = Math.max(1, Math.floor(this.width / (this.fontSize * (charWidth / this.fontSize))));
+    this.rows = Math.max(1, Math.floor(this.height / this.fontSize));
 
     this.canvas.width = this.cols;
     this.canvas.height = this.rows;
@@ -439,6 +439,18 @@ export default function ASCIIText({
       return instance;
     };
 
+    const attachResizeObserver = () => {
+      ro = new ResizeObserver((entries) => {
+        if (!entries[0] || !asciiRef.current) return;
+        const w = entries[0].contentRect.width;
+        const h = entries[0].contentRect.height;
+        if (w > 0 && h > 0) {
+          asciiRef.current.setSize(w, h);
+        }
+      });
+      ro.observe(containerRef.current);
+    };
+
     const setup = async () => {
       const { width, height } = containerRef.current.getBoundingClientRect();
 
@@ -457,6 +469,7 @@ export default function ASCIIText({
                   asciiRef.current = await createAndInit(containerRef.current, w, h);
                   if (!cancelled && asciiRef.current) {
                     asciiRef.current.load();
+                    attachResizeObserver();
                     onReady?.();
                   }
                 } catch (error) {
@@ -476,17 +489,8 @@ export default function ASCIIText({
         asciiRef.current = await createAndInit(containerRef.current, width, height);
         if (!cancelled && asciiRef.current) {
           asciiRef.current.load();
+          attachResizeObserver();
           onReady?.();
-
-          ro = new ResizeObserver((entries) => {
-            if (!entries[0] || !asciiRef.current) return;
-            const w = entries[0].contentRect.width;
-            const h = entries[0].contentRect.height;
-            if (w > 0 && h > 0) {
-              asciiRef.current.setSize(w, h);
-            }
-          });
-          ro.observe(containerRef.current);
         }
       } catch (error) {
         asciiRef.current = null;
