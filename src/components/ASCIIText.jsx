@@ -13,9 +13,9 @@ void main() {
   float waveFactor = uEnableWaves;
   vec3 transformed = position;
 
-  transformed.x += sin(time + position.y) * 0.5 * waveFactor;
-  transformed.y += cos(time + position.z) * 0.15 * waveFactor;
-  transformed.z += sin(time + position.x) * waveFactor;
+  transformed.x += sin(time + position.y) * 0.24 * waveFactor;
+  transformed.y += cos(time + position.z) * 0.08 * waveFactor;
+  transformed.z += sin(time + position.x) * 0.42 * waveFactor;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
 }
@@ -30,9 +30,9 @@ void main() {
   float time = uTime;
   vec2 pos = vUv;
 
-  float r = texture2D(uTexture, pos + cos(time + pos.x) * 0.01).r;
-  float g = texture2D(uTexture, pos + tan(time * 0.5 + pos.x - time) * 0.01).g;
-  float b = texture2D(uTexture, pos - cos(time + pos.y) * 0.01).b;
+  float r = texture2D(uTexture, pos + cos(time + pos.x) * 0.004).r;
+  float g = texture2D(uTexture, pos + tan(time * 0.5 + pos.x - time) * 0.0035).g;
+  float b = texture2D(uTexture, pos - cos(time + pos.y) * 0.004).b;
   float a = texture2D(uTexture, pos).a;
   gl_FragColor = vec4(r, g, b, a);
 }
@@ -293,7 +293,8 @@ class CanvAscii {
 
   setRenderer() {
     this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-    this.renderer.setPixelRatio(1);
+    const pixelRatio = typeof window !== 'undefined' ? Math.min(window.devicePixelRatio || 1, 2) : 1;
+    this.renderer.setPixelRatio(pixelRatio);
     this.renderer.setClearColor(0x000000, 0);
 
     this.filter = new AsciiFilter(this.renderer, {

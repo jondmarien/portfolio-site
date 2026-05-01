@@ -316,12 +316,12 @@ button,
 
 .hero h1 .hero-alias {
   display: block;
-  height: 3.5em;
+  height: 2.85em;
   align-items: center;
   margin-left: 0;
   overflow: visible;
   position: relative;
-  width: min(100%, 32ch);
+  width: min(100%, 24ch);
 }
 
 .hero h1 .hero-alias-fallback {
@@ -329,13 +329,14 @@ button,
   display: inline-flex;
   height: 100%;
   align-items: center;
-  opacity: 0;
+  opacity: 0.95;
 }
 
 .hero h1 .hero-alias-ascii {
   inset: 0;
   pointer-events: none;
   position: absolute;
+  opacity: 0.8;
 }
 
 .hero .tagline {
