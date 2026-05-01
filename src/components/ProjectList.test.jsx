@@ -129,6 +129,26 @@ describe('ProjectList', () => {
     expect(screen.getByAltText('LinkCoder dashboard placeholder')).toBeInTheDocument();
   });
 
+  it('opens a full-size media modal when a project image is clicked', () => {
+    const featuredProject = {
+      ...projects.find((project) => project.id === 'd-sports'),
+      media: {
+        type: 'image',
+        src: '/assets/projects/d-sports-placeholder.png',
+        alt: 'D-Sports app preview placeholder',
+      },
+    };
+
+    render(<ProjectList projects={[featuredProject]} />);
+
+    fireEvent.click(screen.getByAltText('D-Sports app preview placeholder'));
+
+    expect(screen.getByRole('dialog', { name: 'D-Sports app preview placeholder' })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /close image preview/i }));
+    expect(screen.queryByRole('dialog', { name: 'D-Sports app preview placeholder' })).not.toBeInTheDocument();
+  });
+
   it('renders a minimal carousel for capstone media and cycles slides', () => {
     const capstoneProject = {
       ...projects.find((project) => project.id === 'automotive-security-capstone'),

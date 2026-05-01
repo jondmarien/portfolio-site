@@ -469,7 +469,7 @@ button,
   display: block;
   height: auto;
   margin-bottom: 10px;
-  max-height: 180px;
+  max-height: 230px;
   object-fit: cover;
   width: 100%;
 }
@@ -480,6 +480,20 @@ button,
 
 .project-media-wrap .project-media {
   margin-bottom: 0;
+}
+
+.project-media-trigger {
+  background: none;
+  border: 0;
+  display: block;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.project-media-trigger:hover .project-media,
+.project-media-trigger:focus-visible .project-media {
+  border-color: var(--sidebar-accent-dim);
 }
 
 .project-media-carousel {
@@ -540,6 +554,68 @@ button,
   font-size: 10px;
   letter-spacing: 0.03em;
   margin-top: 6px;
+}
+
+.project-media-modal-backdrop {
+  align-items: center;
+  background: rgba(8, 8, 10, 0.88);
+  backdrop-filter: blur(2px);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px;
+  position: fixed;
+  z-index: 1000;
+}
+
+.project-media-modal {
+  background: var(--bg-surface);
+  border: 1px solid var(--chip-border);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.06), 0 20px 60px rgba(0, 0, 0, 0.5);
+  max-height: calc(100vh - 48px);
+  max-width: min(1050px, 94vw);
+  overflow: auto;
+  padding: 16px;
+  position: relative;
+  width: auto;
+}
+
+.project-media-modal-close {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  cursor: var(--cursor-pointer), pointer;
+  font-family: var(--mono);
+  font-size: 10px;
+  margin-bottom: 12px;
+  padding: 5px 8px;
+  text-transform: lowercase;
+}
+
+.project-media-modal-close:hover,
+.project-media-modal-close:focus-visible {
+  border-color: var(--sidebar-accent-dim);
+  color: var(--sidebar-accent);
+}
+
+.project-media-modal-image {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  height: auto;
+  max-height: calc(100vh - 180px);
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
+.project-media-modal-caption {
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  margin-top: 10px;
 }
 
 .project-meta-row {

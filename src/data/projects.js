@@ -14,6 +14,22 @@ const dSportsImage = new URL('../../assets/raw/images/d-sports.png', import.meta
 const linkCoderImage = new URL('../../assets/raw/images/linkcoder.png', import.meta.url).href;
 const qrCoderImage = new URL('../../assets/raw/images/qrcoder.png', import.meta.url).href;
 const mediaCoderImage = new URL('../../assets/raw/images/mediacoder.png', import.meta.url).href;
+const ctfdLiveScoreboardQuestsImage = new URL(
+  '../../assets/raw/images/ctfd-live-scoreboard-quests.png',
+  import.meta.url
+).href;
+const ctfdLiveScoreboardTopTeamsImage = new URL(
+  '../../assets/raw/images/ctfd-live-scoreboard-top-teams.png',
+  import.meta.url
+).href;
+const autoCapstoneLoadingImage = new URL('../../assets/raw/images/auto-capstone-loading-screen.png', import.meta.url).href;
+const autoCapstoneMenuImage = new URL('../../assets/raw/images/auto-capstone-menu-screen.png', import.meta.url).href;
+const autoCapstoneMainImage = new URL('../../assets/raw/images/auto-capstone-main-screen.png', import.meta.url).href;
+const autoCapstoneExitImage = new URL('../../assets/raw/images/auto-capstone-exit-screen.png', import.meta.url).href;
+const autoCapstoneGoodbyeImage = new URL(
+  '../../assets/raw/images/auto-capstone-goodbye-screen.png',
+  import.meta.url
+).href;
 const bearhacksAdminPortalImage = new URL('../../assets/raw/images/bearhacks-admin-portal.png', import.meta.url).href;
 const bearhacksUserPortalProfileImage = new URL(
   '../../assets/raw/images/bearhacks-user-portal-profile.png',
@@ -24,28 +40,33 @@ const bearhacksUserPortalImage = new URL('../../assets/raw/images/bearhacks-user
 const capstoneMedia = [
   {
     type: 'image',
-    src: 'https://private-user-images.githubusercontent.com/2687328/474308035-cdaf5e7a-c4b9-4adf-91fc-686aa3587074.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMwODAzNS1jZGFmNWU3YS1jNGI5LTRhZGYtOTFmYy02ODZhYTM1ODcwNzQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MDk2Y2MzYmQyZWM3ZTQ0NWZjNWQwM2I3MDAzMjY5MzlhYmY4NzJmNzYxNWM2MTdmODc3NGQwZDUwYWUzOTgyMiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.Ofei3GNoLhg-a6qBkr9oJqDvTTPIm4kLhnaMMvjQuWs',
+    src: autoCapstoneLoadingImage,
     alt: 'Loading Screen',
+    fit: 'contain',
   },
   {
     type: 'image',
-    src: 'https://private-user-images.githubusercontent.com/2687328/474308155-ed963dcd-5128-49f3-a676-5f48a335b443.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMwODE1NS1lZDk2M2RjZC01MTI4LTQ5ZjMtYTY3Ni01ZjQ4YTMzNWI0NDMucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MmRiZjI1MTgwODU0ZjBmMzA2ZmQ1ZWIzOWZjOTNjMzU0ZTZlZDBhNWQzOGM3MjY1M2M0NzdlZTUxMWVkZDNhZSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.Q4FkQS7jmei_pPkXzXQ-JWP_URyz8rlsjnsNNZ0IObM',
+    src: autoCapstoneMenuImage,
     alt: 'Menu Screen',
+    fit: 'contain',
   },
   {
     type: 'image',
-    src: 'https://private-user-images.githubusercontent.com/2687328/474310088-a4548a29-b0b3-4a50-a32e-40fdd27b995d.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMxMDA4OC1hNDU0OGEyOS1iMGIzLTRhNTAtYTMyZS00MGZkZDI3Yjk5NWQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MDJlNDIyOTI2YTI2OTI0MmQ1NzgzZGVhZTg0ZTZjZTNiZjFiOWQ2N2U3MDA5MTU0NjM1YjMwNGE1ZWI4YWIzMyZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.1Gv-QkoOFxrDIuFJetgyANk84wWM5lAMou9vhCXPC-A',
+    src: autoCapstoneMainImage,
     alt: 'Main Screen',
+    fit: 'contain',
   },
   {
     type: 'image',
-    src: 'https://private-user-images.githubusercontent.com/2687328/474308318-2899421c-7f26-4d99-922b-e7ba5b5ddd47.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMwODMxOC0yODk5NDIxYy03ZjI2LTRkOTktOTIyYi1lN2JhNWI1ZGRkNDcucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9YWM3NTg1ZWVhM2NiMjQ3MmIwMGI3YjdmMzg3ZDg2Zjk2NTdkOGJkZGFiZjcwMWZhZjY1MWY4M2RjMTZjMTM5ZCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.eSlUee3JEJS8NhIkZdNmIFEH1DzuU3g7uVtsbT41EDs',
+    src: autoCapstoneExitImage,
     alt: 'Exit Dashboard',
+    fit: 'contain',
   },
   {
     type: 'image',
-    src: 'https://private-user-images.githubusercontent.com/2687328/474308796-43d67e15-d56e-497f-a383-20c215454991.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMwODc5Ni00M2Q2N2UxNS1kNTZlLTQ5N2YtYTM4My0yMGMyMTU0NTQ5OTEucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZWY5NzEyYmUwMDI5YmNlNzA5NWNmNTI1ZGU5YmMzYzJhY2FmMzQwOTk3MDkyMmEyNGRlYTRlZTEzYTkwN2YyMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.zmONtuUlxyFQ-mRDoh765B243UZ4pJ5Smqueuc6Jz7E',
+    src: autoCapstoneGoodbyeImage,
     alt: 'Goodbye Screen',
+    fit: 'contain',
   },
 ];
 
@@ -54,16 +75,34 @@ const bearhacksPortalMedia = [
     type: 'image',
     src: bearhacksAdminPortalImage,
     alt: 'BearHacks admin portal',
+    fit: 'contain',
   },
   {
     type: 'image',
     src: bearhacksUserPortalProfileImage,
     alt: 'BearHacks user portal profile',
+    fit: 'contain',
   },
   {
     type: 'image',
     src: bearhacksUserPortalImage,
     alt: 'BearHacks user portal sign-in',
+    fit: 'contain',
+  },
+];
+
+const ctfdLiveScoreboardMedia = [
+  {
+    type: 'image',
+    src: ctfdLiveScoreboardQuestsImage,
+    alt: 'CTFd live scoreboard quests view',
+    fit: 'contain',
+  },
+  {
+    type: 'image',
+    src: ctfdLiveScoreboardTopTeamsImage,
+    alt: 'CTFd live scoreboard top teams',
+    fit: 'contain',
   },
 ];
 
@@ -418,11 +457,7 @@ const projectEntries = [
       src: new URL('../../assets/raw/logos/issessions.svg', import.meta.url).href,
       alt: 'ISSessions logo',
     },
-    media: {
-      type: 'image',
-      src: '',
-      alt: 'CTFd live scoreboard preview',
-    },
+    media: ctfdLiveScoreboardMedia,
     moreInfo: {
       role: 'Builder / maintainer',
       status: '3-day live event scoreboard',
