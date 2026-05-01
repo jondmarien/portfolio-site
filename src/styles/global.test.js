@@ -13,9 +13,9 @@ describe('global cursor styles', () => {
 });
 
 describe('global layout scale', () => {
-  it('scales the main site chrome to match the preferred browser zoom level', () => {
+  it('keeps the site scale token available without using browser zoom', () => {
     expect(css).toContain('--site-scale: 1.1;');
-    expect(css).toContain('zoom: var(--site-scale);');
+    expect(css).not.toContain('zoom: var(--site-scale);');
   });
 });
 
@@ -29,8 +29,10 @@ describe('global UX affordances', () => {
   });
 
   it('keeps desktop sidebar and main content in independent scroll containers', () => {
-    expect(css).toContain('height: calc(100vh / var(--site-scale));');
+    expect(css).toMatch(/html,\s*body,\s*#root\s*\{[^}]*height: 100%;[^}]*overflow: hidden;/s);
+    expect(css).toContain('height: 100vh;');
     expect(css).toContain('overflow: hidden;');
+    expect(css).toContain('min-height: 0;');
     expect(css).toContain('overscroll-behavior: contain;');
     expect(css).toContain('scrollbar-gutter: stable;');
     expect(css).toContain('scrollbar-width: none;');

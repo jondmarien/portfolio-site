@@ -38,6 +38,19 @@ describe('App', () => {
     );
   });
 
+  it('scrolls the sidebar itself when wheel input starts there', () => {
+    render(<App />);
+
+    const sidebar = screen.getByLabelText('Portfolio sidebar');
+    Object.defineProperty(sidebar, 'scrollHeight', { configurable: true, value: 1200 });
+    Object.defineProperty(sidebar, 'clientHeight', { configurable: true, value: 300 });
+    sidebar.scrollTop = 0;
+
+    fireEvent.wheel(sidebar, { deltaY: 180 });
+
+    expect(sidebar.scrollTop).toBe(180);
+  });
+
   it('marks the active sidebar section and updates it when a nav link is clicked', () => {
     render(<App />);
 

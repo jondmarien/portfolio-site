@@ -39,6 +39,14 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -46,7 +54,6 @@ body {
   font-size: 14px;
   line-height: 1.7;
   min-height: 100vh;
-  overflow: hidden;
 }
 
 a,
@@ -59,17 +66,16 @@ button,
 .layout {
   display: grid;
   grid-template-columns: 220px 1fr;
-  height: calc(100vh / var(--site-scale));
+  height: 100vh;
   max-width: 1100px;
   margin: 0 auto;
+  min-height: 0;
   overflow: hidden;
-  zoom: var(--site-scale);
 }
 
 .sidebar {
-  position: sticky;
-  top: 0;
-  height: calc(100vh / var(--site-scale));
+  height: 100vh;
+  min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
@@ -208,7 +214,8 @@ button,
 }
 
 .main {
-  height: calc(100vh / var(--site-scale));
+  height: 100vh;
+  min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 48px 56px;
@@ -465,6 +472,74 @@ button,
   max-height: 180px;
   object-fit: cover;
   width: 100%;
+}
+
+.project-media-wrap {
+  margin-bottom: 10px;
+}
+
+.project-media-wrap .project-media {
+  margin-bottom: 0;
+}
+
+.project-media-carousel {
+  margin-bottom: 10px;
+}
+
+.project-media-carousel-controls {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.project-media-nav {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  cursor: var(--cursor-pointer), pointer;
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1;
+  padding: 4px 7px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.project-media-nav:hover,
+.project-media-nav:focus-visible {
+  background: var(--security-surface);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.project-media-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-media-dot {
+  background: var(--text-muted);
+  border: 0;
+  border-radius: 999px;
+  cursor: var(--cursor-pointer), pointer;
+  height: 6px;
+  padding: 0;
+  transition: background 0.15s, transform 0.15s;
+  width: 6px;
+}
+
+.project-media-dot.is-active {
+  background: var(--sidebar-accent);
+  transform: scale(1.15);
+}
+
+.project-media-caption {
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  margin-top: 6px;
 }
 
 .project-meta-row {
@@ -845,7 +920,10 @@ button,
 }
 
 @media (max-width: 768px) {
-  body {
+  html,
+  body,
+  #root {
+    height: auto;
     overflow: auto;
   }
 
@@ -854,12 +932,11 @@ button,
     height: auto;
     min-height: 100vh;
     overflow: visible;
-    zoom: 1;
   }
 
   .sidebar {
-    position: static;
     height: auto;
+    min-height: auto;
     overflow: visible;
     overscroll-behavior: auto;
     scrollbar-gutter: auto;
@@ -894,6 +971,7 @@ button,
 
   .main {
     height: auto;
+    min-height: auto;
     overflow: visible;
     overscroll-behavior: auto;
     padding: 32px 24px;

@@ -129,6 +129,27 @@ describe('ProjectList', () => {
     expect(screen.getByAltText('LinkCoder dashboard placeholder')).toBeInTheDocument();
   });
 
+  it('renders a minimal carousel for capstone media and cycles slides', () => {
+    const capstoneProject = {
+      ...projects.find((project) => project.id === 'automotive-security-capstone'),
+      media: [
+        { type: 'image', src: '/capstone-loading.png', alt: 'Loading Screen' },
+        { type: 'image', src: '/capstone-menu.png', alt: 'Menu Screen' },
+        { type: 'image', src: '/capstone-main.png', alt: 'Main Screen' },
+      ],
+    };
+
+    render(<ProjectList projects={[capstoneProject]} />);
+
+    expect(screen.getByAltText('Loading Screen')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /next media for automotive security capstone/i }));
+    expect(screen.getByAltText('Menu Screen')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /previous media for automotive security capstone/i }));
+    expect(screen.getByAltText('Loading Screen')).toBeInTheDocument();
+  });
+
   it('shows Render-backed details for the BearHacks backend project', () => {
     const backend = projects.find((project) => project.id === 'bearhacks-backend');
 

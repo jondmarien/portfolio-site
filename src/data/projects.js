@@ -10,6 +10,63 @@ const featuredProjectOrder = [
 
 const archiveProjectOrder = ['link-shortener', 'qrcoder', 'mediacoder'];
 
+const dSportsImage = new URL('../../assets/raw/images/d-sports.png', import.meta.url).href;
+const linkCoderImage = new URL('../../assets/raw/images/linkcoder.png', import.meta.url).href;
+const qrCoderImage = new URL('../../assets/raw/images/qrcoder.png', import.meta.url).href;
+const mediaCoderImage = new URL('../../assets/raw/images/mediacoder.png', import.meta.url).href;
+const bearhacksAdminPortalImage = new URL('../../assets/raw/images/bearhacks-admin-portal.png', import.meta.url).href;
+const bearhacksUserPortalProfileImage = new URL(
+  '../../assets/raw/images/bearhacks-user-portal-profile.png',
+  import.meta.url
+).href;
+const bearhacksUserPortalImage = new URL('../../assets/raw/images/bearhacks-user-portal.png', import.meta.url).href;
+
+const capstoneMedia = [
+  {
+    type: 'image',
+    src: 'https://private-user-images.githubusercontent.com/2687328/474308035-cdaf5e7a-c4b9-4adf-91fc-686aa3587074.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMwODAzNS1jZGFmNWU3YS1jNGI5LTRhZGYtOTFmYy02ODZhYTM1ODcwNzQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MDk2Y2MzYmQyZWM3ZTQ0NWZjNWQwM2I3MDAzMjY5MzlhYmY4NzJmNzYxNWM2MTdmODc3NGQwZDUwYWUzOTgyMiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.Ofei3GNoLhg-a6qBkr9oJqDvTTPIm4kLhnaMMvjQuWs',
+    alt: 'Loading Screen',
+  },
+  {
+    type: 'image',
+    src: 'https://private-user-images.githubusercontent.com/2687328/474308155-ed963dcd-5128-49f3-a676-5f48a335b443.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMwODE1NS1lZDk2M2RjZC01MTI4LTQ5ZjMtYTY3Ni01ZjQ4YTMzNWI0NDMucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MmRiZjI1MTgwODU0ZjBmMzA2ZmQ1ZWIzOWZjOTNjMzU0ZTZlZDBhNWQzOGM3MjY1M2M0NzdlZTUxMWVkZDNhZSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.Q4FkQS7jmei_pPkXzXQ-JWP_URyz8rlsjnsNNZ0IObM',
+    alt: 'Menu Screen',
+  },
+  {
+    type: 'image',
+    src: 'https://private-user-images.githubusercontent.com/2687328/474310088-a4548a29-b0b3-4a50-a32e-40fdd27b995d.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMxMDA4OC1hNDU0OGEyOS1iMGIzLTRhNTAtYTMyZS00MGZkZDI3Yjk5NWQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MDJlNDIyOTI2YTI2OTI0MmQ1NzgzZGVhZTg0ZTZjZTNiZjFiOWQ2N2U3MDA5MTU0NjM1YjMwNGE1ZWI4YWIzMyZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.1Gv-QkoOFxrDIuFJetgyANk84wWM5lAMou9vhCXPC-A',
+    alt: 'Main Screen',
+  },
+  {
+    type: 'image',
+    src: 'https://private-user-images.githubusercontent.com/2687328/474308318-2899421c-7f26-4d99-922b-e7ba5b5ddd47.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMwODMxOC0yODk5NDIxYy03ZjI2LTRkOTktOTIyYi1lN2JhNWI1ZGRkNDcucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9YWM3NTg1ZWVhM2NiMjQ3MmIwMGI3YjdmMzg3ZDg2Zjk2NTdkOGJkZGFiZjcwMWZhZjY1MWY4M2RjMTZjMTM5ZCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.eSlUee3JEJS8NhIkZdNmIFEH1DzuU3g7uVtsbT41EDs',
+    alt: 'Exit Dashboard',
+  },
+  {
+    type: 'image',
+    src: 'https://private-user-images.githubusercontent.com/2687328/474308796-43d67e15-d56e-497f-a383-20c215454991.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc1OTcwNTcsIm5iZiI6MTc3NzU5Njc1NywicGF0aCI6Ii8yNjg3MzI4LzQ3NDMwODc5Ni00M2Q2N2UxNS1kNTZlLTQ5N2YtYTM4My0yMGMyMTU0NTQ5OTEucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDUwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA1MDFUMDA1MjM3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZWY5NzEyYmUwMDI5YmNlNzA5NWNmNTI1ZGU5YmMzYzJhY2FmMzQwOTk3MDkyMmEyNGRlYTRlZTEzYTkwN2YyMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.zmONtuUlxyFQ-mRDoh765B243UZ4pJ5Smqueuc6Jz7E',
+    alt: 'Goodbye Screen',
+  },
+];
+
+const bearhacksPortalMedia = [
+  {
+    type: 'image',
+    src: bearhacksAdminPortalImage,
+    alt: 'BearHacks admin portal',
+  },
+  {
+    type: 'image',
+    src: bearhacksUserPortalProfileImage,
+    alt: 'BearHacks user portal profile',
+  },
+  {
+    type: 'image',
+    src: bearhacksUserPortalImage,
+    alt: 'BearHacks user portal sign-in',
+  },
+];
+
 const projectEntries = [
   {
     id: 'd-sports',
@@ -24,7 +81,7 @@ const projectEntries = [
     ],
     media: {
       type: 'image',
-      src: '',
+      src: dSportsImage,
       alt: 'D-Sports app preview',
     },
     moreInfo: {
@@ -63,11 +120,7 @@ const projectEntries = [
       src: new URL('../../assets/raw/logos/bearhacks.svg', import.meta.url).href,
       alt: 'BearHacks logo',
     },
-    media: {
-      type: 'image',
-      src: '',
-      alt: 'BearHacks portal preview',
-    },
+    media: bearhacksPortalMedia,
     moreInfo: {
       role: 'Dev Lead / Core Organizer',
       status: 'BearHacks 2026 completed',
@@ -97,11 +150,6 @@ const projectEntries = [
         { label: 'Average deploy time', value: '~12s' },
       ],
       screenshots: [],
-    },
-    media: {
-      type: 'image',
-      src: '',
-      alt: 'BearHacks portal preview',
     },
     featured: true,
     tags: [
@@ -169,7 +217,7 @@ const projectEntries = [
     },
     media: {
       type: 'image',
-      src: '',
+      src: linkCoderImage,
       alt: 'LinkCoder dashboard preview',
     },
     tags: [
@@ -203,7 +251,7 @@ const projectEntries = [
     },
     media: {
       type: 'image',
-      src: '',
+      src: qrCoderImage,
       alt: 'QRCoder generator preview',
     },
     tags: [
@@ -236,7 +284,7 @@ const projectEntries = [
     },
     media: {
       type: 'image',
-      src: '',
+      src: mediaCoderImage,
       alt: 'MediaCoder converter preview',
     },
     tags: [
@@ -293,6 +341,7 @@ const projectEntries = [
       ],
       screenshots: [],
     },
+    media: capstoneMedia,
     featured: true,
     tags: [
       { label: 'Python', type: 'py' },

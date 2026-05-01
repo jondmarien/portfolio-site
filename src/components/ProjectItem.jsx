@@ -92,18 +92,106 @@ function ProjectLogo({ logo, name }) {
 }
 
 function ProjectMedia({ media, name }) {
-  if (!media?.src) {
+  const mediaItems = normalizeMedia(media);
+  if (!mediaItems.length) {
     return null;
   }
 
+  if (mediaItems.length === 1) {
+    return <ProjectMediaAsset media={mediaItems[0]} name={name} />;
+  }
+
+  return <ProjectMediaCarousel mediaItems={mediaItems} name={name} />;
+}
+
+function ProjectMediaAsset({ media, name }) {
   if (media.type === 'video') {
     return (
-      <video className="project-media" controls muted playsInline preload="metadata">
-        <source src={media.src} type={media.mimeType ?? 'video/mp4'} />
-        {media.alt ?? `${name} demo video`}
-      </video>
+      <div className="project-media-wrap" onClick={stopEventPropagation}>
+        <video className="project-media" controls muted playsInline preload="metadata">
+          <source src={media.src} type={media.mimeType ?? 'video/mp4'} />
+          {media.alt ?? `${name} demo video`}
+        </video>
+      </div>
     );
   }
 
-  return <img className="project-media" src={media.src} alt={media.alt ?? `${name} preview`} loading="lazy" />;
+  return (
+    <div className="project-media-wrap" onClick={stopEventPropagation}>
+      <img className="project-media" src={media.src} alt={media.alt ?? `${name} preview`} loading="lazy" />
+    </div>
+  );
+}
+
+function ProjectMediaCarousel({ mediaItems, name }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeMedia = mediaItems[activeIndex];
+  const hasMultipleSlides = mediaItems.length > 1;
+
+  const goToPrevious = (event) => {
+    stopEventPropagation(event);
+    setActiveIndex((current) => (current - 1 + mediaItems.length) % mediaItems.length);
+  };
+
+  const goToNext = (event) => {
+    stopEventPropagation(event);
+    setActiveIndex((current) => (current + 1) % mediaItems.length);
+  };
+
+  const setSlide = (event, index) => {
+    stopEventPropagation(event);
+    setActiveIndex(index);
+  };
+
+  return (
+    <div className="project-media-carousel" onClick={stopEventPropagation}>
+      <ProjectMediaAsset media={activeMedia} name={name} />
+      {hasMultipleSlides ? (
+        <div className="project-media-carousel-controls">
+          <button
+            aria-label={`Previous media for ${name}`}
+            className="project-media-nav"
+            onClick={goToPrevious}
+            type="button"
+          >
+            {'<'}
+          </button>
+          <div className="project-media-dots" role="tablist" aria-label={`${name} media slides`}>
+            {mediaItems.map((item, index) => (
+              <button
+                key={`${name}-media-${index}`}
+                aria-label={`Show ${item.alt ?? `slide ${index + 1}`} for ${name}`}
+                aria-pressed={index === activeIndex}
+                className={`project-media-dot ${index === activeIndex ? 'is-active' : ''}`}
+                onClick={(event) => setSlide(event, index)}
+                type="button"
+              />
+            ))}
+          </div>
+          <button aria-label={`Next media for ${name}`} className="project-media-nav" onClick={goToNext} type="button">
+            {'>'}
+          </button>
+        </div>
+      ) : null}
+      <div className="project-media-caption">
+        {activeMedia.alt ?? `${name} preview`} {hasMultipleSlides ? `(${activeIndex + 1}/${mediaItems.length})` : ''}
+      </div>
+    </div>
+  );
+}
+
+function normalizeMedia(media) {
+  if (!media) {
+    return [];
+  }
+
+  if (Array.isArray(media)) {
+    return media.filter((item) => item?.src);
+  }
+
+  return media.src ? [media] : [];
+}
+
+function stopEventPropagation(event) {
+  event.stopPropagation();
 }

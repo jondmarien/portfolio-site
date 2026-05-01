@@ -1,0 +1,2066 @@
+{
+    "campaign": "acceptances",
+    "total": 294,
+    "already_sent": 294,
+    "remaining": 0,
+    "recipients": [
+      {
+        "email": "kaidenrai2@gmail.com",
+        "first_name": "Kaiden",
+        "full_name": "Kaiden Rai",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:42.508446+00:00"
+      },
+      {
+        "email": "jatoujoseph@gmail.com",
+        "first_name": "Joseph",
+        "full_name": "Joseph Jatou",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:43.412784+00:00"
+      },
+      {
+        "email": "saksham6912@gmail.com",
+        "first_name": "Saksham",
+        "full_name": "Saksham Jain",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:44.332634+00:00"
+      },
+      {
+        "email": "jenny132007@gmail.com",
+        "first_name": "Jenny",
+        "full_name": "Jenny Nguyen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:45.096544+00:00"
+      },
+      {
+        "email": "ameeralikhan1245@hotmail.com",
+        "first_name": "Ameer",
+        "full_name": "Ameer Khan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:45.953551+00:00"
+      },
+      {
+        "email": "pravisa1@lakeheadu.ca",
+        "first_name": "Prajith",
+        "full_name": "Prajith Ravisankar",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:47.014355+00:00"
+      },
+      {
+        "email": "jamie.hu.132@gmail.com",
+        "first_name": "Jamie",
+        "full_name": "Jamie Hu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:47.907565+00:00"
+      },
+      {
+        "email": "vuj23@mcmaster.ca",
+        "first_name": "Jack",
+        "full_name": "Jack Vu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:48.968317+00:00"
+      },
+      {
+        "email": "parson.kai.ann@gmail.com",
+        "first_name": "Kai-Ann",
+        "full_name": "Kai-Ann Parsons",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:49.863014+00:00"
+      },
+      {
+        "email": "akash.nagabhirava@mail.utoronto.ca",
+        "first_name": "Akash",
+        "full_name": "Akash Nagabhirava",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:50.923980+00:00"
+      },
+      {
+        "email": "samarrsharmas@gmail.com",
+        "first_name": "Samarpita",
+        "full_name": "Samarpita Sharma",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:51.836536+00:00"
+      },
+      {
+        "email": "saadsyed947@gmail.com",
+        "first_name": "Syed Saad",
+        "full_name": "Syed Saad Qadeer",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:52.922024+00:00"
+      },
+      {
+        "email": "mr.darshan2919@gmail.com",
+        "first_name": "Darshan",
+        "full_name": "Darshan Prajapati",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:53.835503+00:00"
+      },
+      {
+        "email": "preetsinghharman27@gmail.com",
+        "first_name": "Harmanpreet",
+        "full_name": "Harmanpreet Singh",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:54.780973+00:00"
+      },
+      {
+        "email": "riaasehgal@gmail.com",
+        "first_name": "Riaa",
+        "full_name": "Riaa Sehgal",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:55.706474+00:00"
+      },
+      {
+        "email": "khan674@sheridancollege.ca",
+        "first_name": "Mohammad Fahad",
+        "full_name": "Mohammad Fahad Khan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:56.638004+00:00"
+      },
+      {
+        "email": "cenesdurak@gmail.com",
+        "first_name": "Cemal",
+        "full_name": "Cemal Durak",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:57.579677+00:00"
+      },
+      {
+        "email": "kellygao@live.ca",
+        "first_name": "Miu",
+        "full_name": "Miu Gao",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:58.492807+00:00"
+      },
+      {
+        "email": "vishnu.sai@mail.utoronto.ca",
+        "first_name": "Vishnu",
+        "full_name": "Vishnu Sai",
+        "sent": true,
+        "sent_at": "2026-04-07T19:47:59.462988+00:00"
+      },
+      {
+        "email": "Michaelbryan857@gmail.com",
+        "first_name": "Bryan",
+        "full_name": "Bryan Maristanez",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:00.489389+00:00"
+      },
+      {
+        "email": "mishrarishabh075@gmail.com",
+        "first_name": "Rishabh",
+        "full_name": "Rishabh Mishra",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:01.519958+00:00"
+      },
+      {
+        "email": "mahmoofe@sheridancollege.ca",
+        "first_name": "Feras",
+        "full_name": "Feras Mahmood",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:02.503635+00:00"
+      },
+      {
+        "email": "betulcetintas2706@gmail.com",
+        "first_name": "Betul",
+        "full_name": "Betul Cetintas",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:03.526907+00:00"
+      },
+      {
+        "email": "yatharth.jain4223@gmail.com",
+        "first_name": "Yatharth",
+        "full_name": "Yatharth Jain",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:04.401680+00:00"
+      },
+      {
+        "email": "anhminhtran268@gmail.com",
+        "first_name": "Anh",
+        "full_name": "Anh Tran",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:05.442937+00:00"
+      },
+      {
+        "email": "tqc1234@gmail.com",
+        "first_name": "Sienna",
+        "full_name": "Sienna Truong",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:06.328754+00:00"
+      },
+      {
+        "email": "stiefeli@sheridancollege.ca",
+        "first_name": "Erik",
+        "full_name": "Erik Stiefeling",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:07.294952+00:00"
+      },
+      {
+        "email": "Abhishekchauhan8524@gmail.com",
+        "first_name": "Abhishek",
+        "full_name": "Abhishek Abhishek",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:08.190851+00:00"
+      },
+      {
+        "email": "arkel.ziko@gmail.com",
+        "first_name": "Arkel",
+        "full_name": "Arkel Ziko",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:09.162936+00:00"
+      },
+      {
+        "email": "n.a.elshamy1@gmail.com",
+        "first_name": "Nada",
+        "full_name": "Nada Elshami",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:10.048429+00:00"
+      },
+      {
+        "email": "armuhtadi@gmail.com",
+        "first_name": "Abdel Razzaq Muhtadi",
+        "full_name": "Abdel Razzaq Muhtadi Muhtadi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:10.964282+00:00"
+      },
+      {
+        "email": "derinozturk2006@gmail.com",
+        "first_name": "Derin",
+        "full_name": "Derin Ozturk",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:11.899046+00:00"
+      },
+      {
+        "email": "Faithaikhionbare@outlook.com",
+        "first_name": "Faith",
+        "full_name": "Faith Aikhionbare",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:12.801918+00:00"
+      },
+      {
+        "email": "menadan@sheridancollege.ca",
+        "first_name": "Daniel",
+        "full_name": "Daniel Mena",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:13.889803+00:00"
+      },
+      {
+        "email": "1danlu03@gmail.com",
+        "first_name": "Daniel",
+        "full_name": "Daniel Lu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:14.820910+00:00"
+      },
+      {
+        "email": "trivkaty@sheridancollege.ca",
+        "first_name": "Katyayani",
+        "full_name": "Katyayani Trivedi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:16.030986+00:00"
+      },
+      {
+        "email": "tejastyagi999@gmail.com",
+        "first_name": "Tejas",
+        "full_name": "Tejas Tyagi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:16.948679+00:00"
+      },
+      {
+        "email": "babice@sheridancollege.ca",
+        "first_name": "Evan",
+        "full_name": "Evan Babic",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:17.974224+00:00"
+      },
+      {
+        "email": "alexrwmson@gmail.com",
+        "first_name": "Alexander",
+        "full_name": "Alexander Williamson",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:18.874452+00:00"
+      },
+      {
+        "email": "tygo.c@proton.me",
+        "first_name": "Tygo",
+        "full_name": "Tygo Crawley",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:19.841235+00:00"
+      },
+      {
+        "email": "sahildutta.work@gmail.com",
+        "first_name": "Sahil",
+        "full_name": "Sahil Dutta",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:20.771613+00:00"
+      },
+      {
+        "email": "balajirm@sheridancollege.ca",
+        "first_name": "Mahimaa Vardini",
+        "full_name": "Mahimaa Vardini Balaji Ramathaal",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:21.695866+00:00"
+      },
+      {
+        "email": "abe.kuk@mail.utoronto.ca",
+        "first_name": "Abe",
+        "full_name": "Abe Kuk",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:22.657905+00:00"
+      },
+      {
+        "email": "sabeenk2006@gmail.com",
+        "first_name": "Sabeen",
+        "full_name": "Sabeen Khan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:23.552657+00:00"
+      },
+      {
+        "email": "Jaswmson@gmail.com",
+        "first_name": "James",
+        "full_name": "James Williamson",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:24.511120+00:00"
+      },
+      {
+        "email": "jaydenseto0830@gmail.com",
+        "first_name": "Jayden",
+        "full_name": "Jayden Seto",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:25.375915+00:00"
+      },
+      {
+        "email": "leshenka.0621@gmail.com",
+        "first_name": "Lesha",
+        "full_name": "Lesha Nguyen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:26.430442+00:00"
+      },
+      {
+        "email": "nmcclure0330@gmail.com",
+        "first_name": "Nicholas",
+        "full_name": "Nicholas McClure",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:27.323811+00:00"
+      },
+      {
+        "email": "g.khiani1@gmail.com",
+        "first_name": "Gaya",
+        "full_name": "Gaya Khiani",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:28.293112+00:00"
+      },
+      {
+        "email": "lifeng.yin.07@gmail.com",
+        "first_name": "Lifeng",
+        "full_name": "Lifeng Yin",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:29.226469+00:00"
+      },
+      {
+        "email": "aadi.kulsh@gmail.com",
+        "first_name": "Aadi",
+        "full_name": "Aadi Kulshrestha",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:30.190517+00:00"
+      },
+      {
+        "email": "karinavetlugina05@gmail.com",
+        "first_name": "Karina",
+        "full_name": "Karina Vetlugina",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:31.128821+00:00"
+      },
+      {
+        "email": "likhithakoppula10@gmail.com",
+        "first_name": "Likhitha",
+        "full_name": "Likhitha Koppula",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:32.077809+00:00"
+      },
+      {
+        "email": "sythatsokmontrey@gmail.com",
+        "first_name": "Sokmontrey",
+        "full_name": "Sokmontrey Sythat",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:32.986596+00:00"
+      },
+      {
+        "email": "islamukheef@gmail.com",
+        "first_name": "Isla",
+        "full_name": "Isla Mukheef",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:34.006483+00:00"
+      },
+      {
+        "email": "celinedian35@gmail.com",
+        "first_name": "Celine",
+        "full_name": "Celine Hermanto",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:35.563091+00:00"
+      },
+      {
+        "email": "gatdulayoungest@gmail.com",
+        "first_name": "Jean Ray",
+        "full_name": "Jean Ray Gatdula",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:36.477723+00:00"
+      },
+      {
+        "email": "seeronsiva6@gmail.com",
+        "first_name": "Seeron",
+        "full_name": "Seeron Sivashankar",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:37.405840+00:00"
+      },
+      {
+        "email": "stanley.pang@mail.utoronto.ca",
+        "first_name": "Stanley",
+        "full_name": "Stanley Pang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:38.321069+00:00"
+      },
+      {
+        "email": "diyap23@yahoo.com",
+        "first_name": "Diya",
+        "full_name": "Diya Patel",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:39.290997+00:00"
+      },
+      {
+        "email": "hadiaqilkhan@gmail.com",
+        "first_name": "Hadi",
+        "full_name": "Hadi Khan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:40.284972+00:00"
+      },
+      {
+        "email": "zahadad14@gmail.com",
+        "first_name": "Zahadad",
+        "full_name": "Zahadad Jarif",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:41.256618+00:00"
+      },
+      {
+        "email": "deeptanshusanghani@gmail.com",
+        "first_name": "Deeptanshu",
+        "full_name": "Deeptanshu Sanghani",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:42.193164+00:00"
+      },
+      {
+        "email": "ahm.aljabi@gmail.com",
+        "first_name": "Ahmad",
+        "full_name": "Ahmad Al-Jabi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:43.101407+00:00"
+      },
+      {
+        "email": "idangomberg@gmail.com",
+        "first_name": "Idan",
+        "full_name": "Idan Gomberg",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:44.066471+00:00"
+      },
+      {
+        "email": "samuellucanbrowne@gmail.com",
+        "first_name": "Sam",
+        "full_name": "Sam Browne",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:44.986912+00:00"
+      },
+      {
+        "email": "atinder.harika2@gmail.com",
+        "first_name": "Atinder Singh",
+        "full_name": "Atinder Singh Hari",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:46.120373+00:00"
+      },
+      {
+        "email": "chahatbirs@gmail.com",
+        "first_name": "Chahatbir",
+        "full_name": "Chahatbir Singh",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:46.999420+00:00"
+      },
+      {
+        "email": "hariskamal03@gmail.com",
+        "first_name": "Haris",
+        "full_name": "Haris Kamal",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:47.982499+00:00"
+      },
+      {
+        "email": "diego.pachasr@gmail.com",
+        "first_name": "Diego",
+        "full_name": "Diego Pachas",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:48.861209+00:00"
+      },
+      {
+        "email": "rawattar@msu.edu",
+        "first_name": "Tarun",
+        "full_name": "Tarun Rawat",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:50.038879+00:00"
+      },
+      {
+        "email": "bernsan@sheridancollege.com",
+        "first_name": "Santiago",
+        "full_name": "Santiago Bernal",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:51.024331+00:00"
+      },
+      {
+        "email": "xutalia83@gmail.com",
+        "first_name": "Renyin",
+        "full_name": "Renyin Xu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:51.939326+00:00"
+      },
+      {
+        "email": "dantevo132@gmail.com",
+        "first_name": "Dante",
+        "full_name": "Dante Vo",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:53.003413+00:00"
+      },
+      {
+        "email": "mfonezekel@gmail.com",
+        "first_name": "Mfon",
+        "full_name": "Mfon Udoh",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:53.879786+00:00"
+      },
+      {
+        "email": "joshmoncarz@gmail.com",
+        "first_name": "Josh",
+        "full_name": "Josh Moncarz",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:54.904869+00:00"
+      },
+      {
+        "email": "vohrriya@sheridancollege.ca",
+        "first_name": "Riya",
+        "full_name": "Riya Vohra",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:55.827991+00:00"
+      },
+      {
+        "email": "carolynmuskoka@gmail.com",
+        "first_name": "Carolyn",
+        "full_name": "Carolyn Carter",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:56.810953+00:00"
+      },
+      {
+        "email": "nathanserrano104@gmail.com",
+        "first_name": "Nathan",
+        "full_name": "Nathan Serrano",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:57.807068+00:00"
+      },
+      {
+        "email": "fatimanawaz625@gmail.com",
+        "first_name": "Fatima",
+        "full_name": "Fatima Nawaz",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:58.708374+00:00"
+      },
+      {
+        "email": "mattboyd1602@gmail.com",
+        "first_name": "Mathew",
+        "full_name": "Mathew Boyd",
+        "sent": true,
+        "sent_at": "2026-04-07T19:48:59.760929+00:00"
+      },
+      {
+        "email": "zarajper@gmail.com",
+        "first_name": "Zain",
+        "full_name": "Zain Rajper",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:00.636921+00:00"
+      },
+      {
+        "email": "mjtamer@outlook.com",
+        "first_name": "Mustafa",
+        "full_name": "Mustafa Tamer",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:01.753633+00:00"
+      },
+      {
+        "email": "damolida@sheridancollege.ca",
+        "first_name": "Alexander",
+        "full_name": "Alexander Damolidis",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:02.653449+00:00"
+      },
+      {
+        "email": "mahasiddiqi58@gmail.com",
+        "first_name": "Maha",
+        "full_name": "Maha Siddiqi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:03.674126+00:00"
+      },
+      {
+        "email": "t.sabanshi@gmail.com",
+        "first_name": "Tim",
+        "full_name": "Tim S",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:04.552510+00:00"
+      },
+      {
+        "email": "abinashpatti@gmail.com",
+        "first_name": "Abinash",
+        "full_name": "Abinash Patti",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:05.741225+00:00"
+      },
+      {
+        "email": "sulaimansyed0016@gmail.com",
+        "first_name": "Sulaiman",
+        "full_name": "Sulaiman Syed",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:06.619545+00:00"
+      },
+      {
+        "email": "ashleyanandakumar@gmail.com",
+        "first_name": "Anjena 'Ash'",
+        "full_name": "Anjena 'Ash' Anandakumar",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:07.589724+00:00"
+      },
+      {
+        "email": "k3vinwvng@gmail.com",
+        "first_name": "kevin",
+        "full_name": "kevin wang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:08.497701+00:00"
+      },
+      {
+        "email": "epakalapati@gmail.com",
+        "first_name": "Esha",
+        "full_name": "Esha Pakalapati",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:09.387140+00:00"
+      },
+      {
+        "email": "mbert619@gmail.com",
+        "first_name": "Mark",
+        "full_name": "Mark Bertrand",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:10.305031+00:00"
+      },
+      {
+        "email": "nguyenquochao2000@gmail.com",
+        "first_name": "Hao",
+        "full_name": "Hao Nguyen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:11.203070+00:00"
+      },
+      {
+        "email": "aarizm2004@gmail.com",
+        "first_name": "Aariz",
+        "full_name": "Aariz Mohammed",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:12.247140+00:00"
+      },
+      {
+        "email": "dev.reese.chong@gmail.com",
+        "first_name": "Reese",
+        "full_name": "Reese Chong",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:13.207674+00:00"
+      },
+      {
+        "email": "itan9@uwo.ca",
+        "first_name": "Ian",
+        "full_name": "Ian Tan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:14.195728+00:00"
+      },
+      {
+        "email": "sunyubo1225@gmail.com",
+        "first_name": "Yubo",
+        "full_name": "Yubo Sun",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:15.072937+00:00"
+      },
+      {
+        "email": "macinnisliam@gmail.com",
+        "first_name": "Liam",
+        "full_name": "Liam MacInnis",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:16.103895+00:00"
+      },
+      {
+        "email": "juliankim4321@gmail.com",
+        "first_name": "Julian",
+        "full_name": "Julian Kim",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:16.974376+00:00"
+      },
+      {
+        "email": "carolzjwang@gmail.com",
+        "first_name": "Carol",
+        "full_name": "Carol Wang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:17.869684+00:00"
+      },
+      {
+        "email": "khangpicasso@gmail.com",
+        "first_name": "Cris",
+        "full_name": "Cris Huynh",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:18.933274+00:00"
+      },
+      {
+        "email": "pizzafeet70@gmail.com",
+        "first_name": "Nicholas",
+        "full_name": "Nicholas Williams",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:19.802855+00:00"
+      },
+      {
+        "email": "lodhi.rayyan@gmail.com",
+        "first_name": "Rayyan",
+        "full_name": "Rayyan Lodhi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:20.819735+00:00"
+      },
+      {
+        "email": "nerminghabiel@gmail.com",
+        "first_name": "Nermin",
+        "full_name": "Nermin Ghabiel",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:21.702416+00:00"
+      },
+      {
+        "email": "evanlamb848@gmail.com",
+        "first_name": "Evan",
+        "full_name": "Evan Lamb",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:22.728618+00:00"
+      },
+      {
+        "email": "nosannaoat@gmail.com",
+        "first_name": "Annason",
+        "full_name": "Annason Tao",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:23.621070+00:00"
+      },
+      {
+        "email": "angelosimbolrivera@gmail.com",
+        "first_name": "Angelo",
+        "full_name": "Angelo Rivera",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:24.561346+00:00"
+      },
+      {
+        "email": "nasif.parvez2000@gmail.com",
+        "first_name": "Nasif",
+        "full_name": "Nasif Parvez",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:25.498971+00:00"
+      },
+      {
+        "email": "amyxiongg@gmail.com",
+        "first_name": "Amy",
+        "full_name": "Amy Xiong",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:26.402989+00:00"
+      },
+      {
+        "email": "weiwa@sheridancollege.ca",
+        "first_name": "Wangsicong",
+        "full_name": "Wangsicong Wei",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:27.391434+00:00"
+      },
+      {
+        "email": "anipaleja@gmail.com",
+        "first_name": "Anish",
+        "full_name": "Anish Paleja",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:28.408591+00:00"
+      },
+      {
+        "email": "sehreen.basara@mail.utoronto.ca",
+        "first_name": "Sehreen",
+        "full_name": "Sehreen Basara",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:29.762860+00:00"
+      },
+      {
+        "email": "abdulmoeezshaikh@gmail.com",
+        "first_name": "Abdul Moeez",
+        "full_name": "Abdul Moeez Shaikh",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:30.734489+00:00"
+      },
+      {
+        "email": "joseateodoro.jt@gmail.com",
+        "first_name": "Jose",
+        "full_name": "Jose Teodoro",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:31.758121+00:00"
+      },
+      {
+        "email": "phineas.truong@mail.utoronto.ca",
+        "first_name": "Phineas",
+        "full_name": "Phineas Truong",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:32.982143+00:00"
+      },
+      {
+        "email": "jindalnavish50@gmail.com",
+        "first_name": "Navish",
+        "full_name": "Navish Jindal",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:33.873119+00:00"
+      },
+      {
+        "email": "muhammedcengiz2778@gmail.com",
+        "first_name": "Muhammed",
+        "full_name": "Muhammed Cengiz",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:34.943357+00:00"
+      },
+      {
+        "email": "zahrahussain582@gmail.com",
+        "first_name": "Zahra",
+        "full_name": "Zahra .",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:35.851033+00:00"
+      },
+      {
+        "email": "jayn.john12@gmail.com",
+        "first_name": "Jayna",
+        "full_name": "Jayna Johnson",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:36.811292+00:00"
+      },
+      {
+        "email": "thomaszhang223@gmail.com",
+        "first_name": "Thomas",
+        "full_name": "Thomas Zhang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:37.712864+00:00"
+      },
+      {
+        "email": "liamnicol535393@gmail.com",
+        "first_name": "Liam",
+        "full_name": "Liam Nicol",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:38.614511+00:00"
+      },
+      {
+        "email": "tanzeelqazi1999@hotmail.com",
+        "first_name": "Tanzeel",
+        "full_name": "Tanzeel Ahmad",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:39.548611+00:00"
+      },
+      {
+        "email": "samihaddad85@yahoo.com",
+        "first_name": "Sami",
+        "full_name": "Sami Haddad",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:40.478471+00:00"
+      },
+      {
+        "email": "marcus.podnar@gmail.com",
+        "first_name": "Marcus",
+        "full_name": "Marcus Podnar",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:41.537785+00:00"
+      },
+      {
+        "email": "timoswe.khan@gmail.com",
+        "first_name": "Timothy",
+        "full_name": "Timothy Khan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:42.391016+00:00"
+      },
+      {
+        "email": "derekwork36@gmail.com",
+        "first_name": "Derek",
+        "full_name": "Derek Lau",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:43.596837+00:00"
+      },
+      {
+        "email": "sigethyisaac@gmail.com",
+        "first_name": "Isaac",
+        "full_name": "Isaac Sigethy",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:44.489918+00:00"
+      },
+      {
+        "email": "nabaminhas@gmail.com",
+        "first_name": "Naba",
+        "full_name": "Naba Minhas",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:45.395711+00:00"
+      },
+      {
+        "email": "fqu7862@gmail.com",
+        "first_name": "Farhaan Qaisar",
+        "full_name": "Farhaan Qaisar Usmani",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:46.451153+00:00"
+      },
+      {
+        "email": "ariston.pmichael@gmail.com",
+        "first_name": "Ariston Philip",
+        "full_name": "Ariston Philip Michael",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:47.351200+00:00"
+      },
+      {
+        "email": "yuxinliu299@gmail.com",
+        "first_name": "yuxin",
+        "full_name": "yuxin liu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:48.411205+00:00"
+      },
+      {
+        "email": "urbanmaker6@gmail.com",
+        "first_name": "Isa",
+        "full_name": "Isa Syed",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:49.292781+00:00"
+      },
+      {
+        "email": "joliejello@gmail.com",
+        "first_name": "Jolie",
+        "full_name": "Jolie Nguyen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:50.366922+00:00"
+      },
+      {
+        "email": "omariamr99@gmail.com",
+        "first_name": "Amr",
+        "full_name": "Amr Alomari",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:51.249829+00:00"
+      },
+      {
+        "email": "alomariaous74@gmail.com",
+        "first_name": "Aous",
+        "full_name": "Aous Alomari",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:52.156235+00:00"
+      },
+      {
+        "email": "Ryan1000tkd@gmail.com",
+        "first_name": "ryan",
+        "full_name": "ryan shabaneh",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:53.107479+00:00"
+      },
+      {
+        "email": "abdallashaldamm@gmail.com",
+        "first_name": "Abdalla",
+        "full_name": "Abdalla Shaldam",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:54.020752+00:00"
+      },
+      {
+        "email": "hishamahmadxx87@gmail.com",
+        "first_name": "Hisham",
+        "full_name": "Hisham Ahmad",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:54.964208+00:00"
+      },
+      {
+        "email": "minhajareebax@gmail.com",
+        "first_name": "Areeba",
+        "full_name": "Areeba Minhaj",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:55.829569+00:00"
+      },
+      {
+        "email": "kotliar.artem@gmail.com",
+        "first_name": "Artem",
+        "full_name": "Artem Kotliar",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:56.827783+00:00"
+      },
+      {
+        "email": "ahmedlai@sheridancollege.ca",
+        "first_name": "Laiba",
+        "full_name": "Laiba Ahmed",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:57.724585+00:00"
+      },
+      {
+        "email": "ashwanthsubbu05@gmail.com",
+        "first_name": "Ashwanth",
+        "full_name": "Ashwanth Subramani",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:58.792776+00:00"
+      },
+      {
+        "email": "iskander102005@gmail.com",
+        "first_name": "Iskander",
+        "full_name": "Iskander Yelemes",
+        "sent": true,
+        "sent_at": "2026-04-07T19:49:59.672915+00:00"
+      },
+      {
+        "email": "kunalbajaj20220@gmail.com",
+        "first_name": "Kunal",
+        "full_name": "Kunal Bajaj",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:00.615963+00:00"
+      },
+      {
+        "email": "jeremytica@gmail.com",
+        "first_name": "Jeremy",
+        "full_name": "Jeremy Tica",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:01.683792+00:00"
+      },
+      {
+        "email": "caio@cotts.com.br",
+        "first_name": "Caio",
+        "full_name": "Caio dos Santos Cotts Quintão",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:02.562028+00:00"
+      },
+      {
+        "email": "kenny1234567890wu@gmail.com",
+        "first_name": "Kenny",
+        "full_name": "Kenny Wu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:03.604287+00:00"
+      },
+      {
+        "email": "amyzhc0102@gmail.com",
+        "first_name": "Amy",
+        "full_name": "Amy Zhang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:04.528592+00:00"
+      },
+      {
+        "email": "james@jamesliang.ca",
+        "first_name": "James",
+        "full_name": "James Liang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:05.508112+00:00"
+      },
+      {
+        "email": "sh3rwoodm@gmail.com",
+        "first_name": "Sherwood",
+        "full_name": "Sherwood Marks",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:06.380319+00:00"
+      },
+      {
+        "email": "becerramakayla@gmail.com",
+        "first_name": "Makayla",
+        "full_name": "Makayla Becerra",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:07.371459+00:00"
+      },
+      {
+        "email": "johnny.luu2811@live.com",
+        "first_name": "Johny",
+        "full_name": "Johny Luu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:08.280999+00:00"
+      },
+      {
+        "email": "arrththit@gmail.com",
+        "first_name": "Arrththi",
+        "full_name": "Arrththi Thavabalanathan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:09.195013+00:00"
+      },
+      {
+        "email": "stevengustar@gmail.com",
+        "first_name": "Zhaode",
+        "full_name": "Zhaode Gu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:10.082231+00:00"
+      },
+      {
+        "email": "gianni_m_marchione@hotmail.com",
+        "first_name": "Gianni",
+        "full_name": "Gianni Marchione",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:11.817440+00:00"
+      },
+      {
+        "email": "anh.dangphuong@mail.utoronto.ca",
+        "first_name": "Amy",
+        "full_name": "Amy Dang Phuong",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:12.745207+00:00"
+      },
+      {
+        "email": "contact.meera.a@gmail.com",
+        "first_name": "Meera",
+        "full_name": "Meera Aanand",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:13.785371+00:00"
+      },
+      {
+        "email": "mmaxyhl@gmail.com",
+        "first_name": "Max",
+        "full_name": "Max Li",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:14.657003+00:00"
+      },
+      {
+        "email": "matthewtamerfarah@gmail.com",
+        "first_name": "Matthew",
+        "full_name": "Matthew Farah",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:15.612525+00:00"
+      },
+      {
+        "email": "vuminhl@sheridancollege.ca",
+        "first_name": "Minh Long",
+        "full_name": "Minh Long Vu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:16.478462+00:00"
+      },
+      {
+        "email": "papujang@sheridancollege.ca",
+        "first_name": "Pujan",
+        "full_name": "Pujan Patel",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:17.445969+00:00"
+      },
+      {
+        "email": "neelvp2004@gmail.com",
+        "first_name": "Neel",
+        "full_name": "Neel Patel",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:18.305082+00:00"
+      },
+      {
+        "email": "amanmeherally@gmail.com",
+        "first_name": "Aman",
+        "full_name": "Aman Meherally",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:19.253383+00:00"
+      },
+      {
+        "email": "azitawi05@gmail.com",
+        "first_name": "Abdul Rahman",
+        "full_name": "Abdul Rahman Mousa",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:20.157225+00:00"
+      },
+      {
+        "email": "rickytangdev@gmail.com",
+        "first_name": "Ricky",
+        "full_name": "Ricky Tang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:21.081262+00:00"
+      },
+      {
+        "email": "dabhija@sheridancollege.ca",
+        "first_name": "Jayrajsinh",
+        "full_name": "Jayrajsinh Dabhi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:21.971111+00:00"
+      },
+      {
+        "email": "tao.evan.pi@gmail.com",
+        "first_name": "Evan",
+        "full_name": "Evan Tao",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:22.861664+00:00"
+      },
+      {
+        "email": "ricemarii@gmail.com",
+        "first_name": "Rizmari",
+        "full_name": "Rizmari Arrogante",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:23.762275+00:00"
+      },
+      {
+        "email": "fidaawsaf@gmail.com",
+        "first_name": "Awsaf Fida",
+        "full_name": "Awsaf Fida Mahmud",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:24.652767+00:00"
+      },
+      {
+        "email": "kaibo.huang@outlook.com",
+        "first_name": "Kaibo",
+        "full_name": "Kaibo Huang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:25.707560+00:00"
+      },
+      {
+        "email": "nevathan321@gmail.com",
+        "first_name": "Nevathan",
+        "full_name": "Nevathan Arasanchandrasegara",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:26.592473+00:00"
+      },
+      {
+        "email": "vincentguo04@gmail.com",
+        "first_name": "Vincent",
+        "full_name": "Vincent Guo",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:27.645164+00:00"
+      },
+      {
+        "email": "siddhartha.pahari@gmail.com",
+        "first_name": "Siddhartha",
+        "full_name": "Siddhartha Pahari",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:28.507250+00:00"
+      },
+      {
+        "email": "kai.song421@gmail.com",
+        "first_name": "Kai",
+        "full_name": "Kai Song",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:29.515625+00:00"
+      },
+      {
+        "email": "harishussain564@gmail.com",
+        "first_name": "haris",
+        "full_name": "haris hussain",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:30.377925+00:00"
+      },
+      {
+        "email": "chamerallyishfaq@gmail.com",
+        "first_name": "Ishfaq",
+        "full_name": "Ishfaq Chamerally",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:31.352452+00:00"
+      },
+      {
+        "email": "hsharsh0212@gmail.com",
+        "first_name": "Harsh",
+        "full_name": "Harsh Shah",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:32.264639+00:00"
+      },
+      {
+        "email": "chakravarthy5022@gmail.com",
+        "first_name": "Chakravarthy",
+        "full_name": "Chakravarthy Iyengar",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:33.167817+00:00"
+      },
+      {
+        "email": "kawaldhillon5@gmail.com",
+        "first_name": "Kawaljt",
+        "full_name": "Kawaljt Singh",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:34.104309+00:00"
+      },
+      {
+        "email": "diepanhnguyen1809@gmail.com",
+        "first_name": "Daphne",
+        "full_name": "Daphne Nguyen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:35.002107+00:00"
+      },
+      {
+        "email": "shcherbykrostyslav@gmail.com",
+        "first_name": "Rostyslav",
+        "full_name": "Rostyslav Shcherbyk",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:35.915808+00:00"
+      },
+      {
+        "email": "danielwliudwl@gmail.com",
+        "first_name": "Daniel",
+        "full_name": "Daniel Liu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:36.802575+00:00"
+      },
+      {
+        "email": "madi26@hotmail.ca",
+        "first_name": "Madison",
+        "full_name": "Madison Scarlett",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:38.046675+00:00"
+      },
+      {
+        "email": "Hossam.anwar.aziz@gmail.com",
+        "first_name": "Hossam",
+        "full_name": "Hossam Abdelaziz",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:39.001209+00:00"
+      },
+      {
+        "email": "alejitogarbo@gmail.com",
+        "first_name": "Alejandro",
+        "full_name": "Alejandro Garzon Barbosa",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:39.944602+00:00"
+      },
+      {
+        "email": "lukie.fountain01@gmail.com",
+        "first_name": "Lukas",
+        "full_name": "Lukas Fountain",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:40.927113+00:00"
+      },
+      {
+        "email": "adam_magdziak@yahoo.ca",
+        "first_name": "Adam",
+        "full_name": "Adam Magdziak",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:41.799460+00:00"
+      },
+      {
+        "email": "yamsdowe@gmail.com",
+        "first_name": "Yamato",
+        "full_name": "Yamato Dowe",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:42.818241+00:00"
+      },
+      {
+        "email": "moonashley889@gmail.com",
+        "first_name": "Ashley",
+        "full_name": "Ashley Moon",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:43.751057+00:00"
+      },
+      {
+        "email": "cobyn.brad@gmail.com",
+        "first_name": "cobyn",
+        "full_name": "cobyn brading",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:44.817883+00:00"
+      },
+      {
+        "email": "lazaroyovanys@gmail.com",
+        "first_name": "Lazaro",
+        "full_name": "Lazaro Carabeo",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:45.716618+00:00"
+      },
+      {
+        "email": "joaolucasqa2304@gmail.com",
+        "first_name": "Joao Lucas",
+        "full_name": "Joao Lucas Queiroz de Almeida",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:46.705075+00:00"
+      },
+      {
+        "email": "michaelx.10@hotmail.com",
+        "first_name": "Michael",
+        "full_name": "Michael Xie",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:47.586591+00:00"
+      },
+      {
+        "email": "etbaseke@gmail.com",
+        "first_name": "Eli",
+        "full_name": "Eli Baseke",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:48.541111+00:00"
+      },
+      {
+        "email": "chen.zhao.cfz@gmail.com",
+        "first_name": "Chen",
+        "full_name": "Chen Zhao",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:49.623112+00:00"
+      },
+      {
+        "email": "neilpatricksaldanha150405@gmail.com",
+        "first_name": "Neil",
+        "full_name": "Neil Saldanha",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:50.574991+00:00"
+      },
+      {
+        "email": "wasi866@gmail.com",
+        "first_name": "Wasi",
+        "full_name": "Wasi Rehman",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:51.644248+00:00"
+      },
+      {
+        "email": "rajputja@sheridancollege.ca",
+        "first_name": "Janasi",
+        "full_name": "Janasi Rajput",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:52.518480+00:00"
+      },
+      {
+        "email": "rajputmanasi2002@gmail.com",
+        "first_name": "Manasi",
+        "full_name": "Manasi Rajput",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:53.511408+00:00"
+      },
+      {
+        "email": "ytina0719@gmail.com",
+        "first_name": "Tina",
+        "full_name": "Tina Ye",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:54.402109+00:00"
+      },
+      {
+        "email": "lu33@sheridancollege.ca",
+        "first_name": "Xinyu",
+        "full_name": "Xinyu Lu",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:55.340986+00:00"
+      },
+      {
+        "email": "waggly@sheridancollege.ca",
+        "first_name": "Lyndon",
+        "full_name": "Lyndon Wagg",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:56.307910+00:00"
+      },
+      {
+        "email": "anirudh22022@gmail.com",
+        "first_name": "Anirudh",
+        "full_name": "Anirudh Shankar",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:57.184659+00:00"
+      },
+      {
+        "email": "hashbukhtiar@gmail.com",
+        "first_name": "Hashim",
+        "full_name": "Hashim Bukhtiar",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:58.127748+00:00"
+      },
+      {
+        "email": "arturka0505@gmail.com",
+        "first_name": "Artur",
+        "full_name": "Artur Sharipov",
+        "sent": true,
+        "sent_at": "2026-04-07T19:50:59.020570+00:00"
+      },
+      {
+        "email": "zamanu@sheridancollege.ca",
+        "first_name": "Umar",
+        "full_name": "Umar Zaman",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:00.002631+00:00"
+      },
+      {
+        "email": "noinkeegirl@gmail.com",
+        "first_name": "Abby",
+        "full_name": "Abby Simons",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:00.874824+00:00"
+      },
+      {
+        "email": "vermaa63@mcmaster.ca",
+        "first_name": "Aryan",
+        "full_name": "Aryan Verma",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:01.887198+00:00"
+      },
+      {
+        "email": "truons8@mcmaster.ca",
+        "first_name": "Shan",
+        "full_name": "Shan Truong",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:02.765463+00:00"
+      },
+      {
+        "email": "mekaeel.r.malik@gmail.com",
+        "first_name": "Mekaeel",
+        "full_name": "Mekaeel Malik",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:03.735031+00:00"
+      },
+      {
+        "email": "rodoshi.mondal@mail.utoronto.ca",
+        "first_name": "Rodoshi",
+        "full_name": "Rodoshi Mondal",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:04.609687+00:00"
+      },
+      {
+        "email": "davidzhao0524@gmail.com",
+        "first_name": "David",
+        "full_name": "David Zhao",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:05.868401+00:00"
+      },
+      {
+        "email": "cezeoke@umich.edu",
+        "first_name": "Chuka",
+        "full_name": "Chuka Ezeoke",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:06.960579+00:00"
+      },
+      {
+        "email": "rohan.gottipati@gmail.com",
+        "first_name": "Rohan",
+        "full_name": "Rohan Gottipati",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:07.897957+00:00"
+      },
+      {
+        "email": "tungle.270903@gmail.com",
+        "first_name": "Thanh Tung",
+        "full_name": "Thanh Tung Le",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:08.848395+00:00"
+      },
+      {
+        "email": "vuanhhuynguyen053004@gmail.com",
+        "first_name": "Huy",
+        "full_name": "Huy Nguyen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:09.736425+00:00"
+      },
+      {
+        "email": "gmanhphuu@gmail.com",
+        "first_name": "Manh Phu",
+        "full_name": "Manh Phu Giang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:10.623715+00:00"
+      },
+      {
+        "email": "dylanknguyen04@gmail.com",
+        "first_name": "Dylan",
+        "full_name": "Dylan Nguyen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:11.501038+00:00"
+      },
+      {
+        "email": "adam.porbanderwalla@gmail.com",
+        "first_name": "Adam",
+        "full_name": "Adam Porbanderwalla",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:12.599985+00:00"
+      },
+      {
+        "email": "syedtahafaisal1@gmail.com",
+        "first_name": "Taha",
+        "full_name": "Taha Faisal",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:13.693946+00:00"
+      },
+      {
+        "email": "geetransit@gmail.com",
+        "first_name": "George",
+        "full_name": "George Zhang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:14.537533+00:00"
+      },
+      {
+        "email": "ahmadhira8@gmail.com",
+        "first_name": "Hira",
+        "full_name": "Hira Ahmad",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:15.519637+00:00"
+      },
+      {
+        "email": "jialiang.ellison.chen@gmail.com",
+        "first_name": "Jia Liang (Ellison)",
+        "full_name": "Jia Liang (Ellison) Chen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:16.377935+00:00"
+      },
+      {
+        "email": "cofft201020@gmail.com",
+        "first_name": "Xiaoting",
+        "full_name": "Xiaoting Ma",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:17.373288+00:00"
+      },
+      {
+        "email": "mail@mahekpatel.com",
+        "first_name": "Mahek",
+        "full_name": "Mahek Patel",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:18.265407+00:00"
+      },
+      {
+        "email": "ypiyush14yadav@gmail.com",
+        "first_name": "Piyush",
+        "full_name": "Piyush Yadav",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:19.194610+00:00"
+      },
+      {
+        "email": "04ahmdali@gmail.com",
+        "first_name": "ahmad",
+        "full_name": "ahmad ali",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:20.102899+00:00"
+      },
+      {
+        "email": "donguyenminhluan96@gmail.com",
+        "first_name": "Liam",
+        "full_name": "Liam Do",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:21.011288+00:00"
+      },
+      {
+        "email": "hansencheng635@gmail.com",
+        "first_name": "Hansen",
+        "full_name": "Hansen Cheng",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:21.926273+00:00"
+      },
+      {
+        "email": "evanzyang@outlook.com",
+        "first_name": "Evan",
+        "full_name": "Evan Yang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:22.798225+00:00"
+      },
+      {
+        "email": "abishanan.sriran@gmail.com",
+        "first_name": "Abishanan",
+        "full_name": "Abishanan Sriranjan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:23.751090+00:00"
+      },
+      {
+        "email": "isaacngcaasi@gmail.com",
+        "first_name": "Isaac",
+        "full_name": "Isaac Ng",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:24.645778+00:00"
+      },
+      {
+        "email": "alexanderphilippopoulos@gmail.com",
+        "first_name": "Alexander",
+        "full_name": "Alexander Philippopoulos",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:25.661618+00:00"
+      },
+      {
+        "email": "taliamekhayche@gmail.com",
+        "first_name": "Talia",
+        "full_name": "Talia Mekhayche",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:26.556692+00:00"
+      },
+      {
+        "email": "348735812richardli@gmail.com",
+        "first_name": "Richard",
+        "full_name": "Richard Li",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:27.467262+00:00"
+      },
+      {
+        "email": "fizakaleem01@gmail.com",
+        "first_name": "Fiza",
+        "full_name": "Fiza Kaleem",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:28.374907+00:00"
+      },
+      {
+        "email": "amoghmerudi@gmail.com",
+        "first_name": "Amogh",
+        "full_name": "Amogh Merudi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:29.320923+00:00"
+      },
+      {
+        "email": "aamoahbe@gmail.com",
+        "first_name": "Atta",
+        "full_name": "Atta Amoah-Bediako",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:30.286048+00:00"
+      },
+      {
+        "email": "vishva.tyagi21@gmail.com",
+        "first_name": "Vishva",
+        "full_name": "Vishva Tyagi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:31.229738+00:00"
+      },
+      {
+        "email": "i34zhang@uwaterloo.ca",
+        "first_name": "Ian",
+        "full_name": "Ian Zhang",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:32.242966+00:00"
+      },
+      {
+        "email": "Jarankhalid2@gmail.com",
+        "first_name": "Jaran",
+        "full_name": "Jaran Khalid",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:33.150338+00:00"
+      },
+      {
+        "email": "georgepostica7@gmail.com",
+        "first_name": "George",
+        "full_name": "George Postica",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:34.104126+00:00"
+      },
+      {
+        "email": "allaine.sioson@gmail.com",
+        "first_name": "Allaine Bettina",
+        "full_name": "Allaine Bettina Sioson",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:34.988858+00:00"
+      },
+      {
+        "email": "ademc1191@gmail.com",
+        "first_name": "Adem",
+        "full_name": "Adem Cehajic",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:35.849775+00:00"
+      },
+      {
+        "email": "khang.bui211204@gmail.com",
+        "first_name": "Khang",
+        "full_name": "Khang Bui",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:37.016330+00:00"
+      },
+      {
+        "email": "amanashishshah@gmail.com",
+        "first_name": "Aman",
+        "full_name": "Aman Shah",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:37.906395+00:00"
+      },
+      {
+        "email": "harryallenp@outlook.com",
+        "first_name": "Harry",
+        "full_name": "Harry Allen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:38.900125+00:00"
+      },
+      {
+        "email": "abirademello@gmail.com",
+        "first_name": "Abira",
+        "full_name": "Abira Demello",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:39.802232+00:00"
+      },
+      {
+        "email": "puranikc09@gmail.com",
+        "first_name": "Chaitanya",
+        "full_name": "Chaitanya Puranik",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:40.708784+00:00"
+      },
+      {
+        "email": "dossantosnicholas99@gmail.com",
+        "first_name": "Nicholas",
+        "full_name": "Nicholas Dos Santos",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:41.642787+00:00"
+      },
+      {
+        "email": "sallahwala1@gmail.com",
+        "first_name": "Saad",
+        "full_name": "Saad Allahwala",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:42.522884+00:00"
+      },
+      {
+        "email": "nathan-nguyen@outlook.com",
+        "first_name": "Nathan",
+        "full_name": "Nathan Nguyen",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:43.639660+00:00"
+      },
+      {
+        "email": "rashmikashyap1359@gmail.com",
+        "first_name": "Rashmi",
+        "full_name": "Rashmi Rashmi",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:44.501800+00:00"
+      },
+      {
+        "email": "adawalia0924@gmail.com",
+        "first_name": "Ada",
+        "full_name": "Ada Walia",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:45.452641+00:00"
+      },
+      {
+        "email": "alhamwy.zane@gmail.com",
+        "first_name": "Zane",
+        "full_name": "Zane Al-Hamwy",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:46.344746+00:00"
+      },
+      {
+        "email": "yuto5@outlook.com",
+        "first_name": "Yuto",
+        "full_name": "Yuto Chau",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:47.318186+00:00"
+      },
+      {
+        "email": "honiya871@gmail.com",
+        "first_name": "Honiya",
+        "full_name": "Honiya Maqsood",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:48.202099+00:00"
+      },
+      {
+        "email": "shettypuneet2@gmail.com",
+        "first_name": "Puneet",
+        "full_name": "Puneet Shetty",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:49.144891+00:00"
+      },
+      {
+        "email": "navyamadaan21@gmail.com",
+        "first_name": "Navya",
+        "full_name": "Navya Madaan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:50.056187+00:00"
+      },
+      {
+        "email": "elshriefmoh@gmail.com",
+        "first_name": "Mohammed",
+        "full_name": "Mohammed Elshrief",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:50.959089+00:00"
+      },
+      {
+        "email": "Ibanezemily@outlook.com",
+        "first_name": "Emily",
+        "full_name": "Emily Ibanez",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:51.979457+00:00"
+      },
+      {
+        "email": "kabith29@gmail.com",
+        "first_name": "Kabith",
+        "full_name": "Kabith Kuberarajan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:52.853007+00:00"
+      },
+      {
+        "email": "gina.ta7073@gmail.com",
+        "first_name": "Regina",
+        "full_name": "Regina Ta",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:53.904230+00:00"
+      },
+      {
+        "email": "yoonsa@sheridancollege.ca",
+        "first_name": "Sang Hyun",
+        "full_name": "Sang Hyun Yoon",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:54.846355+00:00"
+      },
+      {
+        "email": "jonealle@sheridancollege.ca",
+        "first_name": "Allen",
+        "full_name": "Allen Jones",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:55.905822+00:00"
+      },
+      {
+        "email": "carterashleysmith@gmail.com",
+        "first_name": "Carter",
+        "full_name": "Carter Ashley-Smith",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:56.861054+00:00"
+      },
+      {
+        "email": "mikaelacadiz.mc@gmail.com",
+        "first_name": "Mikaela",
+        "full_name": "Mikaela Cadiz",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:57.825962+00:00"
+      },
+      {
+        "email": "maseehtaha@gmail.com",
+        "first_name": "Taha",
+        "full_name": "Taha Maseehuddin",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:58.751472+00:00"
+      },
+      {
+        "email": "gurehmat9@gmail.com",
+        "first_name": "Gurehmat",
+        "full_name": "Gurehmat Chahal",
+        "sent": true,
+        "sent_at": "2026-04-07T19:51:59.646003+00:00"
+      },
+      {
+        "email": "ryankhann47@gmail.com",
+        "first_name": "Rayyan",
+        "full_name": "Rayyan Khan",
+        "sent": true,
+        "sent_at": "2026-04-07T19:52:00.629449+00:00"
+      },
+      {
+        "email": "j2mui@uwaterloo.ca",
+        "first_name": "Justin",
+        "full_name": "Justin Mui",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:04.016753+00:00"
+      },
+      {
+        "email": "Justinshawcareer@gmail.com",
+        "first_name": "Justin",
+        "full_name": "Justin Shaw",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:04.953558+00:00"
+      },
+      {
+        "email": "arora7kabir@gmail.com",
+        "first_name": "Kabir",
+        "full_name": "Kabir Arora",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:05.936944+00:00"
+      },
+      {
+        "email": "nirjadabhi34@gmail.com",
+        "first_name": "Nirja",
+        "full_name": "Nirja Dabhi",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:06.851377+00:00"
+      },
+      {
+        "email": "clairezhang838@gmail.com",
+        "first_name": "Claire",
+        "full_name": "Claire Zhang",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:07.799613+00:00"
+      },
+      {
+        "email": "perera5@mcmaster.ca",
+        "first_name": "Anuja",
+        "full_name": "Anuja Perera",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:08.802115+00:00"
+      },
+      {
+        "email": "nafisat.larissa.ibrahim@gmail.com",
+        "first_name": "Nafisat",
+        "full_name": "Nafisat Ibrahim",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:09.76301+00:00"
+      },
+      {
+        "email": "saqibmominkhan@gmail.com",
+        "first_name": "Saqib",
+        "full_name": "Saqib Khan",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:10.685842+00:00"
+      },
+      {
+        "email": "gurmanatsinghkahlon@gmail.com",
+        "first_name": "Gurmanat Singh",
+        "full_name": "Gurmanat Singh Kahlon",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:11.624481+00:00"
+      },
+      {
+        "email": "murtadalakhdar@gmail.com",
+        "first_name": "Murtada",
+        "full_name": "Murtada Lakhdar",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:12.533391+00:00"
+      },
+      {
+        "email": "aizahsaba@gmail.com",
+        "first_name": "Aizah",
+        "full_name": "Aizah Sadiq",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:13.506016+00:00"
+      },
+      {
+        "email": "tasnia23@my.yorku.ca",
+        "first_name": "Tasnia",
+        "full_name": "Tasnia Ahmed",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:14.454487+00:00"
+      },
+      {
+        "email": "lishawn100@uwaterloo.ca",
+        "first_name": "Shawn",
+        "full_name": "Shawn Li",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:15.516966+00:00"
+      },
+      {
+        "email": "omarsaraj164@gmail.com",
+        "first_name": "Omar",
+        "full_name": "Omar Saraj",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:16.491236+00:00"
+      },
+      {
+        "email": "tiffmares@gmail.com",
+        "first_name": "Tiffany",
+        "full_name": "Tiffany Mares",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:17.474125+00:00"
+      },
+      {
+        "email": "farid.jamshid77@gmail.com",
+        "first_name": "Farid",
+        "full_name": "Farid Jamshid",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:18.443144+00:00"
+      },
+      {
+        "email": "yuhan.xu0229@gmail.com",
+        "first_name": "Yuhan",
+        "full_name": "Yuhan Xu",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:20.248308+00:00"
+      },
+      {
+        "email": "jaedenlouis360@gmail.com",
+        "first_name": "Jaeden",
+        "full_name": "Jaeden Louis",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:22.123911+00:00"
+      },
+      {
+        "email": "krish.bhoopati556@gmail.com",
+        "first_name": "Krish",
+        "full_name": "Krish Bhoopati",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:23.652503+00:00"
+      },
+      {
+        "email": "hanifallana1391@gmail.com",
+        "first_name": "Muhammad",
+        "full_name": "Muhammad Hanif",
+        "sent": true,
+        "sent_at": "2026-04-11T01:25:24.52947+00:00"
+      },
+      {
+        "email": "aashiralam06@gmail.com",
+        "first_name": "Syed Aashir",
+        "full_name": "Syed Aashir Alam",
+        "sent": true,
+        "sent_at": "2026-04-13T01:36:49.903815+00:00"
+      },
+      {
+        "email": "adnanroh118@gmail.com",
+        "first_name": "Adnan",
+        "full_name": "Adnan Rohani",
+        "sent": true,
+        "sent_at": "2026-04-13T01:43:03.367493+00:00"
+      },
+      {
+        "email": "haydendarerobertson@gmail.com",
+        "first_name": "Hayden",
+        "full_name": "Hayden Da Re-Robertson",
+        "sent": true,
+        "sent_at": "2026-04-13T01:56:03.016939+00:00"
+      },
+      {
+        "email": "leowilson1407@gmail.com",
+        "first_name": "Leo",
+        "full_name": "Leo Wilson",
+        "sent": true,
+        "sent_at": "2026-04-13T01:56:04.741441+00:00"
+      }
+    ]
+  }

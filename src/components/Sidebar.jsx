@@ -7,7 +7,7 @@ export function Sidebar({ profile }) {
   const [activeSection, setActiveSection] = useActiveSection(sectionIds);
 
   return (
-    <aside className="sidebar">
+    <aside aria-label="Portfolio sidebar" className="sidebar" onWheel={handleSidebarWheel}>
       <div className="sidebar-brand">
         <div>{profile.brand.title}</div>
         <div className="path">{profile.brand.path}</div>
@@ -45,6 +45,18 @@ export function Sidebar({ profile }) {
       <QuickContact entries={profile.contact} />
     </aside>
   );
+}
+
+function handleSidebarWheel(event) {
+  const sidebar = event.currentTarget;
+
+  if (sidebar.scrollHeight <= sidebar.clientHeight) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+  sidebar.scrollTop += event.deltaY;
 }
 
 function useActiveSection(sectionIds) {
