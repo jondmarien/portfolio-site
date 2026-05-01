@@ -300,9 +300,9 @@ button,
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.08em;
+  gap: 0.16em;
   letter-spacing: -0.01em;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   line-height: 1.2;
 }
 
@@ -316,10 +316,10 @@ button,
 
 .hero h1 .hero-alias {
   display: block;
-  height: 2.9em;
+  height: 3.5em;
   align-items: center;
   margin-left: 0;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   width: min(100%, 32ch);
 }
