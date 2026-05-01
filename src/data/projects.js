@@ -258,6 +258,8 @@ const projectEntries = [
       type: 'image',
       src: linkCoderImage,
       alt: 'LinkCoder dashboard preview',
+      fit: 'cover',
+      position: 'left top',
     },
     tags: [
       { label: 'TypeScript', type: 'ts' },
@@ -292,6 +294,8 @@ const projectEntries = [
       type: 'image',
       src: qrCoderImage,
       alt: 'QRCoder generator preview',
+      fit: 'cover',
+      position: 'center top',
     },
     tags: [
       { label: 'TypeScript', type: 'ts' },
@@ -325,6 +329,8 @@ const projectEntries = [
       type: 'image',
       src: mediaCoderImage,
       alt: 'MediaCoder converter preview',
+      fit: 'cover',
+      position: 'center top',
     },
     tags: [
       { label: 'TypeScript', type: 'ts' },

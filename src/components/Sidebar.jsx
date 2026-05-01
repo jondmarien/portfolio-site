@@ -75,6 +75,37 @@ function useActiveSection(sectionIds) {
       return undefined;
     }
 
+    const scrollRoot = document.querySelector('.main');
+
+    const syncFromScroll = () => {
+      const rootTop = scrollRoot?.getBoundingClientRect().top ?? 0;
+      const activationOffset = 96;
+      const measuredPositions = [];
+
+      let nextActiveSection = sectionIds[0];
+
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+        if (!section) {
+          return;
+        }
+
+        const relativeTop = section.getBoundingClientRect().top - rootTop;
+        measuredPositions.push(Math.round(relativeTop));
+        if (relativeTop <= activationOffset) {
+          nextActiveSection = id;
+        }
+      });
+
+      // jsdom/layout-less environments can report identical positions for all sections.
+      // In that case preserve existing state and rely on hash/click updates.
+      if (new Set(measuredPositions).size <= 1) {
+        return;
+      }
+
+      setActiveSection((current) => (current === nextActiveSection ? current : nextActiveSection));
+    };
+
     const syncHash = () => {
       const hashSection = window.location.hash.replace('#', '');
       if (hashSection) {
@@ -82,37 +113,24 @@ function useActiveSection(sectionIds) {
       }
     };
 
-    if (!('IntersectionObserver' in window)) {
-      window.addEventListener('hashchange', syncHash);
-      syncHash();
-      return () => window.removeEventListener('hashchange', syncHash);
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visibleEntry) {
-          setActiveSection(visibleEntry.target.id);
-        }
-      },
-      { rootMargin: '-20% 0px -65% 0px', threshold: [0.2, 0.5, 0.8] },
-    );
-
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) {
-        observer.observe(section);
-      }
-    });
-
     window.addEventListener('hashchange', syncHash);
+    window.addEventListener('resize', syncFromScroll);
+    if (scrollRoot) {
+      scrollRoot.addEventListener('scroll', syncFromScroll);
+    } else {
+      window.addEventListener('scroll', syncFromScroll);
+    }
+    syncHash();
+    syncFromScroll();
 
     return () => {
-      observer.disconnect();
       window.removeEventListener('hashchange', syncHash);
+      window.removeEventListener('resize', syncFromScroll);
+      if (scrollRoot) {
+        scrollRoot.removeEventListener('scroll', syncFromScroll);
+      } else {
+        window.removeEventListener('scroll', syncFromScroll);
+      }
     };
   }, [sectionIds]);
 

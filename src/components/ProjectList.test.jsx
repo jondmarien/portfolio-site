@@ -149,6 +149,28 @@ describe('ProjectList', () => {
     expect(screen.queryByRole('dialog', { name: 'D-Sports app preview placeholder' })).not.toBeInTheDocument();
   });
 
+  it('lets users cycle modal images for a carousel project', () => {
+    const capstoneProject = {
+      ...projects.find((project) => project.id === 'automotive-security-capstone'),
+      media: [
+        { type: 'image', src: '/capstone-loading.png', alt: 'Loading Screen' },
+        { type: 'image', src: '/capstone-menu.png', alt: 'Menu Screen' },
+        { type: 'image', src: '/capstone-main.png', alt: 'Main Screen' },
+      ],
+    };
+
+    render(<ProjectList projects={[capstoneProject]} />);
+
+    fireEvent.click(screen.getByAltText('Loading Screen'));
+    expect(screen.getByRole('dialog', { name: 'Loading Screen' })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /next modal image/i }));
+    expect(screen.getByRole('dialog', { name: 'Menu Screen' })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /previous modal image/i }));
+    expect(screen.getByRole('dialog', { name: 'Loading Screen' })).toBeInTheDocument();
+  });
+
   it('renders a minimal carousel for capstone media and cycles slides', () => {
     const capstoneProject = {
       ...projects.find((project) => project.id === 'automotive-security-capstone'),

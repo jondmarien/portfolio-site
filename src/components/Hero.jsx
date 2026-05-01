@@ -20,6 +20,15 @@ export function Hero({ profile }) {
           </span>
         ))}
       </div>
+      {hero.badges?.length ? (
+        <div className="hero-badges" aria-label="Profile badges">
+          {hero.badges.map((badge) => (
+            <span className="hero-badge" key={badge}>
+              {badge}
+            </span>
+          ))}
+        </div>
+      ) : null}
       <div className="hero-body">
         {hero.paragraphs.map((paragraph, index) => (
           <p key={index}>

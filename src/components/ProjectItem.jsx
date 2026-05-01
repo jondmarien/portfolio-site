@@ -9,6 +9,36 @@ export function ProjectItem({ project }) {
 
   const toggleDetails = () => setIsFlipped((current) => !current);
   const closeExpandedMedia = () => setExpandedMedia(null);
+  const expandedMediaItem = expandedMedia ? expandedMedia.items[expandedMedia.index] : null;
+  const canCycleExpandedMedia = expandedMedia ? expandedMedia.items.length > 1 : false;
+
+  const showPreviousExpandedMedia = (event) => {
+    stopEventPropagation(event);
+    setExpandedMedia((current) => {
+      if (!current || current.items.length <= 1) {
+        return current;
+      }
+
+      return {
+        ...current,
+        index: (current.index - 1 + current.items.length) % current.items.length,
+      };
+    });
+  };
+
+  const showNextExpandedMedia = (event) => {
+    stopEventPropagation(event);
+    setExpandedMedia((current) => {
+      if (!current || current.items.length <= 1) {
+        return current;
+      }
+
+      return {
+        ...current,
+        index: (current.index + 1) % current.items.length,
+      };
+    });
+  };
 
   useEffect(() => {
     if (!expandedMedia) {
@@ -64,10 +94,10 @@ export function ProjectItem({ project }) {
           ))}
         </div>
       </div>
-      {expandedMedia ? (
+      {expandedMediaItem ? (
         <div className="project-media-modal-backdrop" onClick={closeExpandedMedia} role="presentation">
           <div
-            aria-label={expandedMedia.alt ?? `${project.name} image preview`}
+            aria-label={expandedMediaItem.alt ?? `${project.name} image preview`}
             aria-modal="true"
             className="project-media-modal"
             onClick={stopEventPropagation}
@@ -76,8 +106,37 @@ export function ProjectItem({ project }) {
             <button aria-label="Close image preview" className="project-media-modal-close" onClick={closeExpandedMedia} type="button">
               close
             </button>
-            <img className="project-media-modal-image" src={expandedMedia.src} alt={expandedMedia.alt ?? `${project.name} preview`} />
-            <p className="project-media-modal-caption">{expandedMedia.alt ?? `${project.name} preview`}</p>
+            <div className="project-media-modal-stage">
+              <img
+                className="project-media-modal-image"
+                src={expandedMediaItem.src}
+                alt={expandedMediaItem.alt ?? `${project.name} preview`}
+              />
+              {canCycleExpandedMedia ? (
+                <>
+                  <button
+                    aria-label="Previous modal image"
+                    className="project-media-modal-nav project-media-modal-nav-prev"
+                    onClick={showPreviousExpandedMedia}
+                    type="button"
+                  >
+                    {'<'}
+                  </button>
+                  <button
+                    aria-label="Next modal image"
+                    className="project-media-modal-nav project-media-modal-nav-next"
+                    onClick={showNextExpandedMedia}
+                    type="button"
+                  >
+                    {'>'}
+                  </button>
+                </>
+              ) : null}
+            </div>
+            <p className="project-media-modal-caption">
+              {expandedMediaItem.alt ?? `${project.name} preview`}{' '}
+              {canCycleExpandedMedia ? `(${expandedMedia.index + 1}/${expandedMedia.items.length})` : ''}
+            </p>
           </div>
         </div>
       ) : null}
@@ -148,14 +207,22 @@ function ProjectMedia({ media, name, onPreviewMedia }) {
   }
 
   if (mediaItems.length === 1) {
-    return <ProjectMediaAsset media={mediaItems[0]} name={name} onPreviewMedia={onPreviewMedia} />;
+    return (
+      <ProjectMediaAsset
+        media={mediaItems[0]}
+        name={name}
+        onPreviewMedia={onPreviewMedia}
+        previewContext={{ items: mediaItems, index: 0 }}
+      />
+    );
   }
 
   return <ProjectMediaCarousel mediaItems={mediaItems} name={name} onPreviewMedia={onPreviewMedia} />;
 }
 
-function ProjectMediaAsset({ media, name, onPreviewMedia }) {
+function ProjectMediaAsset({ media, name, onPreviewMedia, previewContext }) {
   const objectFit = media.fit ?? 'cover';
+  const objectPosition = media.position ?? 'center center';
   const loading = media.loading ?? 'lazy';
 
   if (media.type === 'video') {
@@ -171,7 +238,7 @@ function ProjectMediaAsset({ media, name, onPreviewMedia }) {
 
   const openPreview = (event) => {
     stopEventPropagation(event);
-    onPreviewMedia?.(media);
+    onPreviewMedia?.(previewContext ?? { items: [media], index: 0 });
   };
 
   return (
@@ -188,7 +255,7 @@ function ProjectMediaAsset({ media, name, onPreviewMedia }) {
           alt={media.alt ?? `${name} preview`}
           loading={loading}
           fetchPriority={loading === 'eager' ? 'high' : 'auto'}
-          style={{ objectFit }}
+          style={{ objectFit, objectPosition }}
         />
       </button>
     </div>
@@ -229,17 +296,36 @@ function ProjectMediaCarousel({ mediaItems, name, onPreviewMedia }) {
 
   return (
     <div className="project-media-carousel" onClick={stopEventPropagation}>
-      <ProjectMediaAsset media={activeMedia} name={name} onPreviewMedia={onPreviewMedia} />
+      <div className="project-media-carousel-stage">
+        <ProjectMediaAsset
+          media={activeMedia}
+          name={name}
+          onPreviewMedia={onPreviewMedia}
+          previewContext={{ items: mediaItems, index: activeIndex }}
+        />
+        {hasMultipleSlides ? (
+          <>
+            <button
+              aria-label={`Previous media for ${name}`}
+              className="project-media-nav project-media-nav-prev"
+              onClick={goToPrevious}
+              type="button"
+            >
+              {'<'}
+            </button>
+            <button
+              aria-label={`Next media for ${name}`}
+              className="project-media-nav project-media-nav-next"
+              onClick={goToNext}
+              type="button"
+            >
+              {'>'}
+            </button>
+          </>
+        ) : null}
+      </div>
       {hasMultipleSlides ? (
         <div className="project-media-carousel-controls">
-          <button
-            aria-label={`Previous media for ${name}`}
-            className="project-media-nav"
-            onClick={goToPrevious}
-            type="button"
-          >
-            {'<'}
-          </button>
           <div className="project-media-dots" role="tablist" aria-label={`${name} media slides`}>
             {mediaItems.map((item, index) => (
               <button
@@ -252,9 +338,6 @@ function ProjectMediaCarousel({ mediaItems, name, onPreviewMedia }) {
               />
             ))}
           </div>
-          <button aria-label={`Next media for ${name}`} className="project-media-nav" onClick={goToNext} type="button">
-            {'>'}
-          </button>
         </div>
       ) : null}
       <div className="project-media-caption">
