@@ -75,6 +75,8 @@ describe('App', () => {
     expect(screen.getByText(/FastAPI\/Supabase backend behind the BearHacks portals/)).toBeInTheDocument();
     expect(screen.getByText('BearHacks Backend')).toBeInTheDocument();
     expect(screen.getByText(/Render-hosted API for BearHacks 2026/)).toBeInTheDocument();
+    expect(screen.getByAltText('Portrait of Jon Marien')).toBeInTheDocument();
+    expect(screen.getByAltText('ISSessions Fantasy CTF team photo one')).toBeInTheDocument();
   });
 
   it('shows directional cursor classes while wheel scrolling', () => {

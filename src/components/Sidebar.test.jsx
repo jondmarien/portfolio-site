@@ -18,4 +18,16 @@ describe('Sidebar', () => {
     expect(githubLink.querySelector('.link-icon')).toBeTruthy();
     expect(githubLink.querySelector('.link-label')).toBeTruthy();
   });
+
+  it('supports custom svg logos for selected sidebar links', () => {
+    render(<Sidebar profile={profile} />);
+
+    const linksSection = screen.getByLabelText('Sidebar links');
+    const siteLink = within(linksSection).getByRole('link', { name: /chron0\.link/i });
+    const dSportsLink = within(linksSection).getByRole('link', { name: /d-sports/i });
+
+    expect(siteLink.querySelector('.link-logo')).toBeTruthy();
+    expect(siteLink.querySelector('.link-logo.is-inverted')).toBeTruthy();
+    expect(dSportsLink.querySelector('.link-logo')).toBeTruthy();
+  });
 });

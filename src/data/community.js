@@ -3,10 +3,6 @@ const issFantasyCtfClosingCeremony = new URL(
   '../../assets/raw/images/iss-fantasy-ctf-closing-ceremony.jpg',
   import.meta.url
 ).href;
-const issFantasyCtfTeamPictureOne = new URL(
-  '../../assets/raw/images/iss-fantasy-ctf-team-picture-1.jpg',
-  import.meta.url
-).href;
 const issFantasyCtfTeamPictureTwo = new URL(
   '../../assets/raw/images/iss-fantasy-ctf-team-picture-2.jpg',
   import.meta.url
@@ -37,11 +33,6 @@ export const community = [
       { text: '28.4K requests, 77.2K logs, and 7 deploys', emphasis: 'underline' },
       ' during the Apr 24-26 event window.',
     ],
-    media: {
-      src: issFantasyCtfTeamPictureOne,
-      alt: 'ISSessions Fantasy CTF team photo one',
-      caption: 'ISSessions Fantasy CTF team photo',
-    },
   },
   {
     id: 'issessions-ctf',
@@ -52,11 +43,18 @@ export const community = [
       { text: '20+ challenges', emphasis: 'strong' },
       ' for the 2026 Fantasy CTF. Built and maintained the live scoreboard tool (CTFd API) and published challenge writeups at quartz.chron0.tech.',
     ],
-    media: {
-      src: issFantasyCtfClosingCeremony,
-      alt: 'ISSessions Fantasy CTF closing ceremony',
-      caption: 'ISSessions Fantasy CTF closing ceremony',
-    },
+    media: [
+      {
+        src: issFantasyCtfClosingCeremony,
+        alt: 'ISSessions Fantasy CTF closing ceremony',
+        caption: 'ISSessions Fantasy CTF closing ceremony',
+      },
+      {
+        src: issFantasyCtfTeamPictureTwo,
+        alt: 'ISSessions Fantasy CTF team photo two',
+        caption: 'ISSessions Fantasy CTF team photo',
+      },
+    ],
   },
   {
     id: 'canada-devops-hackathon-toronto',
@@ -67,10 +65,5 @@ export const community = [
       { text: 'Most Impactful Project', emphasis: 'strong' },
       ' for building HemoStat — a Docker Container Health Monitoring System — during a time-pressured hackathon environment, with a team of 4, in 48 hours.',
     ],
-    media: {
-      src: issFantasyCtfTeamPictureTwo,
-      alt: 'ISSessions Fantasy CTF team photo two',
-      caption: 'ISSessions Fantasy CTF team photo',
-    },
   },
 ];

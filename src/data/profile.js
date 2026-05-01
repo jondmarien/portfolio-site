@@ -1,3 +1,11 @@
+const dSportsLogo = new URL('../../assets/raw/logos/dsports.svg', import.meta.url).href;
+const chron0TechLogo = new URL('../../assets/raw/logos/chron0tech.svg', import.meta.url).href;
+const portraitPhoto = new URL('../../assets/raw/me/me.jpg', import.meta.url).href;
+const issFantasyCtfTeamPictureOne = new URL(
+  '../../assets/raw/images/iss-fantasy-ctf-team-picture-1.jpg',
+  import.meta.url
+).href;
+
 export const profile = {
   brand: {
     title: '~/chrono',
@@ -13,9 +21,16 @@ export const profile = {
   ],
   links: [
     { id: 'github', label: 'github', href: 'https://github.com/jondmarien', icon: 'github' },
-    { id: 'site', label: 'chron0.link', href: 'https://chron0.link', icon: 'site' },
+    {
+      id: 'site',
+      label: 'chron0.link',
+      href: 'https://chron0.link',
+      icon: 'site',
+      logoSrc: chron0TechLogo,
+      logoInvert: true,
+    },
     { id: 'blog', label: 'blog', href: 'https://quartz.chron0.tech', icon: 'blog' },
-    { id: 'd-sports', label: 'd-sports', href: 'https://d-sports.org', icon: 'site' },
+    { id: 'd-sports', label: 'd-sports', href: 'https://d-sports.org', icon: 'site', logoSrc: dSportsLogo },
     { id: 'linkedin', label: 'linkedin', href: 'https://linkedin.com/in/jondmarien', icon: 'linkedin' },
     { id: 'twitch', label: 'twitch', href: 'https://twitch.tv/sirchronoblaze', icon: 'twitch' },
   ],
@@ -28,13 +43,15 @@ export const profile = {
     media: [
       {
         id: 'personality-photo',
-        alt: 'Personality image placeholder',
-        caption: 'Add a personality photo here',
+        src: portraitPhoto,
+        alt: 'Portrait of Jon Marien',
+        caption: 'Professional portrait',
       },
       {
         id: 'activities-photo',
-        alt: 'Activity image placeholder',
-        caption: 'Add a cybersecurity/community activity shot here',
+        src: issFantasyCtfTeamPictureOne,
+        alt: 'ISSessions Fantasy CTF team photo one',
+        caption: 'Cybersecurity community activity',
       },
     ],
     paragraphs: [

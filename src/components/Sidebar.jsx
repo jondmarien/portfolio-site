@@ -37,7 +37,17 @@ export function Sidebar({ profile }) {
           {profile.links.map((link) => (
             <ExternalLink href={link.href} key={link.id}>
               <span className="link-icon" aria-hidden="true">
-                <BrandIcon name={link.icon ?? link.id} />
+                {link.logoSrc ? (
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    className={`link-logo${link.logoInvert ? ' is-inverted' : ''}`}
+                    loading="lazy"
+                    src={link.logoSrc}
+                  />
+                ) : (
+                  <BrandIcon name={link.icon ?? link.id} />
+                )}
               </span>
               <span className="link-label">{link.label}</span>
             </ExternalLink>
