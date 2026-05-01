@@ -28,15 +28,15 @@ export function Hero({ profile }) {
               key={badge}
               className="hero-badge-glow"
               edgeSensitivity={30}
-              glowColor="182 88 78"
-              backgroundColor="#120f17"
+              glowColor="24 92 68"
+              backgroundColor="#101117"
               borderRadius={8}
               glowRadius={18}
-              glowIntensity={0.65}
+              glowIntensity={0.82}
               coneSpread={22}
               animated={false}
-              colors={['#2dd4bf', '#a78bfa', '#38bdf8']}
-              fillOpacity={0.22}
+              colors={['#fb923c', '#f472b6', '#f59e0b']}
+              fillOpacity={0.3}
             >
               <span className="hero-badge">{badge}</span>
             </BorderGlow>
