@@ -32,9 +32,9 @@ export function Hero({ profile }) {
             <ASCIIText
               text={hero.alias}
               enableWaves={!prefersReducedMotion}
-              asciiFontSize={4}
-              textFontSize={260}
-              planeBaseHeight={9}
+              asciiFontSize={11}
+              textFontSize={520}
+              planeBaseHeight={16}
             />
           </span>
         </span>

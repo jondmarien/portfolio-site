@@ -316,12 +316,12 @@ button,
 
 .hero h1 .hero-alias {
   display: block;
-  height: 1.34em;
+  height: 2.9em;
   align-items: center;
   margin-left: 0;
   overflow: hidden;
   position: relative;
-  width: min(100%, 16ch);
+  width: min(100%, 32ch);
 }
 
 .hero h1 .hero-alias-fallback {
