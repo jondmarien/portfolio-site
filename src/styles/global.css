@@ -23,7 +23,7 @@
   --purple: #c4a8fb;
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
   --sans: 'Inter', system-ui, sans-serif;
-  --site-scale: 1.1;
+  --site-scale: 1.25;
   --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l12 11-6 .8 3.4 5.2-2.2 1.4-3.4-5.2L4 21z' fill='%230d0d0d' stroke='%23a78bfa' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 4 3;
   --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5' fill='none' stroke='%23a78bfa' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%23c4a8fb'/%3E%3C/svg%3E") 12 12;
   --cursor-scroll-up: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='11' fill='%23d4d4d4'/%3E%3Cpath d='M9.5 11.5L13 8l3.5 3.5' fill='none' stroke='%230d0d0d' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M9.5 15.5L13 12l3.5 3.5' fill='none' stroke='%230d0d0d' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' opacity='0.45'/%3E%3C/svg%3E") 13 13;
@@ -59,6 +59,13 @@ body,
   height: 100%;
   overflow: hidden;
   width: 100%;
+}
+
+#root {
+  transform: scale(var(--site-scale));
+  transform-origin: top left;
+  width: calc(100% / var(--site-scale));
+  height: calc(100% / var(--site-scale));
 }
 
 body {
@@ -299,8 +306,9 @@ button,
 }
 
 .hero h1 .hero-alias {
-  display: inline-block;
+  display: inline-flex;
   height: 1.18em;
+  align-items: center;
   margin-left: 0.08em;
   overflow: hidden;
   position: relative;
@@ -313,6 +321,7 @@ button,
   display: inline-flex;
   height: 100%;
   align-items: center;
+  opacity: 0;
 }
 
 .hero h1 .hero-alias-ascii {
@@ -1192,6 +1201,10 @@ button,
     width: auto;
   }
 
+  .hero h1 .hero-alias-fallback {
+    opacity: 1;
+  }
+
   .hero h1 .hero-alias-ascii {
     display: none;
   }
@@ -1213,6 +1226,10 @@ button,
   .hero h1 .hero-alias {
     height: auto;
     width: auto;
+  }
+
+  .hero h1 .hero-alias-fallback {
+    opacity: 1;
   }
 
   .hero h1 .hero-alias-ascii {

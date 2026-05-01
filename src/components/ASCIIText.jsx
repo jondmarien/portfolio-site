@@ -129,9 +129,8 @@ class AsciiFilter {
   }
 
   hue() {
-    const deg = (Math.atan2(this.dy, this.dx) * 180) / Math.PI;
-    this.deg += (deg - this.deg) * 0.075;
-    this.domElement.style.filter = `hue-rotate(${this.deg.toFixed(1)}deg)`;
+    // Keep color stable for compact inline placements.
+    this.domElement.style.filter = 'none';
   }
 
   asciify(ctx, w, h) {
