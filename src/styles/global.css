@@ -98,9 +98,10 @@ button,
   height: 100vh;
   min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   overscroll-behavior: contain;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  -ms-overflow-style: auto;
   scrollbar-gutter: stable;
   border-right: 1px solid var(--border);
   padding: 32px 20px;
@@ -296,6 +297,10 @@ button,
   font-size: 26px;
   font-weight: 600;
   color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.08em;
   letter-spacing: -0.01em;
   margin-bottom: 6px;
   line-height: 1.2;
@@ -305,15 +310,18 @@ button,
   color: var(--accent);
 }
 
+.hero h1 .hero-name {
+  display: block;
+}
+
 .hero h1 .hero-alias {
-  display: inline-flex;
-  height: 1.18em;
+  display: block;
+  height: 1.34em;
   align-items: center;
-  margin-left: 0.08em;
+  margin-left: 0;
   overflow: hidden;
   position: relative;
-  vertical-align: baseline;
-  width: var(--hero-alias-width, 10ch);
+  width: min(100%, 16ch);
 }
 
 .hero h1 .hero-alias-fallback {
@@ -1123,7 +1131,15 @@ button,
   color: var(--sidebar-accent);
 }
 
-.sidebar::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
 .main::-webkit-scrollbar {
   display: none;
 }
@@ -1155,7 +1171,8 @@ button,
   .sidebar {
     height: auto;
     min-height: auto;
-    overflow: visible;
+    overflow-y: auto;
+    overflow-x: hidden;
     overscroll-behavior: auto;
     scrollbar-gutter: auto;
     border-right: none;
@@ -1198,7 +1215,7 @@ button,
 
   .hero h1 .hero-alias {
     height: auto;
-    width: auto;
+    width: 100%;
   }
 
   .hero h1 .hero-alias-fallback {

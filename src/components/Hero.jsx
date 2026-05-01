@@ -18,8 +18,6 @@ export function Hero({ profile }) {
     return () => mediaQuery.removeEventListener('change', updatePreference);
   }, []);
 
-  const aliasWidthCh = Math.max(hero.alias.length + 1, 9);
-
   return (
     <section className="hero" id="about">
       <div className="hero-prompt">
@@ -27,16 +25,16 @@ export function Hero({ profile }) {
         <span>{hero.prompt}</span>
       </div>
       <h1>
-        {hero.name}{' '}
-        <span className="name-accent hero-alias" style={{ '--hero-alias-width': `${aliasWidthCh}ch` }}>
+        <span className="hero-name">{hero.name}</span>
+        <span className="name-accent hero-alias hero-alias-line">
           <span className="hero-alias-fallback">{hero.alias}</span>
           <span className="hero-alias-ascii" aria-hidden="true">
             <ASCIIText
               text={hero.alias}
               enableWaves={!prefersReducedMotion}
-              asciiFontSize={3}
-              textFontSize={220}
-              planeBaseHeight={8}
+              asciiFontSize={4}
+              textFontSize={260}
+              planeBaseHeight={9}
             />
           </span>
         </span>
