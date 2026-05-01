@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { ExternalLink } from './ExternalLink.jsx';
+import { RichText } from './RichText.jsx';
 
 export function ProjectItem({ project }) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -177,7 +178,11 @@ function ProjectBack({ project, onPreviewMedia }) {
         {moreInfo.role ? <span>{moreInfo.role}</span> : null}
         {moreInfo.status ? <span>{moreInfo.status}</span> : null}
       </div>
-      {moreInfo.details ? <p className="project-more-details">{moreInfo.details}</p> : null}
+      {moreInfo.details ? (
+        <p className="project-more-details">
+          <RichText parts={normalizeTextParts(moreInfo.details)} />
+        </p>
+      ) : null}
       {moreInfo.stats?.length ? (
         <dl className="project-stats">
           {moreInfo.stats.slice(0, 5).map((stat) => (
@@ -357,6 +362,13 @@ function normalizeMedia(media) {
   }
 
   return media.src ? [media] : [];
+}
+
+function normalizeTextParts(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+  return value ? [value] : [];
 }
 
 function stopEventPropagation(event) {

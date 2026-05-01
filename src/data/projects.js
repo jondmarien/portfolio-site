@@ -126,8 +126,11 @@ const projectEntries = [
     moreInfo: {
       role: 'CTO / platform builder',
       status: 'Live sports engagement ecosystem',
-      details:
-        'Hockey-focused fan engagement platform spanning a Progressive Web App, marketing site, native mobile app, wallet-enabled digital collectibles, leaderboards, and Mic’d Up live audio rooms.',
+      details: [
+        'Hockey-focused fan engagement platform spanning a Progressive Web App, marketing site, native mobile app, wallet-enabled digital collectibles, leaderboards, and ',
+        { text: 'Mic’d Up live audio rooms', emphasis: 'strong' },
+        '.',
+      ],
       stats: [
         { label: 'Ecosystem', value: 'PWA, web, native app, live audio' },
         { label: 'Users', value: '100+ across 3 countries' },
@@ -163,8 +166,11 @@ const projectEntries = [
     moreInfo: {
       role: 'Dev Lead / Core Organizer',
       status: 'BearHacks 2026 completed',
-      details:
-        'Led development and shipped the attendee and admin portals used for BearHacks 2026. Stats are backed by Vercel Analytics and Observability data; Analytics was enabled Day 1 night, after the main Day 1 event day, so visitor totals undercount the full weekend. The Day 1 boba/momo ordering flow worked for the large majority of 200+ hackers, with only about 5-10 reported issues.',
+      details: [
+        'Led development and shipped the attendee and admin portals used for BearHacks 2026. Stats are backed by Vercel Analytics and Observability data; Analytics was enabled Day 1 night, after the main Day 1 event day, so visitor totals undercount the full weekend. The Day 1 boba/momo ordering flow worked for the large majority of ',
+        { text: '200+ hackers', emphasis: 'strong' },
+        ', with only about 5-10 reported issues.',
+      ],
       stats: [
         { label: 'Attendee portal', value: '119 visitors' },
         { label: 'Attendee edge requests', value: '29K' },
@@ -467,8 +473,11 @@ const projectEntries = [
     moreInfo: {
       role: 'Builder / maintainer',
       status: '3-day live event scoreboard',
-      details:
-        'Fantasy-themed live scoreboard for ISSessions Fantasy CTF 2026, with CTFd-backed rankings, quest/challenge views, adventurer stats, First Blood Discord webhooks, and server-side API token proxying. It supported a 300+ attendee hybrid event for 3 days and only needed two live patches during the event.',
+      details: [
+        'Fantasy-themed live scoreboard for ISSessions Fantasy CTF 2026, with CTFd-backed rankings, quest/challenge views, adventurer stats, First Blood Discord webhooks, and server-side API token proxying. It supported a ',
+        { text: '300+ attendee hybrid event', emphasis: 'strong' },
+        ' for 3 days and only needed two live patches during the event.',
+      ],
       stats: [
         { label: 'Event scale', value: '300+ hybrid attendees' },
         { label: 'Uptime window', value: '3 days live' },

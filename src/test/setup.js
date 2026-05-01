@@ -13,6 +13,25 @@ if (typeof document === 'undefined') {
   globalThis.getComputedStyle = dom.window.getComputedStyle;
   globalThis.requestAnimationFrame = (callback) => setTimeout(callback, 0);
   globalThis.cancelAnimationFrame = (id) => clearTimeout(id);
+  globalThis.window.matchMedia = globalThis.window.matchMedia ?? (() => ({
+    matches: false,
+    media: '',
+    onchange: null,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    addListener: () => {},
+    removeListener: () => {},
+    dispatchEvent: () => false,
+  }));
+
+  class MockObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+
+  globalThis.IntersectionObserver = globalThis.IntersectionObserver ?? MockObserver;
+  globalThis.ResizeObserver = globalThis.ResizeObserver ?? MockObserver;
 
   Object.defineProperty(globalThis, 'navigator', {
     value: dom.window.navigator,

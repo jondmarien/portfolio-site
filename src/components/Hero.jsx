@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ASCIIText from './ASCIIText.jsx';
 import BorderGlow from './BorderGlow.jsx';
-import { ExternalLink } from './ExternalLink.jsx';
+import { RichText } from './RichText.jsx';
 
 export function Hero({ profile }) {
   const { hero } = profile;
@@ -75,28 +75,26 @@ export function Hero({ profile }) {
       <div className="hero-body">
         {hero.paragraphs.map((paragraph, index) => (
           <p key={index}>
-            {paragraph.map((part, partIndex) => (
-              <HeroPart key={partIndex} part={part} />
-            ))}
+            <RichText parts={paragraph} />
           </p>
         ))}
       </div>
+      {hero.media?.length ? (
+        <div className="hero-media-grid" aria-label="Profile personality media">
+          {hero.media.map((item) => (
+            <figure className="hero-media-card" key={item.id}>
+              {item.src ? (
+                <img src={item.src} alt={item.alt} loading="lazy" />
+              ) : (
+                <div className="hero-media-placeholder" role="img" aria-label={item.alt}>
+                  <span>image slot</span>
+                </div>
+              )}
+              <figcaption>{item.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      ) : null}
     </section>
-  );
-}
-
-function HeroPart({ part }) {
-  if (typeof part === 'string') {
-    return part;
-  }
-
-  if (part.variant === 'tag') {
-    return <span className="inline-tag">{part.text}</span>;
-  }
-
-  return (
-    <ExternalLink className="text-link" href={part.href}>
-      {part.text}
-    </ExternalLink>
   );
 }

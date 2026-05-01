@@ -22,8 +22,8 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: 'community' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'contact' })).toBeInTheDocument();
     const profileBadges = screen.getByLabelText('Profile badges');
-    expect(profileBadges.textContent).toContain('Graduated');
-    expect(profileBadges.textContent).toContain('Sheridan College');
+    expect(profileBadges.textContent).toContain('Specialization');
+    expect(profileBadges.textContent).toContain('Security Engineering');
   });
 
   it('keeps a quick contact path visible in the sidebar', () => {

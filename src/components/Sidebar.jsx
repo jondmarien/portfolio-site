@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
+import { BrandIcon } from './BrandIcon.jsx';
 import { ExternalLink } from './ExternalLink.jsx';
 
 export function Sidebar({ profile }) {
@@ -24,7 +25,7 @@ export function Sidebar({ profile }) {
               onClick={() => setActiveSection(item.id)}
             >
               <span className="icon">{item.icon}</span>
-              {item.label}
+              <span className="nav-label">{item.label}</span>
             </a>
           ))}
         </nav>
@@ -32,11 +33,13 @@ export function Sidebar({ profile }) {
 
       <div className="sidebar-section">
         <div className="sidebar-section-title">Links</div>
-        <div className="sidebar-links">
+        <div className="sidebar-links" aria-label="Sidebar links">
           {profile.links.map((link) => (
             <ExternalLink href={link.href} key={link.id}>
-              <span className="dot" />
-              {link.label}
+              <span className="link-icon" aria-hidden="true">
+                <BrandIcon name={link.icon ?? link.id} />
+              </span>
+              <span className="link-label">{link.label}</span>
             </ExternalLink>
           ))}
         </div>
