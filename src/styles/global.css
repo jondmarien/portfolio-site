@@ -292,11 +292,14 @@ button,
 }
 
 .quick-contact-links a {
+  align-items: center;
   border: 1px solid var(--border);
   border-radius: 4px;
   color: var(--text-dim);
+  display: flex;
   font-family: var(--mono);
   font-size: 10px;
+  gap: 7px;
   padding: 5px 8px;
   text-decoration: none;
   transition: border-color 0.15s, color 0.15s, background 0.15s;
@@ -307,6 +310,13 @@ button,
   background: var(--bg-hover);
   border-color: var(--sidebar-accent-dim);
   color: var(--sidebar-accent);
+}
+
+.quick-contact-icon {
+  color: var(--sidebar-accent-dim);
+  flex-shrink: 0;
+  height: 13px;
+  width: 13px;
 }
 
 .main {

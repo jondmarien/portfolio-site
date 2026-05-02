@@ -88,11 +88,8 @@ function useActiveSection(sectionIds) {
       return undefined;
     }
 
-    const scrollRoot = document.querySelector('.main');
-
     const syncFromScroll = () => {
-      const rootTop = scrollRoot?.getBoundingClientRect().top ?? 0;
-      const activationOffset = 96;
+      const activationOffset = 128;
       const measuredPositions = [];
 
       let nextActiveSection = sectionIds[0];
@@ -103,9 +100,9 @@ function useActiveSection(sectionIds) {
           return;
         }
 
-        const relativeTop = section.getBoundingClientRect().top - rootTop;
-        measuredPositions.push(Math.round(relativeTop));
-        if (relativeTop <= activationOffset) {
+        const viewportTop = section.getBoundingClientRect().top;
+        measuredPositions.push(Math.round(viewportTop));
+        if (viewportTop <= activationOffset) {
           nextActiveSection = id;
         }
       });
@@ -129,9 +126,6 @@ function useActiveSection(sectionIds) {
     window.addEventListener('hashchange', syncHash);
     window.addEventListener('resize', syncFromScroll);
     window.addEventListener('scroll', syncFromScroll);
-    if (scrollRoot) {
-      scrollRoot.addEventListener('scroll', syncFromScroll);
-    }
     syncHash();
     syncFromScroll();
 
@@ -139,9 +133,6 @@ function useActiveSection(sectionIds) {
       window.removeEventListener('hashchange', syncHash);
       window.removeEventListener('resize', syncFromScroll);
       window.removeEventListener('scroll', syncFromScroll);
-      if (scrollRoot) {
-        scrollRoot.removeEventListener('scroll', syncFromScroll);
-      }
     };
   }, [sectionIds]);
 
@@ -158,7 +149,10 @@ function QuickContact({ entries }) {
       <div className="quick-contact-links">
         {quickContactEntries.map((entry) => (
           <ExternalLink href={entry.href} key={entry.id}>
-            {entry.id === 'work-email' ? entry.text : entry.label}
+            <span className="quick-contact-icon" aria-hidden="true">
+              <BrandIcon name={entry.icon ?? entry.id} />
+            </span>
+            <span>{entry.id === 'work-email' ? entry.text : entry.label}</span>
           </ExternalLink>
         ))}
       </div>
