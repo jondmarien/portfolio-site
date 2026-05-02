@@ -63,10 +63,9 @@ body,
 
 #root {
   overflow: visible;
-  transform: scale(var(--site-scale));
-  transform-origin: top left;
-  width: calc(100% / var(--site-scale));
-  min-height: calc(100% / var(--site-scale));
+  transform: none;
+  width: 100%;
+  min-height: 100%;
 }
 
 body {

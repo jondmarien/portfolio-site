@@ -20,6 +20,8 @@ describe('global layout scale', () => {
   it('keeps the site scale token available without using browser zoom', () => {
     expect(css).toContain('--site-scale: 1.25;');
     expect(css).not.toContain('zoom: var(--site-scale);');
+    expect(css).toContain('#root {');
+    expect(css).toContain('transform: none;');
   });
 });
 

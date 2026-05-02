@@ -15,4 +15,13 @@ describe('CommunityList', () => {
     const altSequence = issessionImages.map((image) => image.getAttribute('alt'));
     expect(altSequence).toEqual(['ISSessions Fantasy CTF closing ceremony', 'ISSessions Fantasy CTF team photo two']);
   });
+
+  it('renders ISSessions photos as part of the card body, after text metadata', () => {
+    render(<CommunityList entries={community} />);
+
+    const issessionsCard = screen.getByText('ISSessions').closest('.community-item');
+    const title = within(issessionsCard).getByText('ISSessions');
+    const firstImage = within(issessionsCard).getByAltText('ISSessions Fantasy CTF closing ceremony');
+    expect(title.compareDocumentPosition(firstImage) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
 });

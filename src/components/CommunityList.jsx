@@ -54,6 +54,11 @@ export function CommunityList({ entries }) {
     <div className="community-list">
       {entries.map((entry) => (
         <article className="community-item" key={entry.id}>
+          <div className="community-name">{entry.name}</div>
+          <div className="community-role">{entry.role}</div>
+          <p className="community-desc">
+            <RichText parts={normalizeTextParts(entry.description)} />
+          </p>
           {normalizeMediaItems(entry.media).length ? (
             <div className="community-media-gallery">
               {normalizeMediaItems(entry.media).map((mediaItem, index) => (
@@ -80,11 +85,6 @@ export function CommunityList({ entries }) {
               ))}
             </div>
           ) : null}
-          <div className="community-name">{entry.name}</div>
-          <div className="community-role">{entry.role}</div>
-          <p className="community-desc">
-            <RichText parts={normalizeTextParts(entry.description)} />
-          </p>
         </article>
       ))}
       {expandedMediaItem ? (
