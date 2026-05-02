@@ -12,6 +12,17 @@ test.describe('responsive portfolio layout', () => {
     await expect(page.getByRole('heading', { level: 2, name: /community/i })).toBeVisible();
     await expect(page.getByRole('heading', { level: 2, name: /contact/i })).toBeVisible();
 
+    const asciiFitsHeroFrame = await page.evaluate(() => {
+      const alias = document.querySelector('.hero-alias');
+      const ascii = document.querySelector('.ascii-text-container pre');
+      if (!alias || !ascii) {
+        return true;
+      }
+
+      return ascii.scrollWidth <= alias.clientWidth + 8 && ascii.scrollHeight <= alias.clientHeight + 8;
+    });
+    expect(asciiFitsHeroFrame, `${testInfo.project.name} ASCII hero text should fit its frame`).toBe(true);
+
     const hasHorizontalOverflow = await page.evaluate(() => {
       const root = document.documentElement;
       return root.scrollWidth > root.clientWidth + 2;

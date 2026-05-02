@@ -17,9 +17,9 @@ void main() {
 
     vec3 transformed = position;
 
-    transformed.x += sin(time + position.y) * 0.5 * waveFactor;
-    transformed.y += cos(time + position.z) * 0.15 * waveFactor;
-    transformed.z += sin(time + position.x) * waveFactor;
+    transformed.x += sin(time + position.y) * 0.16 * waveFactor;
+    transformed.y += cos(time + position.z) * 0.05 * waveFactor;
+    transformed.z += sin(time + position.x) * 0.22 * waveFactor;
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
 }
@@ -36,9 +36,9 @@ void main() {
     vec2 pos = vUv;
     
     float move = sin(time + mouse) * 0.01;
-    float r = texture2D(uTexture, pos + cos(time * 2. - time + pos.x) * .01).r;
-    float g = texture2D(uTexture, pos + tan(time * .5 + pos.x - time) * .01).g;
-    float b = texture2D(uTexture, pos - cos(time * 2. + time + pos.y) * .01).b;
+    float r = texture2D(uTexture, pos + cos(time + pos.x * 4.) * .006).r;
+    float g = texture2D(uTexture, pos + sin(time * 1.3 + pos.y * 3.) * .005).g;
+    float b = texture2D(uTexture, pos - cos(time * 1.7 + pos.y * 4.) * .006).b;
     float a = texture2D(uTexture, pos).a;
     gl_FragColor = vec4(r, g, b, a);
 }
@@ -49,6 +49,29 @@ Math.map = function map(n, start, stop, start2, stop2) {
 };
 
 const PX_RATIO = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
+
+export function calculateFittedPlaneSize({
+  cameraDistance,
+  cameraFov,
+  containerAspect,
+  planeBaseHeight,
+  textAspect,
+  fitPadding = 0.92,
+}) {
+  const verticalFov = THREE.MathUtils.degToRad(cameraFov);
+  const viewHeight = 2 * Math.tan(verticalFov / 2) * cameraDistance;
+  const viewWidth = viewHeight * containerAspect;
+  const maxHeightFromView = viewHeight * fitPadding;
+  const maxHeightFromWidth = (viewWidth * fitPadding) / textAspect;
+  const height = Math.min(planeBaseHeight, maxHeightFromView, maxHeightFromWidth);
+
+  return {
+    width: height * textAspect,
+    height,
+    viewWidth,
+    viewHeight,
+  };
+}
 
 class AsciiFilter {
   constructor(renderer, { fontSize, fontFamily, charset, invert } = {}) {
@@ -110,6 +133,9 @@ class AsciiFilter {
     this.pre.style.position = 'absolute';
     this.pre.style.left = '0';
     this.pre.style.top = '0';
+    this.pre.style.width = '100%';
+    this.pre.style.height = '100%';
+    this.pre.style.overflow = 'hidden';
     this.pre.style.zIndex = '9';
     this.pre.style.backgroundAttachment = 'fixed';
     this.pre.style.mixBlendMode = 'difference';
@@ -196,8 +222,13 @@ class CanvasTxt {
     this.context.font = this.font;
     const metrics = this.context.measureText(this.txt);
 
-    const textWidth = Math.ceil(metrics.width) + 20;
-    const textHeight = Math.ceil(metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent) + 20;
+    const measuredWidth =
+      Math.abs(metrics.actualBoundingBoxLeft ?? 0) + Math.abs(metrics.actualBoundingBoxRight ?? 0) || metrics.width;
+    const measuredHeight =
+      (metrics.fontBoundingBoxAscent ?? metrics.actualBoundingBoxAscent ?? this.fontSize * 0.8) +
+      (metrics.fontBoundingBoxDescent ?? metrics.actualBoundingBoxDescent ?? this.fontSize * 0.25);
+    const textWidth = Math.ceil(measuredWidth) + 24;
+    const textHeight = Math.ceil(measuredHeight) + 24;
 
     this.canvas.width = textWidth;
     this.canvas.height = textHeight;
@@ -278,12 +309,9 @@ class CanvAscii {
     this.texture = new THREE.CanvasTexture(this.textCanvas.texture);
     this.texture.minFilter = THREE.NearestFilter;
 
-    const textAspect = this.textCanvas.width / this.textCanvas.height;
-    const baseH = this.planeBaseHeight;
-    const planeW = baseH * textAspect;
-    const planeH = baseH;
+    const { width: planeW, height: planeH } = this.getFittedPlaneSize();
 
-    this.geometry = new THREE.PlaneGeometry(planeW, planeH, 36, 36);
+    this.geometry = new THREE.PlaneGeometry(planeW, planeH, 24, 24);
     this.material = new THREE.ShaderMaterial({
       vertexShader,
       fragmentShader,
@@ -298,6 +326,16 @@ class CanvAscii {
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.mesh);
+  }
+
+  getFittedPlaneSize() {
+    return calculateFittedPlaneSize({
+      cameraDistance: this.camera.position.z,
+      cameraFov: this.camera.fov,
+      containerAspect: this.width / this.height,
+      planeBaseHeight: this.planeBaseHeight,
+      textAspect: this.textCanvas.width / this.textCanvas.height,
+    });
   }
 
   setRenderer() {
@@ -324,6 +362,13 @@ class CanvAscii {
 
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
+
+    if (this.mesh) {
+      const { width: planeW, height: planeH } = this.getFittedPlaneSize();
+      const nextGeometry = new THREE.PlaneGeometry(planeW, planeH, 24, 24);
+      this.mesh.geometry.dispose();
+      this.mesh.geometry = nextGeometry;
+    }
 
     this.filter.setSize(w, h);
 
@@ -541,9 +586,14 @@ export default function ASCIIText({
 
         .ascii-text-container pre {
           margin: 0;
+          contain: strict;
+          overflow: hidden;
           user-select: none;
           padding: 0;
           line-height: 1em;
+          white-space: pre;
+          width: 100%;
+          height: 100%;
           text-align: left;
           position: absolute;
           left: 0;

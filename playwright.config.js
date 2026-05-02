@@ -1,14 +1,15 @@
 const { defineConfig, devices } = require('@playwright/test');
 
 const baseURL = 'http://127.0.0.1:5173';
+const responsiveTestMatch = '**/responsive.e2e.js';
+const asciiTestMatch = '**/ascii-cross-browser.e2e.js';
 
 module.exports = defineConfig({
   testDir: './e2e',
-  testMatch: '**/*.e2e.js',
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 4,
   reporter: process.env.CI ? 'list' : 'html',
   use: {
     baseURL,
@@ -18,6 +19,7 @@ module.exports = defineConfig({
   projects: [
     {
       name: 'desktop-1280',
+      testMatch: responsiveTestMatch,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1280, height: 800 },
@@ -25,6 +27,7 @@ module.exports = defineConfig({
     },
     {
       name: 'desktop-1440',
+      testMatch: responsiveTestMatch,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1440, height: 900 },
@@ -32,6 +35,7 @@ module.exports = defineConfig({
     },
     {
       name: 'tablet-820',
+      testMatch: responsiveTestMatch,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 820, height: 1180 },
@@ -39,6 +43,7 @@ module.exports = defineConfig({
     },
     {
       name: 'boundary-767',
+      testMatch: responsiveTestMatch,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 767, height: 900 },
@@ -46,6 +51,7 @@ module.exports = defineConfig({
     },
     {
       name: 'boundary-769',
+      testMatch: responsiveTestMatch,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 769, height: 900 },
@@ -53,6 +59,7 @@ module.exports = defineConfig({
     },
     {
       name: 'mobile-390',
+      testMatch: responsiveTestMatch,
       use: {
         ...devices['Pixel 5'],
         viewport: { width: 390, height: 844 },
@@ -60,6 +67,7 @@ module.exports = defineConfig({
     },
     {
       name: 'mobile-375',
+      testMatch: responsiveTestMatch,
       use: {
         ...devices['Pixel 5'],
         viewport: { width: 375, height: 667 },
@@ -67,9 +75,34 @@ module.exports = defineConfig({
     },
     {
       name: 'mobile-landscape',
+      testMatch: responsiveTestMatch,
       use: {
         ...devices['Pixel 5 landscape'],
         viewport: { width: 844, height: 390 },
+      },
+    },
+    {
+      name: 'ascii-chromium',
+      testMatch: asciiTestMatch,
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 800 },
+      },
+    },
+    {
+      name: 'ascii-firefox',
+      testMatch: asciiTestMatch,
+      use: {
+        ...devices['Desktop Firefox'],
+        viewport: { width: 1280, height: 800 },
+      },
+    },
+    {
+      name: 'ascii-webkit',
+      testMatch: asciiTestMatch,
+      use: {
+        ...devices['Desktop Safari'],
+        viewport: { width: 1280, height: 800 },
       },
     },
   ],
