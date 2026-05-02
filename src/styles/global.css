@@ -39,6 +39,7 @@
 html {
   cursor: var(--cursor-default), auto;
   scroll-behavior: smooth;
+  zoom: 1.25;
 }
 
 html.is-scrolling-up,
@@ -481,6 +482,7 @@ button,
   gap: 10px;
   margin-top: 18px;
   max-width: 580px;
+  align-items: start;
 }
 
 .hero-media-card {
@@ -488,6 +490,7 @@ button,
   border-radius: 6px;
   overflow: hidden;
   background: var(--bg-surface);
+  align-self: start;
 }
 
 .hero-media-placeholder {
@@ -503,12 +506,15 @@ button,
   padding: 0;
   text-align: left;
   width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
 }
 
 .hero-media-trigger img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   display: block;
 }
 
@@ -1371,6 +1377,10 @@ button,
   #root {
     height: auto;
     overflow: auto;
+  }
+
+  html {
+    zoom: 1;
   }
 
   .layout {
