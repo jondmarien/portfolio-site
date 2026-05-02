@@ -88,9 +88,9 @@ button,
   display: grid;
   grid-template-columns: 220px 1fr;
   min-height: 100vh;
-  width: 100%;
-  max-width: none;
-  margin: 0;
+  width: min(100%, 1160px);
+  max-width: 1160px;
+  margin: 0 auto;
   overflow: visible;
 }
 
