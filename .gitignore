@@ -3,6 +3,8 @@ dist/
 coverage/
 .vite/
 .vercel/
+playwright-report/
+test-results/
 
 .env
 .env.*
