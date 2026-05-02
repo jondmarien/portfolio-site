@@ -96,6 +96,9 @@ button,
 }
 
 .sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
   height: 100vh;
   min-height: 0;
   overflow-y: auto;
@@ -1397,6 +1400,8 @@ button,
   }
 
   .sidebar {
+    position: static;
+    top: auto;
     height: auto;
     min-height: auto;
     overflow-y: auto;

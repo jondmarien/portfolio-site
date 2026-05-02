@@ -40,6 +40,9 @@ describe('global UX affordances', () => {
     expect(css).toContain('width: min(100%, 1160px);');
     expect(css).toContain('max-width: 1160px;');
     expect(css).toContain('margin: 0 auto;');
+    expect(css).toContain('.sidebar {');
+    expect(css).toContain('position: sticky;');
+    expect(css).toContain('top: 0;');
     expect(css).toContain('.main {');
     expect(css).toContain('overflow: visible;');
   });
