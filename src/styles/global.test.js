@@ -35,7 +35,8 @@ describe('global UX affordances', () => {
   });
 
   it('uses full-width layout and page-level scrolling', () => {
-    expect(css).toMatch(/html,\s*body,\s*#root\s*\{[^}]*min-height: 100%;[^}]*overflow-x: hidden;/s);
+    expect(css).toMatch(/html,\s*body,\s*#root\s*\{[^}]*min-height: 100%;[^}]*overflow-x: clip;/s);
+    expect(css).not.toMatch(/html,\s*body,\s*#root\s*\{[^}]*overflow-x: hidden;/s);
     expect(css).toContain('.layout {');
     expect(css).toContain('width: min(100%, 1160px);');
     expect(css).toContain('max-width: 1160px;');
