@@ -128,10 +128,9 @@ function useActiveSection(sectionIds) {
 
     window.addEventListener('hashchange', syncHash);
     window.addEventListener('resize', syncFromScroll);
+    window.addEventListener('scroll', syncFromScroll);
     if (scrollRoot) {
       scrollRoot.addEventListener('scroll', syncFromScroll);
-    } else {
-      window.addEventListener('scroll', syncFromScroll);
     }
     syncHash();
     syncFromScroll();
@@ -139,10 +138,9 @@ function useActiveSection(sectionIds) {
     return () => {
       window.removeEventListener('hashchange', syncHash);
       window.removeEventListener('resize', syncFromScroll);
+      window.removeEventListener('scroll', syncFromScroll);
       if (scrollRoot) {
         scrollRoot.removeEventListener('scroll', syncFromScroll);
-      } else {
-        window.removeEventListener('scroll', syncFromScroll);
       }
     };
   }, [sectionIds]);

@@ -32,14 +32,12 @@ describe('global UX affordances', () => {
     expect(css).toContain('@media (prefers-reduced-motion: reduce)');
   });
 
-  it('keeps desktop sidebar and main content in independent scroll containers', () => {
-    expect(css).toMatch(/html,\s*body,\s*#root\s*\{[^}]*height: 100%;[^}]*overflow: hidden;/s);
-    expect(css).toContain('height: 100vh;');
-    expect(css).toContain('overflow: hidden;');
-    expect(css).toContain('min-height: 0;');
-    expect(css).toContain('overscroll-behavior: contain;');
-    expect(css).toContain('scrollbar-gutter: stable;');
-    expect(css).toContain('scrollbar-width: none;');
-    expect(css).toContain('-ms-overflow-style: none;');
+  it('uses full-width layout and page-level scrolling', () => {
+    expect(css).toMatch(/html,\s*body,\s*#root\s*\{[^}]*min-height: 100%;[^}]*overflow-x: hidden;/s);
+    expect(css).toContain('.layout {');
+    expect(css).toContain('width: 100%;');
+    expect(css).toContain('.main {');
+    expect(css).toContain('overflow: visible;');
+    expect(css).toContain('max-width: none;');
   });
 });
