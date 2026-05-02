@@ -67,6 +67,55 @@ describe('Sidebar', () => {
     main.remove();
     profile.navigation.forEach((item) => document.getElementById(item.id)?.remove());
   });
+
+  it('marks contact active when the short final section is visible at scroll bottom', () => {
+    Object.defineProperty(window, 'innerHeight', { configurable: true, value: 800 });
+    profile.navigation.forEach((item) => {
+      const section = document.createElement('section');
+      section.id = item.id;
+      section.getBoundingClientRect = () => sectionRectsAtBottom[item.id];
+      document.body.appendChild(section);
+    });
+
+    render(<Sidebar profile={profile} />);
+
+    fireEvent.scroll(window);
+
+    const navigation = screen.getByRole('navigation', { name: 'Primary navigation' });
+    expect(within(navigation).getByRole('link', { name: /contact/i })).toHaveAttribute('aria-current', 'location');
+    expect(within(navigation).getByRole('link', { name: /community/i })).not.toHaveAttribute('aria-current');
+
+    profile.navigation.forEach((item) => document.getElementById(item.id)?.remove());
+  });
+
+  it('uses an accessible disclosure menu for mobile navigation', () => {
+    render(<Sidebar profile={profile} />);
+
+    const menuButton = screen.getByRole('button', { name: /menu/i });
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('navigation', { name: /mobile navigation/i })).not.toBeInTheDocument();
+
+    fireEvent.click(menuButton);
+
+    expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+    const mobileNavigation = screen.getByRole('navigation', { name: /mobile navigation/i });
+    expect(within(mobileNavigation).getByRole('link', { name: /about/i })).toHaveAttribute('href', '#about');
+    fireEvent.click(within(mobileNavigation).getByRole('link', { name: /projects/i }));
+
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('navigation', { name: /mobile navigation/i })).not.toBeInTheDocument();
+  });
+
+  it('closes the mobile menu with Escape and returns focus to the toggle', () => {
+    render(<Sidebar profile={profile} />);
+
+    const menuButton = screen.getByRole('button', { name: /menu/i });
+    fireEvent.click(menuButton);
+    fireEvent.keyDown(window, { key: 'Escape' });
+
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(menuButton).toHaveFocus();
+  });
 });
 
 const sectionTopById = {
@@ -75,4 +124,12 @@ const sectionTopById = {
   projects: 80,
   community: 720,
   contact: 1320,
+};
+
+const sectionRectsAtBottom = {
+  about: { top: -1800, bottom: -1300 },
+  security: { top: -1300, bottom: -800 },
+  projects: { top: -800, bottom: -300 },
+  community: { top: -300, bottom: 250 },
+  contact: { top: 360, bottom: 700 },
 };

@@ -1,4 +1,5 @@
 import { Sidebar } from './Sidebar.jsx';
+import { MobileFooter } from './MobileFooter.jsx';
 
 export function Layout({ children, profile }) {
   return (
@@ -8,6 +9,7 @@ export function Layout({ children, profile }) {
         <Breadcrumb parts={profile.breadcrumb} />
         {children}
       </main>
+      <MobileFooter profile={profile} />
     </div>
   );
 }

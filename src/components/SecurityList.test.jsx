@@ -6,12 +6,13 @@ import { securityResearch } from '../data/security.js';
 
 describe('SecurityList', () => {
   it('surfaces a research summary before the individual writeups', () => {
-    render(<SecurityList entries={securityResearch} />);
+    const { container } = render(<SecurityList entries={securityResearch} />);
 
     expect(screen.getByText('research signal')).toBeInTheDocument();
     expect(screen.getByText(/CVEs, exploit analysis, labs, and writeups/)).toBeInTheDocument();
     expect(screen.getByText('CVE-backed findings')).toBeInTheDocument();
     expect(screen.getByText('Hands-on labs')).toBeInTheDocument();
+    expect(container.querySelector('.security-summary-glow.border-glow-card')).toBeTruthy();
   });
 
   it('shows why high-value security entries matter', () => {
