@@ -9,6 +9,6 @@ describe('build config', () => {
     expect(viteConfig).toContain('codeSplitting');
     expect(viteConfig).toContain('react-vendor');
     expect(viteConfig).toContain('three-vendor');
-    expect(viteConfig).toContain('vendor');
+    expect(viteConfig).toMatch(/name:\s*['"]vendor['"]/);
   });
 });
