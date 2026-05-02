@@ -47,4 +47,21 @@ describe('ASCIIText sizing', () => {
 
     expect(topPadding).toBeCloseTo(bottomPadding, 5);
   });
+
+  it('does not crop text when advance width is wider than actual ink bounds', () => {
+    const layout = calculateCanvasTextLayout({
+      metrics: {
+        width: 420,
+        actualBoundingBoxLeft: 8,
+        actualBoundingBoxRight: 300,
+        actualBoundingBoxAscent: 60,
+        actualBoundingBoxDescent: 12,
+        fontBoundingBoxAscent: 80,
+        fontBoundingBoxDescent: 20,
+      },
+      padding: 12,
+    });
+
+    expect(layout.canvasWidth).toBeGreaterThanOrEqual(8 + 420 + 24);
+  });
 });

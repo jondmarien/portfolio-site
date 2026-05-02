@@ -56,7 +56,7 @@ export function calculateFittedPlaneSize({
   containerAspect,
   planeBaseHeight,
   textAspect,
-  fitPadding = 0.92,
+  fitPadding = 0.78,
 }) {
   const verticalFov = THREE.MathUtils.degToRad(cameraFov);
   const viewHeight = 2 * Math.tan(verticalFov / 2) * cameraDistance;
@@ -80,7 +80,7 @@ export function calculateCanvasTextLayout({ metrics, padding = 12, fallbackFontS
   const actualDescent = metrics.actualBoundingBoxDescent ?? metrics.fontBoundingBoxDescent ?? fallbackFontSize * 0.25;
   const fontAscent = metrics.fontBoundingBoxAscent ?? actualAscent;
   const fontDescent = metrics.fontBoundingBoxDescent ?? actualDescent;
-  const measuredWidth = actualLeft + actualRight || metrics.width;
+  const measuredWidth = Math.max(metrics.width + actualLeft, actualLeft + actualRight);
   const measuredHeight = fontAscent + fontDescent;
   const actualHeight = actualAscent + actualDescent;
   const canvasWidth = Math.ceil(measuredWidth) + padding * 2;
@@ -243,7 +243,7 @@ class CanvasTxt {
   resize() {
     this.context.font = this.font;
     const metrics = this.context.measureText(this.txt);
-    const layout = calculateCanvasTextLayout({ metrics, fallbackFontSize: this.fontSize });
+    const layout = calculateCanvasTextLayout({ metrics, padding: 48, fallbackFontSize: this.fontSize });
 
     this.canvas.width = layout.canvasWidth;
     this.canvas.height = layout.canvasHeight;
@@ -255,7 +255,7 @@ class CanvasTxt {
     this.context.font = this.font;
 
     const metrics = this.context.measureText(this.txt);
-    const layout = calculateCanvasTextLayout({ metrics, fallbackFontSize: this.fontSize });
+    const layout = calculateCanvasTextLayout({ metrics, padding: 48, fallbackFontSize: this.fontSize });
 
     this.context.fillText(this.txt, layout.baselineX, layout.baselineY);
   }
