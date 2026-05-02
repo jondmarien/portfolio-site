@@ -41,7 +41,7 @@ export function Sidebar({ profile }) {
                   <img
                     alt=""
                     aria-hidden="true"
-                    className={`link-logo${link.logoInvert ? ' is-inverted' : ''}`}
+                    className={`link-logo${link.logoTone === 'accent' ? ' is-accent' : ''}`}
                     loading="lazy"
                     src={link.logoSrc}
                   />
