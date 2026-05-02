@@ -7,6 +7,9 @@ export function Hero({ profile }) {
   const { hero } = profile;
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [asciiReady, setAsciiReady] = useState(false);
+  const [expandedMedia, setExpandedMedia] = useState(null);
+  const expandedMediaItem = expandedMedia ? expandedMedia.items[expandedMedia.index] : null;
+  const canCycleExpandedMedia = expandedMedia ? expandedMedia.items.length > 1 : false;
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return undefined;
@@ -18,6 +21,49 @@ export function Hero({ profile }) {
     mediaQuery.addEventListener('change', updatePreference);
     return () => mediaQuery.removeEventListener('change', updatePreference);
   }, []);
+
+  useEffect(() => {
+    if (!expandedMedia) {
+      return undefined;
+    }
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setExpandedMedia(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [expandedMedia]);
+
+  const showPreviousExpandedMedia = (event) => {
+    stopEventPropagation(event);
+    setExpandedMedia((current) => {
+      if (!current || current.items.length <= 1) {
+        return current;
+      }
+
+      return {
+        ...current,
+        index: (current.index - 1 + current.items.length) % current.items.length,
+      };
+    });
+  };
+
+  const showNextExpandedMedia = (event) => {
+    stopEventPropagation(event);
+    setExpandedMedia((current) => {
+      if (!current || current.items.length <= 1) {
+        return current;
+      }
+
+      return {
+        ...current,
+        index: (current.index + 1) % current.items.length,
+      };
+    });
+  };
 
   return (
     <section className="hero" id="about">
@@ -81,10 +127,20 @@ export function Hero({ profile }) {
       </div>
       {hero.media?.length ? (
         <div className="hero-media-grid" aria-label="Profile personality media">
-          {hero.media.map((item) => (
+          {hero.media.map((item, index) => (
             <figure className="hero-media-card" key={item.id}>
               {item.src ? (
-                <img src={item.src} alt={item.alt} loading="lazy" />
+                <button
+                  aria-label={`Open full image for ${item.alt}`}
+                  className="hero-media-trigger"
+                  onClick={(event) => {
+                    stopEventPropagation(event);
+                    setExpandedMedia({ items: hero.media, index });
+                  }}
+                  type="button"
+                >
+                  <img src={item.src} alt={item.alt} loading="lazy" />
+                </button>
               ) : (
                 <div className="hero-media-placeholder" role="img" aria-label={item.alt}>
                   <span>image slot</span>
@@ -95,6 +151,56 @@ export function Hero({ profile }) {
           ))}
         </div>
       ) : null}
+      {expandedMediaItem ? (
+        <div className="project-media-modal-backdrop" onClick={() => setExpandedMedia(null)} role="presentation">
+          <div
+            aria-label={expandedMediaItem.alt}
+            aria-modal="true"
+            className="project-media-modal"
+            onClick={stopEventPropagation}
+            role="dialog"
+          >
+            <button
+              aria-label="Close image preview"
+              className="project-media-modal-close"
+              onClick={() => setExpandedMedia(null)}
+              type="button"
+            >
+              close
+            </button>
+            <div className="project-media-modal-stage">
+              <img className="project-media-modal-image" src={expandedMediaItem.src} alt={expandedMediaItem.alt} />
+              {canCycleExpandedMedia ? (
+                <>
+                  <button
+                    aria-label="Previous modal image"
+                    className="project-media-modal-nav project-media-modal-nav-prev"
+                    onClick={showPreviousExpandedMedia}
+                    type="button"
+                  >
+                    {'<'}
+                  </button>
+                  <button
+                    aria-label="Next modal image"
+                    className="project-media-modal-nav project-media-modal-nav-next"
+                    onClick={showNextExpandedMedia}
+                    type="button"
+                  >
+                    {'>'}
+                  </button>
+                </>
+              ) : null}
+            </div>
+            <p className="project-media-modal-caption">
+              {expandedMediaItem.alt} {canCycleExpandedMedia ? `(${expandedMedia.index + 1}/${expandedMedia.items.length})` : ''}
+            </p>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
+}
+
+function stopEventPropagation(event) {
+  event.stopPropagation();
 }

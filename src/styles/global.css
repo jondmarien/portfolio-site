@@ -500,6 +500,22 @@ button,
   height: 140px;
 }
 
+.hero-media-trigger {
+  background: none;
+  border: 0;
+  display: block;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.hero-media-trigger img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
 .hero-media-placeholder {
   align-items: center;
   background: linear-gradient(145deg, rgba(45, 212, 191, 0.08), rgba(167, 139, 250, 0.1));
@@ -1231,6 +1247,15 @@ button,
   width: 100%;
   height: 160px;
   display: block;
+}
+
+.community-media-trigger {
+  background: none;
+  border: 0;
+  display: block;
+  padding: 0;
+  text-align: left;
+  width: 100%;
 }
 
 .community-media-image {

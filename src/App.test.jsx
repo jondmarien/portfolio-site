@@ -96,4 +96,18 @@ describe('App', () => {
     expect(root).not.toHaveClass('is-scrolling-down');
     vi.useRealTimers();
   });
+
+  it('opens profile and ISSessions images in a larger modal preview', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByAltText('Portrait of Jon Marien'));
+    expect(screen.getByRole('dialog', { name: 'Portrait of Jon Marien' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /close image preview/i }));
+    expect(screen.queryByRole('dialog', { name: 'Portrait of Jon Marien' })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByAltText('ISSessions Fantasy CTF closing ceremony'));
+    expect(screen.getByRole('dialog', { name: 'ISSessions Fantasy CTF closing ceremony' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /next modal image/i }));
+    expect(screen.getByRole('dialog', { name: 'ISSessions Fantasy CTF team photo two' })).toBeInTheDocument();
+  });
 });
