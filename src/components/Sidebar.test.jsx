@@ -26,9 +26,10 @@ describe('Sidebar', () => {
     const siteLink = within(linksSection).getByRole('link', { name: /chron0\.link/i });
     const dSportsLink = within(linksSection).getByRole('link', { name: /d-sports/i });
 
-    expect(siteLink.querySelector('.link-logo')).toBeTruthy();
-    expect(siteLink.querySelector('.link-logo.is-accent')).toBeTruthy();
+    expect(siteLink.querySelector('.brand-icon-svg')).toBeTruthy();
+    expect(siteLink.querySelector('.link-logo')).toBeFalsy();
     expect(dSportsLink.querySelector('.link-logo')).toBeTruthy();
     expect(dSportsLink.querySelector('.link-logo.is-accent')).toBeTruthy();
+    expect(dSportsLink.querySelector('.link-logo.is-zoomed')).toBeTruthy();
   });
 });

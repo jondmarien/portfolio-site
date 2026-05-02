@@ -1,5 +1,4 @@
 const dSportsLogo = new URL('../../assets/raw/logos/dsports.svg', import.meta.url).href;
-const chron0TechLogo = new URL('../../assets/raw/logos/chron0tech.svg', import.meta.url).href;
 const portraitPhoto = new URL('../../assets/raw/me/me.jpg', import.meta.url).href;
 const issFantasyCtfTeamPictureOne = new URL(
   '../../assets/raw/images/iss-fantasy-ctf-team-picture-1.jpg',
@@ -25,12 +24,18 @@ export const profile = {
       id: 'site',
       label: 'chron0.link',
       href: 'https://chron0.link',
-      icon: 'site',
-      logoSrc: chron0TechLogo,
-      logoTone: 'accent',
+      icon: 'link',
     },
     { id: 'blog', label: 'blog', href: 'https://quartz.chron0.tech', icon: 'blog' },
-    { id: 'd-sports', label: 'd-sports', href: 'https://d-sports.org', icon: 'site', logoSrc: dSportsLogo, logoTone: 'accent' },
+    {
+      id: 'd-sports',
+      label: 'd-sports',
+      href: 'https://d-sports.org',
+      icon: 'site',
+      logoSrc: dSportsLogo,
+      logoTone: 'accent',
+      logoZoom: true,
+    },
     { id: 'linkedin', label: 'linkedin', href: 'https://linkedin.com/in/jondmarien', icon: 'linkedin' },
     { id: 'twitch', label: 'twitch', href: 'https://twitch.tv/sirchronoblaze', icon: 'twitch' },
   ],

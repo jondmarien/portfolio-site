@@ -235,12 +235,18 @@ button,
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center center;
   display: block;
 }
 
 .sidebar-links a .link-logo.is-accent {
   filter: brightness(0) saturate(100%) invert(68%) sepia(72%) saturate(454%) hue-rotate(118deg) brightness(92%) contrast(88%);
   opacity: 0.95;
+}
+
+.sidebar-links a .link-logo.is-zoomed {
+  transform: scale(1.28);
+  transform-origin: center;
 }
 
 .sidebar-links a .link-label {
