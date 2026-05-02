@@ -105,4 +105,29 @@ test.describe('responsive portfolio layout', () => {
     await expect(page.getByRole('dialog', { name: /portrait of jon marien/i })).toBeVisible();
     await expect(page.getByRole('button', { name: /close image preview/i })).toBeVisible();
   });
+
+  test('lets expanded project details use the available mobile width', async ({ page }, testInfo) => {
+    await page.goto('/');
+    const viewport = page.viewportSize();
+    if (viewport.width > mobileBreakpoint) {
+      test.skip();
+    }
+
+    const detailsButton = page.getByRole('button', { name: /show details about automotive security capstone/i });
+    await detailsButton.click();
+
+    const mobileDetailsUseAvailableWidth = await page.evaluate(() => {
+      const project = Array.from(document.querySelectorAll('.project-item')).find((item) =>
+        item.querySelector('button[aria-label*="Automotive Security Capstone"]'),
+      );
+      const content = project?.querySelector('.project-card-content');
+      if (!project || !content) {
+        return false;
+      }
+
+      return content.getBoundingClientRect().width >= project.getBoundingClientRect().width * 0.9;
+    });
+
+    expect(mobileDetailsUseAvailableWidth, `${testInfo.project.name} expanded project details should not be squeezed`).toBe(true);
+  });
 });

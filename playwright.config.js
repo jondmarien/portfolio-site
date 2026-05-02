@@ -1,6 +1,8 @@
 const { defineConfig, devices } = require('@playwright/test');
 
-const baseURL = 'http://127.0.0.1:5173';
+const host = process.env.PLAYWRIGHT_HOST ?? '127.0.0.1';
+const port = process.env.PLAYWRIGHT_PORT ?? '5174';
+const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://${host}:${port}`;
 const responsiveTestMatch = '**/responsive.e2e.js';
 const asciiTestMatch = '**/ascii-cross-browser.e2e.js';
 
@@ -107,8 +109,8 @@ module.exports = defineConfig({
     },
   ],
   webServer: {
-    command: 'bun run dev -- --host 127.0.0.1 --port 5173',
+    command: `bun run dev -- --host ${host} --port ${port} --strictPort`,
     url: baseURL,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
   },
 });
