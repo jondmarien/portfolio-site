@@ -73,6 +73,28 @@ export function calculateFittedPlaneSize({
   };
 }
 
+export function calculateCanvasTextLayout({ metrics, padding = 12, fallbackFontSize = 200 }) {
+  const actualLeft = Math.abs(metrics.actualBoundingBoxLeft ?? 0);
+  const actualRight = Math.abs(metrics.actualBoundingBoxRight ?? 0);
+  const actualAscent = metrics.actualBoundingBoxAscent ?? metrics.fontBoundingBoxAscent ?? fallbackFontSize * 0.8;
+  const actualDescent = metrics.actualBoundingBoxDescent ?? metrics.fontBoundingBoxDescent ?? fallbackFontSize * 0.25;
+  const fontAscent = metrics.fontBoundingBoxAscent ?? actualAscent;
+  const fontDescent = metrics.fontBoundingBoxDescent ?? actualDescent;
+  const measuredWidth = actualLeft + actualRight || metrics.width;
+  const measuredHeight = fontAscent + fontDescent;
+  const actualHeight = actualAscent + actualDescent;
+  const canvasWidth = Math.ceil(measuredWidth) + padding * 2;
+  const canvasHeight = Math.ceil(measuredHeight) + padding * 2;
+  const baselineY = (canvasHeight - actualHeight) / 2 + actualAscent;
+
+  return {
+    canvasWidth,
+    canvasHeight,
+    baselineX: padding + actualLeft,
+    baselineY,
+  };
+}
+
 class AsciiFilter {
   constructor(renderer, { fontSize, fontFamily, charset, invert } = {}) {
     this.renderer = renderer;
@@ -221,17 +243,10 @@ class CanvasTxt {
   resize() {
     this.context.font = this.font;
     const metrics = this.context.measureText(this.txt);
+    const layout = calculateCanvasTextLayout({ metrics, fallbackFontSize: this.fontSize });
 
-    const measuredWidth =
-      Math.abs(metrics.actualBoundingBoxLeft ?? 0) + Math.abs(metrics.actualBoundingBoxRight ?? 0) || metrics.width;
-    const measuredHeight =
-      (metrics.fontBoundingBoxAscent ?? metrics.actualBoundingBoxAscent ?? this.fontSize * 0.8) +
-      (metrics.fontBoundingBoxDescent ?? metrics.actualBoundingBoxDescent ?? this.fontSize * 0.25);
-    const textWidth = Math.ceil(measuredWidth) + 24;
-    const textHeight = Math.ceil(measuredHeight) + 24;
-
-    this.canvas.width = textWidth;
-    this.canvas.height = textHeight;
+    this.canvas.width = layout.canvasWidth;
+    this.canvas.height = layout.canvasHeight;
   }
 
   render() {
@@ -240,9 +255,9 @@ class CanvasTxt {
     this.context.font = this.font;
 
     const metrics = this.context.measureText(this.txt);
-    const yPos = 10 + metrics.actualBoundingBoxAscent;
+    const layout = calculateCanvasTextLayout({ metrics, fallbackFontSize: this.fontSize });
 
-    this.context.fillText(this.txt, 10, yPos);
+    this.context.fillText(this.txt, layout.baselineX, layout.baselineY);
   }
 
   get width() {

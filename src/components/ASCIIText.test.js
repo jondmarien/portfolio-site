@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { calculateFittedPlaneSize } from './ASCIIText.jsx';
+import { calculateCanvasTextLayout, calculateFittedPlaneSize } from './ASCIIText.jsx';
 
 describe('ASCIIText sizing', () => {
   it('fits wide text inside the perspective camera view on narrow containers', () => {
@@ -27,5 +27,24 @@ describe('ASCIIText sizing', () => {
     });
 
     expect(fitted.height).toBeCloseTo(18, 5);
+  });
+
+  it('centers actual text ink inside a font-bounding canvas', () => {
+    const layout = calculateCanvasTextLayout({
+      metrics: {
+        width: 300,
+        actualBoundingBoxLeft: 0,
+        actualBoundingBoxRight: 300,
+        actualBoundingBoxAscent: 60,
+        actualBoundingBoxDescent: 12,
+        fontBoundingBoxAscent: 80,
+        fontBoundingBoxDescent: 20,
+      },
+    });
+
+    const topPadding = layout.baselineY - 60;
+    const bottomPadding = layout.canvasHeight - (layout.baselineY + 12);
+
+    expect(topPadding).toBeCloseTo(bottomPadding, 5);
   });
 });
