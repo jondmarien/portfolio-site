@@ -98,6 +98,20 @@ describe('ProjectList', () => {
     expect(screen.getByText('2 event patches')).toBeInTheDocument();
   });
 
+  it('shows project start and end or update dates on project cards', () => {
+    render(
+      <ProjectList
+        projects={[
+          projects.find((project) => project.id === 'd-sports'),
+          projects.find((project) => project.id === 'automotive-security-capstone'),
+        ]}
+      />
+    );
+
+    expect(screen.getByText('Aug 2025 - updated May 2026')).toBeInTheDocument();
+    expect(screen.getByText('Jan 2025 - Apr 2025')).toBeInTheDocument();
+  });
+
   it('shows featured project media up front and archive media only after details open', () => {
     const featuredProject = {
       ...projects.find((project) => project.id === 'd-sports'),
@@ -210,4 +224,45 @@ describe('ProjectList', () => {
     expect(screen.getByText('28.4K requests')).toBeInTheDocument();
     expect(screen.getByText('77.2K exported logs')).toBeInTheDocument();
   });
+
+  it('orders visible flagship projects by technical impressiveness', () => {
+    const { container } = render(<ProjectList projects={projects} sortMode="impressive" />);
+
+    expect(projectNames(container).slice(0, 3)).toEqual(['D-Sports', 'Automotive Security Capstone', 'Nexus C2']);
+  });
+
+  it('orders visible flagship projects by recent activity in both directions', () => {
+    const { container, rerender } = render(<ProjectList projects={projects} sortMode="date-desc" />);
+
+    expect(projectNames(container).slice(0, 3)).toEqual(['D-Sports', 'BearHacks Web Portals', 'MemoryAnalysis.Powershell']);
+
+    rerender(<ProjectList projects={projects} sortMode="date-asc" />);
+
+    expect(projectNames(container).slice(0, 3)).toEqual(['Automotive Security Capstone', 'Burpcord', 'Nexus C2']);
+  });
+
+  it('orders visible flagship projects alphabetically in both directions', () => {
+    const { container, rerender } = render(<ProjectList projects={projects} sortMode="alpha-asc" />);
+
+    expect(projectNames(container).slice(0, 3)).toEqual(['Automotive Security Capstone', 'BearHacks Web Portals', 'Burpcord']);
+
+    rerender(<ProjectList projects={projects} sortMode="alpha-desc" />);
+
+    expect(projectNames(container).slice(0, 3)).toEqual(['Nexus C2', 'MemoryAnalysis.Powershell', 'D-Sports']);
+  });
+
+  it('keeps archive expansion available after changing sort mode', () => {
+    const extraProjectCount = projects.filter((project) => !project.featured).length;
+    const { container } = render(<ProjectList projects={projects} sortMode="alpha-asc" />);
+
+    fireEvent.click(screen.getByRole('button', { name: `+ show more (${extraProjectCount} projects)` }));
+
+    const names = projectNames(container);
+    expect(names.slice(0, 3)).toEqual(['Automotive Security Capstone', 'BearHacks Web Portals', 'Burpcord']);
+    expect(names.slice(7, 10)).toEqual(['Advent of Code 2025', 'BearHacks Backend', 'Contextual']);
+  });
 });
+
+function projectNames(container) {
+  return [...container.querySelectorAll('.project-name')].map((element) => element.textContent);
+}

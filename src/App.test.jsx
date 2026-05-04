@@ -26,6 +26,15 @@ describe('App', () => {
     expect(profileBadges.textContent).toContain('Security Engineering');
   });
 
+  it('sorts projects from controls in the projects section header', () => {
+    const { container } = render(<App />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'A-Z' }));
+
+    expect(screen.getByRole('radiogroup', { name: 'Sort projects' })).toBeInTheDocument();
+    expect(projectNames(container).slice(0, 3)).toEqual(['Automotive Security Capstone', 'BearHacks Web Portals', 'Burpcord']);
+  });
+
   it('keeps a quick contact path visible in the sidebar', () => {
     render(<App />);
 
@@ -111,3 +120,7 @@ describe('App', () => {
     expect(screen.getByRole('dialog', { name: 'ISSessions Fantasy CTF team photo two' })).toBeInTheDocument();
   });
 });
+
+function projectNames(container) {
+  return [...container.querySelectorAll('.project-name')].map((element) => element.textContent);
+}
