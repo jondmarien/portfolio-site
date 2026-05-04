@@ -29,7 +29,7 @@ describe('App', () => {
   it('sorts projects from controls in the projects section header', () => {
     const { container } = render(<App />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'A-Z' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'A-Z' }));
 
     expect(screen.getByRole('radiogroup', { name: 'Sort projects' })).toBeInTheDocument();
     expect(projectNames(container).slice(0, 3)).toEqual(['Automotive Security Capstone', 'BearHacks Web Portals', 'Burpcord']);
