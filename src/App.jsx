@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CommunityList } from './components/CommunityList.jsx';
 import { ContactList } from './components/ContactList.jsx';
@@ -7,12 +7,15 @@ import { Layout } from './components/Layout.jsx';
 import { ProjectList } from './components/ProjectList.jsx';
 import { Section } from './components/Section.jsx';
 import { SecurityList } from './components/SecurityList.jsx';
+import { SegmentedControl } from './components/SegmentedControl.jsx';
 import { community } from './data/community.js';
 import { profile } from './data/profile.js';
-import { projects } from './data/projects.js';
+import { projectSortOptions, projects } from './data/projects.js';
 import { securityResearch } from './data/security.js';
 
 export default function App() {
+  const [projectSortMode, setProjectSortMode] = useState('default');
+
   useEffect(() => {
     if (typeof window === 'undefined') {
       return undefined;
@@ -60,8 +63,20 @@ export default function App() {
         <SecurityList entries={securityResearch} />
       </Section>
 
-      <Section id="projects" title="projects">
-        <ProjectList projects={projects} />
+      <Section
+        id="projects"
+        title="projects"
+        actions={
+          <SegmentedControl
+            ariaLabel="Sort projects"
+            className="project-sort-controls"
+            onChange={setProjectSortMode}
+            options={projectSortOptions}
+            value={projectSortMode}
+          />
+        }
+      >
+        <ProjectList projects={projects} sortMode={projectSortMode} />
       </Section>
 
       <Section id="community" title="community">

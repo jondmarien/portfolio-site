@@ -151,6 +151,7 @@ function ProjectFront({ project, onPreviewMedia }) {
       {project.featured ? <ProjectMedia media={project.media} name={project.name} onPreviewMedia={onPreviewMedia} /> : null}
       <ProjectLogo logo={project.logo} name={project.name} />
       <div className="project-name">{project.name}</div>
+      <ProjectDates project={project} />
       <div className="project-desc">{project.description}</div>
       <div className="project-tags" aria-label={`${project.name} technologies`}>
         {project.tags.map((tag) => (
@@ -161,6 +162,16 @@ function ProjectFront({ project, onPreviewMedia }) {
       </div>
     </div>
   );
+}
+
+function ProjectDates({ project }) {
+  const dateLabel = formatProjectDateRange(project);
+
+  if (!dateLabel) {
+    return null;
+  }
+
+  return <div className="project-dates">{dateLabel}</div>;
 }
 
 function ProjectBack({ project, onPreviewMedia }) {
@@ -369,6 +380,47 @@ function normalizeTextParts(value) {
     return value;
   }
   return value ? [value] : [];
+}
+
+function formatProjectDateRange(project) {
+  const startDate = formatProjectMonth(project.startDate);
+  const endDate = formatProjectMonth(project.endDate);
+  const updatedDate = formatProjectMonth(project.updatedDate);
+
+  if (startDate && endDate) {
+    return `${startDate} - ${endDate}`;
+  }
+
+  if (startDate && updatedDate) {
+    return `${startDate} - updated ${updatedDate}`;
+  }
+
+  if (startDate) {
+    return `started ${startDate}`;
+  }
+
+  if (updatedDate) {
+    return `updated ${updatedDate}`;
+  }
+
+  return '';
+}
+
+function formatProjectMonth(value) {
+  if (!value) {
+    return '';
+  }
+
+  const [year, month] = value.split('-');
+  if (!year || !month) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat('en', {
+    month: 'short',
+    timeZone: 'UTC',
+    year: 'numeric',
+  }).format(new Date(Date.UTC(Number(year), Number(month) - 1, 1)));
 }
 
 function stopEventPropagation(event) {

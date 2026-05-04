@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
 import { ProjectItem } from './ProjectItem.jsx';
+import { sortProjects } from '../data/projects.js';
 
-export function ProjectList({ projects }) {
+export function ProjectList({ projects, sortMode = 'default' }) {
   const [expanded, setExpanded] = useState(false);
-  const featuredProjects = projects.filter((project) => project.featured);
-  const extraProjects = projects.filter((project) => !project.featured);
+  const sortedProjects = sortProjects(projects, sortMode);
+  const featuredProjects = sortedProjects.filter((project) => project.featured);
+  const extraProjects = sortedProjects.filter((project) => !project.featured);
   const visibleArchiveProjects = expanded ? extraProjects : [];
 
   return (

@@ -10,6 +10,35 @@ const featuredProjectOrder = [
 
 const archiveProjectOrder = ['link-shortener', 'qrcoder', 'mediacoder'];
 
+export const impressiveProjectOrder = [
+  'd-sports',
+  'automotive-security-capstone',
+  'nexus-c2',
+  'memoryanalysis-powershell',
+  'bearhacks-web-portals',
+  'ctfd-live-scoreboard',
+  'burpcord',
+  'hemostat',
+  'bearhacks-backend',
+  'link-shortener',
+  'health-companion',
+  'contextual',
+  'qrcoder',
+  'mediacoder',
+  'dvulndb',
+  'tuneflow',
+  'aoc-2025',
+];
+
+export const projectSortOptions = [
+  { label: 'default', value: 'default' },
+  { label: 'impressive', value: 'impressive' },
+  { label: 'date ↓', value: 'date-desc' },
+  { label: 'date ↑', value: 'date-asc' },
+  { label: 'A-Z', value: 'alpha-asc' },
+  { label: 'Z-A', value: 'alpha-desc' },
+];
+
 const dSportsImage = new URL('../../assets/raw/images/d-sports.png', import.meta.url).href;
 const linkCoderImage = new URL('../../assets/raw/images/linkcoder.png', import.meta.url).href;
 const qrCoderImage = new URL('../../assets/raw/images/qrcoder.png', import.meta.url).href;
@@ -110,6 +139,8 @@ const projectEntries = [
   {
     id: 'd-sports',
     name: 'D-Sports',
+    startDate: '2025-08-01',
+    updatedDate: '2026-05-04',
     href: 'https://d-sports.org',
     description:
       'Sports + blockchain fan engagement platform. Hockey-focused. Pack opening, digital collectibles, crypto wallets, global leaderboards. 100+ users, 3 countries.',
@@ -149,6 +180,9 @@ const projectEntries = [
   {
     id: 'bearhacks-web-portals',
     name: 'BearHacks Web Portals',
+    startDate: '2026-01-15',
+    endDate: '2026-04-26',
+    updatedDate: '2026-04-26',
     href: 'https://github.com/jondmarien/bearhacks-web-portals',
     description:
       "Registration and admin portals for BearHacks 2026 — Sheridan College's hybrid hackathon, completed after the event weekend.",
@@ -205,6 +239,9 @@ const projectEntries = [
   {
     id: 'bearhacks-backend',
     name: 'BearHacks Backend',
+    startDate: '2026-01-15',
+    endDate: '2026-04-26',
+    updatedDate: '2026-04-26',
     href: 'https://github.com/jondmarien/bearhacks-backend',
     description:
       'FastAPI backend for BearHacks 2026. Supabase auth/database, QR claiming, hacker profiles, social networking, admin tools, email campaigns, wallet passes, and boba/momo ordering APIs.',
@@ -238,6 +275,8 @@ const projectEntries = [
   {
     id: 'link-shortener',
     name: 'LinkCoder',
+    startDate: '2026-03-01',
+    updatedDate: '2026-04-15',
     href: 'https://github.com/jondmarien/linkcoder',
     description:
       'Cloudflare Workers link shortener with auth, dashboard, redirect caching, abuse reporting, admin review, and analytics.',
@@ -276,6 +315,8 @@ const projectEntries = [
   {
     id: 'qrcoder',
     name: 'QRCoder',
+    startDate: '2026-04-01',
+    updatedDate: '2026-04-20',
     href: 'https://github.com/jondmarien/qrcoder',
     description: 'Custom QR code generator — branded QR codes with logo embedding and styling options.',
     linkLabel: 'github ↗',
@@ -311,6 +352,8 @@ const projectEntries = [
   {
     id: 'mediacoder',
     name: 'MediaCoder',
+    startDate: '2026-04-01',
+    updatedDate: '2026-04-20',
     href: 'https://github.com/jondmarien/mediacoder',
     description: 'Media file converter and background removal tool. Built alongside QRCoder as a personal utility duo.',
     linkLabel: 'github ↗',
@@ -346,6 +389,8 @@ const projectEntries = [
   {
     id: 'nexus-c2',
     name: 'Nexus C2',
+    startDate: '2025-09-01',
+    updatedDate: '2026-02-01',
     href: 'https://c2.chron0.tech',
     description:
       'Python C2 framework. Encrypted agent comms (Fernet), Rich TUI operator console, multi-platform payload delivery (Windows/Linux/macOS), Gatekeeper bypass, screenshot/webcam capture, hardware fingerprinting, loot auto-save, Ghost VPN social-engineering landing page.  Deployment paused at c2.chron0.tech.',
@@ -374,6 +419,9 @@ const projectEntries = [
   {
     id: 'automotive-security-capstone',
     name: 'Automotive Security Capstone',
+    startDate: '2025-01-01',
+    endDate: '2025-04-30',
+    updatedDate: '2025-04-30',
     href: 'https://github.com/jondmarien/automotive-security-capstone',
     description:
       'RTL-SDR V4 + Raspberry Pi Pico W for real-time automotive RF/NFC security monitoring. Detects jamming, replay attacks, and brute force on wireless car entry. Rich CLI dashboard with session export.',
@@ -403,6 +451,8 @@ const projectEntries = [
   {
     id: 'burpcord',
     name: 'Burpcord',
+    startDate: '2025-06-01',
+    updatedDate: '2026-01-15',
     href: 'https://github.com/jondmarien/Burpcord',
     description:
       'BurpSuite extension for Discord rich presence. Shows your active scan target and state in your Discord status. Published to the PortSwigger BApp Store.',
@@ -430,6 +480,8 @@ const projectEntries = [
   {
     id: 'health-companion',
     name: 'Health Companion',
+    startDate: '2026-02-01',
+    updatedDate: '2026-03-01',
     href: 'https://github.com/jondmarien/Health-Companion-Plan',
     description:
       'Personal health app monorepo. Expo Router mobile app (iOS/Android/Web) + Express API + PostgreSQL + Drizzle ORM. pnpm workspace with generated OpenAPI types and React Native client.',
@@ -456,6 +508,9 @@ const projectEntries = [
   {
     id: 'ctfd-live-scoreboard',
     name: 'CTFd Live Scoreboard',
+    startDate: '2026-01-01',
+    endDate: '2026-02-15',
+    updatedDate: '2026-02-15',
     href: 'https://github.com/jondmarien/ctfd-live-scoreboard',
     description:
       'Real-time scoreboard overlay for CTFd. Used at ISSessions competitions — live-polls the CTFd API and renders rankings.',
@@ -499,6 +554,8 @@ const projectEntries = [
   {
     id: 'memoryanalysis-powershell',
     name: 'MemoryAnalysis.Powershell',
+    startDate: '2025-12-01',
+    updatedDate: '2026-03-15',
     href: 'https://github.com/jondmarien/MemoryAnalysis.Powershell',
     description:
       'PowerShell module wrapping vol3, pyo3, and .NET for memory dump forensics. Includes a Rust bridge for performance-critical analysis paths.',
@@ -532,6 +589,9 @@ const projectEntries = [
   {
     id: 'hemostat',
     name: 'HemoStat',
+    startDate: '2025-11-01',
+    endDate: '2025-11-15',
+    updatedDate: '2025-11-15',
     href: 'https://github.com/jondmarien/HemoStat',
     description:
       'Autonomous Docker container health monitoring system. Canada DevOps Hackathon Toronto, Nov 2025 — Team 1 project.',
@@ -559,6 +619,8 @@ const projectEntries = [
   {
     id: 'tuneflow',
     name: 'TuneFlow',
+    startDate: '2025-09-01',
+    updatedDate: '2025-10-01',
     href: 'https://github.com/jondmarien/TuneFlow',
     description:
       'YouTube description/chapters/comments parser that auto-generates Spotify, YouTube, SoundCloud, and Apple Music playlists.',
@@ -585,6 +647,8 @@ const projectEntries = [
   {
     id: 'dvulndb',
     name: 'dVulnDB',
+    startDate: '2025-07-01',
+    updatedDate: '2025-08-01',
     href: 'https://github.com/jondmarien/dVulnDB',
     description:
       'Web3 vulnerability disclosure and bug bounty platform. On-chain vuln registry with structured disclosure flows for security researchers.',
@@ -611,6 +675,8 @@ const projectEntries = [
   {
     id: 'contextual',
     name: 'Contextual',
+    startDate: '2025-11-15',
+    updatedDate: '2025-12-10',
     href: 'https://github.com/jondmarien/contextual-discord',
     description: 'AI-powered GIF picker for Discord. Reads conversation context and suggests the perfect reaction GIF.',
     linkLabel: 'github ↗',
@@ -636,6 +702,9 @@ const projectEntries = [
   {
     id: 'aoc-2025',
     name: 'Advent of Code 2025',
+    startDate: '2025-12-01',
+    endDate: '2025-12-25',
+    updatedDate: '2025-12-25',
     href: 'https://github.com/jondmarien/AoC-2025',
     description: 'AoC 2025 solutions written in Go — language learning through competitive algorithmic puzzles.',
     linkLabel: 'github ↗',
@@ -650,6 +719,26 @@ export const projects = [...projectEntries].sort((firstProject, secondProject) =
   return firstOrder - secondOrder;
 });
 
+export function sortProjects(projectsToSort, sortMode = 'default') {
+  return [...projectsToSort].sort((firstProject, secondProject) => {
+    switch (sortMode) {
+      case 'impressive':
+        return compareProjectOrder(firstProject, secondProject, impressiveProjectOrder);
+      case 'date-desc':
+        return compareProjectDates(secondProject, firstProject) || compareProjectOrder(firstProject, secondProject);
+      case 'date-asc':
+        return compareProjectDates(firstProject, secondProject) || compareProjectOrder(firstProject, secondProject);
+      case 'alpha-asc':
+        return compareProjectNames(firstProject, secondProject) || compareProjectOrder(firstProject, secondProject);
+      case 'alpha-desc':
+        return compareProjectNames(secondProject, firstProject) || compareProjectOrder(firstProject, secondProject);
+      case 'default':
+      default:
+        return compareProjectOrder(firstProject, secondProject);
+    }
+  });
+}
+
 function getProjectOrder(project) {
   if (project.featured) {
     const featuredIndex = featuredProjectOrder.indexOf(project.id);
@@ -658,4 +747,32 @@ function getProjectOrder(project) {
 
   const archiveIndex = archiveProjectOrder.indexOf(project.id);
   return archiveIndex === -1 ? 200 : 100 + archiveIndex;
+}
+
+function compareProjectOrder(firstProject, secondProject, order = null) {
+  if (!order) {
+    return getProjectOrder(firstProject) - getProjectOrder(secondProject);
+  }
+
+  const firstIndex = getOrderIndex(firstProject, order);
+  const secondIndex = getOrderIndex(secondProject, order);
+
+  return firstIndex - secondIndex || compareProjectOrder(firstProject, secondProject);
+}
+
+function getOrderIndex(project, order) {
+  const index = order.indexOf(project.id);
+  return index === -1 ? Number.MAX_SAFE_INTEGER : index;
+}
+
+function compareProjectDates(firstProject, secondProject) {
+  return getProjectSortDate(firstProject).localeCompare(getProjectSortDate(secondProject));
+}
+
+function getProjectSortDate(project) {
+  return project.updatedDate ?? project.endDate ?? project.startDate ?? '';
+}
+
+function compareProjectNames(firstProject, secondProject) {
+  return firstProject.name.localeCompare(secondProject.name, undefined, { sensitivity: 'base' });
 }
