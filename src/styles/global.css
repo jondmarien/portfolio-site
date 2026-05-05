@@ -1630,7 +1630,7 @@ button,
 }
 
 .contact-value a {
-  color: var(--accent);
+  color: var(--accent-dim);
   text-decoration: none;
   transition: color 0.15s;
 }

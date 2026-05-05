@@ -70,4 +70,9 @@ describe('global UX affordances', () => {
     expect(css).toMatch(/\.project-media-wrap\s*\{[^}]*height: clamp\(190px, 30vw, 252px\);[^}]*max-width: 560px;[^}]*overflow: hidden;/s);
     expect(css).toMatch(/\.project-media\s*\{[^}]*height: 100%;[^}]*object-fit: contain;[^}]*width: 100%;/s);
   });
+
+  it('keeps contact links visually distinct between rest and interactive states', () => {
+    expect(css).toMatch(/\.contact-value a\s*\{[^}]*color: var\(--accent-dim\);[^}]*transition: color 0\.15s;/s);
+    expect(css).toMatch(/\.contact-value a:hover,\s*\.contact-value a:focus-visible\s*\{[^}]*color: var\(--accent\);/s);
+  });
 });
