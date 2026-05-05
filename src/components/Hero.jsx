@@ -5,22 +5,10 @@ import { RichText } from './RichText.jsx';
 
 export function Hero({ profile }) {
   const { hero } = profile;
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [asciiReady, setAsciiReady] = useState(false);
   const [expandedMedia, setExpandedMedia] = useState(null);
   const expandedMediaItem = expandedMedia ? expandedMedia.items[expandedMedia.index] : null;
   const canCycleExpandedMedia = expandedMedia ? expandedMedia.items.length > 1 : false;
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return undefined;
-
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
-    updatePreference();
-
-    mediaQuery.addEventListener('change', updatePreference);
-    return () => mediaQuery.removeEventListener('change', updatePreference);
-  }, []);
 
   useEffect(() => {
     if (!expandedMedia) {
@@ -78,7 +66,7 @@ export function Hero({ profile }) {
           <span className="hero-alias-ascii" aria-hidden="true">
             <ASCIIText
               text={hero.alias}
-              enableWaves={!prefersReducedMotion}
+              enableWaves={false}
               asciiFontSize={7}
               textFontSize={560}
               planeBaseHeight={18}
@@ -102,18 +90,21 @@ export function Hero({ profile }) {
             <BorderGlow
               key={badge}
               className="hero-badge-glow"
-              edgeSensitivity={30}
-              glowColor="24 92 68"
-              backgroundColor="#101117"
-              borderRadius={8}
-              glowRadius={18}
-              glowIntensity={0.82}
-              coneSpread={22}
+              edgeSensitivity={42}
+              glowColor="178 62 64"
+              backgroundColor="oklch(13.5% 0.015 255)"
+              borderRadius={999}
+              glowRadius={14}
+              glowIntensity={0.3}
+              coneSpread={12}
               animated={false}
-              colors={['#fb923c', '#f472b6', '#f59e0b']}
-              fillOpacity={0.3}
+              colors={['oklch(76% 0.13 178)', 'oklch(72% 0.13 305)', 'oklch(61% 0.11 178)']}
+              fillOpacity={0.08}
             >
-              <span className="hero-badge">{badge}</span>
+              <span className="hero-badge">
+                <span className="hero-badge-prefix" aria-hidden="true">./</span>
+                <span className="hero-badge-label">{badge}</span>
+              </span>
             </BorderGlow>
           ))}
         </div>

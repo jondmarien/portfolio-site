@@ -78,6 +78,13 @@ export function ProjectItem({ project }) {
         )}
       </div>
       <div className="project-actions">
+        <div className="project-links" aria-label={`${project.name} links`}>
+          {links.map((link) => (
+            <ExternalLink className="project-link" href={link.href} key={link.href}>
+              {link.label}
+            </ExternalLink>
+          ))}
+        </div>
         <button
           aria-label={`${isFlipped ? 'Show summary' : 'Show details'} about ${project.name}`}
           aria-pressed={isFlipped}
@@ -87,13 +94,6 @@ export function ProjectItem({ project }) {
         >
           {isFlipped ? 'back to summary' : 'view details'}
         </button>
-        <div className="project-links" aria-label={`${project.name} links`}>
-          {links.map((link) => (
-            <ExternalLink className="project-link" href={link.href} key={link.href}>
-              {link.label}
-            </ExternalLink>
-          ))}
-        </div>
       </div>
       {expandedMediaItem ? (
         <div className="project-media-modal-backdrop" onClick={closeExpandedMedia} role="presentation">

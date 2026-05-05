@@ -1,10 +1,13 @@
 import { JSDOM } from 'jsdom';
 
-if (typeof document === 'undefined') {
-  const dom = new JSDOM('<!doctype html><html><body></body></html>', {
-    url: 'http://localhost/',
-  });
+const dom =
+  typeof document === 'undefined'
+    ? new JSDOM('<!doctype html><html><body></body></html>', {
+        url: 'http://localhost/',
+      })
+    : null;
 
+if (dom) {
   globalThis.window = dom.window;
   globalThis.document = dom.window.document;
   globalThis.HTMLElement = dom.window.HTMLElement;
@@ -24,19 +27,24 @@ if (typeof document === 'undefined') {
     dispatchEvent: () => false,
   }));
 
-  class MockObserver {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  }
-
-  globalThis.IntersectionObserver = globalThis.IntersectionObserver ?? MockObserver;
-  globalThis.ResizeObserver = globalThis.ResizeObserver ?? MockObserver;
-
   Object.defineProperty(globalThis, 'navigator', {
     value: dom.window.navigator,
     configurable: true,
   });
+}
+
+class MockObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+globalThis.IntersectionObserver = globalThis.IntersectionObserver ?? MockObserver;
+globalThis.ResizeObserver = globalThis.ResizeObserver ?? MockObserver;
+
+if (globalThis.window) {
+  globalThis.window.IntersectionObserver = globalThis.window.IntersectionObserver ?? globalThis.IntersectionObserver;
+  globalThis.window.ResizeObserver = globalThis.window.ResizeObserver ?? globalThis.ResizeObserver;
 }
 
 await import('@testing-library/jest-dom/vitest');

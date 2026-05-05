@@ -20,11 +20,37 @@ describe('SegmentedControl', () => {
     );
 
     expect(screen.getByRole('radiogroup', { name: 'Sort projects' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'default' })).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByRole('button', { name: 'date ↓' })).toHaveAttribute('aria-pressed', 'false');
+    expect(screen.getByRole('radio', { name: 'default' })).toHaveAttribute('aria-checked', 'true');
+    expect(screen.getByRole('radio', { name: 'date ↓' })).toHaveAttribute('aria-checked', 'false');
+    expect(screen.queryByRole('button', { name: 'default' })).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: 'date ↓' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'date ↓' }));
 
     expect(handleChange).toHaveBeenCalledWith('date-desc');
+  });
+
+  it('supports radio keyboard navigation between options', () => {
+    const handleChange = vi.fn();
+
+    render(
+      <SegmentedControl
+        ariaLabel="Sort projects"
+        options={[
+          { label: 'default', value: 'default' },
+          { label: 'date ↓', value: 'date-desc' },
+          { label: 'A-Z', value: 'alpha-asc' },
+        ]}
+        value="date-desc"
+        onChange={handleChange}
+      />
+    );
+
+    const selectedOption = screen.getByRole('radio', { name: 'date ↓' });
+    selectedOption.focus();
+
+    fireEvent.keyDown(selectedOption, { key: 'ArrowRight' });
+
+    expect(handleChange).toHaveBeenCalledWith('alpha-asc');
+    expect(screen.getByRole('radio', { name: 'A-Z' })).toHaveFocus();
   });
 });

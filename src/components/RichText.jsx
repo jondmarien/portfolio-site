@@ -36,5 +36,8 @@ function withEmphasis(part) {
   if (part.emphasis === 'underline') {
     return <u>{text}</u>;
   }
+  if (part.emphasis === 'accent') {
+    return <strong className="rich-text-accent">{text}</strong>;
+  }
   return text;
 }

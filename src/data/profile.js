@@ -44,7 +44,7 @@ export const profile = {
     name: 'Jon Marien',
     alias: '// chrono',
     tagline: ['CTO @ D-Sports', 'Security Researcher', 'Cybersecurity Graduate'],
-    badges: ['Specialization: Offensive Security, Full-Stack TypeScript, and Security Engineering'],
+    badges: ['offensive security', 'full-stack TypeScript', 'security engineering'],
     media: [
       {
         id: 'personality-photo',
@@ -79,12 +79,18 @@ export const profile = {
         { text: 'TryHackMe and HackTheBox', emphasis: 'italic' },
         ', and serving as ',
         { text: 'BearHacks Co-Chair / Dev Lead / Core Organizer', emphasis: 'strong' },
-        ', including the FastAPI/Supabase backend behind the BearHacks portals. I also coordinated ISSessions at Sheridan: inter/intra-college events, 20+ Fantasy CTF 2026 challenges, a CTFd live scoreboard, and writeups. The alias has been ',
+        ', including the FastAPI/Supabase backend behind the BearHacks portals. I also ',
+        {
+          text: 'coordinated ISSessions at Sheridan: inter/intra-college events, 20+ Fantasy CTF 2026 challenges, a CTFd live scoreboard',
+          emphasis: 'strong',
+        },
+        ', and writeups. The alias has been ',
         {
           text: 'chrono',
           variant: 'tag',
         },
-        ' for years. It fits.',
+        ' for years. ',
+        { text: 'It fits.', emphasis: 'accent' },
       ],
     ],
   },

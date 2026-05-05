@@ -44,12 +44,6 @@ void main() {
 }
 `;
 
-Math.map = function map(n, start, stop, start2, stop2) {
-  return ((n - start) / (stop - start)) * (stop2 - start2) + start2;
-};
-
-const PX_RATIO = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
-
 export function calculateFittedPlaneSize({
   cameraDistance,
   cameraFov,
@@ -95,22 +89,46 @@ export function calculateCanvasTextLayout({ metrics, padding = 12, fallbackFontS
   };
 }
 
+export function calculateAsciiGridLayout({ width, height, fontSize, charWidth }) {
+  const safeFontSize = Math.max(1, fontSize);
+  const safeCharWidth = Math.max(1, charWidth);
+  const cols = Math.max(1, Math.floor(width / safeCharWidth));
+  const rows = Math.max(1, Math.floor(height / safeFontSize));
+
+  return {
+    cols,
+    rows,
+    layerWidth: `${width}px`,
+    layerHeight: `${height}px`,
+  };
+}
+
+export function calculateWordmarkLeftOffset({ viewWidth, planeWidth, leftBias = 0.46 }) {
+  const availableSpace = Math.max(0, viewWidth - planeWidth);
+  return availableSpace === 0 ? 0 : -availableSpace * leftBias;
+}
+
 class AsciiFilter {
   constructor(renderer, { fontSize, fontFamily, charset, invert } = {}) {
     this.renderer = renderer;
     this.domElement = document.createElement('div');
+    this.domElement.className = 'ascii-filter';
     this.domElement.style.position = 'absolute';
     this.domElement.style.top = '0';
     this.domElement.style.left = '0';
     this.domElement.style.width = '100%';
     this.domElement.style.height = '100%';
 
+    this.basePre = document.createElement('pre');
+    this.basePre.className = 'ascii-filter-pre ascii-filter-pre-base';
+    this.domElement.appendChild(this.basePre);
+
     this.pre = document.createElement('pre');
+    this.pre.className = 'ascii-filter-pre ascii-filter-pre-accent';
     this.domElement.appendChild(this.pre);
 
-    this.canvas = document.createElement('canvas');
-    this.context = this.canvas.getContext('2d');
-    this.domElement.appendChild(this.canvas);
+    this.sampleCanvas = document.createElement('canvas');
+    this.context = this.sampleCanvas.getContext('2d');
 
     this.deg = 0;
     this.invert = invert ?? true;
@@ -123,9 +141,6 @@ class AsciiFilter {
     this.context.mozImageSmoothingEnabled = false;
     this.context.msImageSmoothingEnabled = false;
     this.context.imageSmoothingEnabled = false;
-
-    this.onMouseMove = this.onMouseMove.bind(this);
-    document.addEventListener('mousemove', this.onMouseMove);
   }
 
   setSize(width, height) {
@@ -139,60 +154,55 @@ class AsciiFilter {
   }
 
   reset() {
-    this.context.font = `${this.fontSize}px ${this.fontFamily}`;
+    this.context.font = `500 ${this.fontSize}px ${this.fontFamily}`;
     const charWidth = this.context.measureText('A').width;
+    const layout = calculateAsciiGridLayout({
+      width: this.width,
+      height: this.height,
+      fontSize: this.fontSize,
+      charWidth,
+    });
 
-    this.cols = Math.max(1, Math.floor(this.width / (this.fontSize * (charWidth / this.fontSize))));
-    this.rows = Math.max(1, Math.floor(this.height / this.fontSize));
+    this.cols = layout.cols;
+    this.rows = layout.rows;
 
-    this.canvas.width = this.cols;
-    this.canvas.height = this.rows;
-    this.pre.style.fontFamily = this.fontFamily;
-    this.pre.style.fontSize = `${this.fontSize}px`;
-    this.pre.style.margin = '0';
-    this.pre.style.padding = '0';
-    this.pre.style.lineHeight = '1em';
-    this.pre.style.position = 'absolute';
-    this.pre.style.left = '0';
-    this.pre.style.top = '0';
-    this.pre.style.width = '100%';
-    this.pre.style.height = '100%';
-    this.pre.style.overflow = 'hidden';
-    this.pre.style.zIndex = '9';
-    this.pre.style.backgroundAttachment = 'fixed';
-    this.pre.style.mixBlendMode = 'difference';
+    this.sampleCanvas.width = this.cols;
+    this.sampleCanvas.height = this.rows;
+    this.applyLayerStyles(this.basePre, layout);
+    this.applyLayerStyles(this.pre, layout);
+  }
+
+  applyLayerStyles(layer, layout) {
+    layer.style.fontFamily = this.fontFamily;
+    layer.style.fontSize = `${this.fontSize}px`;
+    layer.style.fontKerning = 'none';
+    layer.style.fontVariantLigatures = 'none';
+    layer.style.fontWeight = '500';
+    layer.style.height = layout.layerHeight;
+    layer.style.left = '0';
+    layer.style.lineHeight = '1em';
+    layer.style.margin = '0';
+    layer.style.overflow = 'hidden';
+    layer.style.padding = '0';
+    layer.style.position = 'absolute';
+    layer.style.tabSize = '1';
+    layer.style.textAlign = 'left';
+    layer.style.top = '0';
+    layer.style.whiteSpace = 'pre';
+    layer.style.width = layout.layerWidth;
   }
 
   render(scene, camera) {
     this.renderer.render(scene, camera);
 
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const w = this.sampleCanvas.width;
+    const h = this.sampleCanvas.height;
     this.context.clearRect(0, 0, w, h);
     if (this.context && w && h) {
       this.context.drawImage(this.renderer.domElement, 0, 0, w, h);
     }
 
     this.asciify(this.context, w, h);
-    this.hue();
-  }
-
-  onMouseMove(e) {
-    this.mouse = { x: e.clientX * PX_RATIO, y: e.clientY * PX_RATIO };
-  }
-
-  get dx() {
-    return this.mouse.x - this.center.x;
-  }
-
-  get dy() {
-    return this.mouse.y - this.center.y;
-  }
-
-  hue() {
-    const deg = (Math.atan2(this.dy, this.dx) * 180) / Math.PI;
-    this.deg += (deg - this.deg) * 0.075;
-    this.domElement.style.filter = `hue-rotate(${this.deg.toFixed(1)}deg)`;
   }
 
   asciify(ctx, w, h) {
@@ -219,12 +229,14 @@ class AsciiFilter {
         }
         str += '\n';
       }
+      this.basePre.textContent = str;
       this.pre.textContent = str;
     }
   }
 
   dispose() {
-    document.removeEventListener('mousemove', this.onMouseMove);
+    this.basePre.textContent = '';
+    this.pre.textContent = '';
   }
 }
 
@@ -324,7 +336,7 @@ class CanvAscii {
     this.texture = new THREE.CanvasTexture(this.textCanvas.texture);
     this.texture.minFilter = THREE.NearestFilter;
 
-    const { width: planeW, height: planeH } = this.getFittedPlaneSize();
+    const { width: planeW, height: planeH, viewWidth } = this.getFittedPlaneSize();
 
     this.geometry = new THREE.PlaneGeometry(planeW, planeH, 24, 24);
     this.material = new THREE.ShaderMaterial({
@@ -340,6 +352,7 @@ class CanvAscii {
     });
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.position.x = calculateWordmarkLeftOffset({ viewWidth, planeWidth: planeW });
     this.scene.add(this.mesh);
   }
 
@@ -379,10 +392,11 @@ class CanvAscii {
     this.camera.updateProjectionMatrix();
 
     if (this.mesh) {
-      const { width: planeW, height: planeH } = this.getFittedPlaneSize();
+      const { width: planeW, height: planeH, viewWidth } = this.getFittedPlaneSize();
       const nextGeometry = new THREE.PlaneGeometry(planeW, planeH, 24, 24);
       this.mesh.geometry.dispose();
       this.mesh.geometry = nextGeometry;
+      this.mesh.position.x = calculateWordmarkLeftOffset({ viewWidth, planeWidth: planeW });
     }
 
     this.filter.setSize(w, h);
@@ -423,11 +437,8 @@ class CanvAscii {
   }
 
   updateRotation() {
-    const x = Math.map(this.mouse.y, 0, this.height, 0.5, -0.5);
-    const y = Math.map(this.mouse.x, 0, this.width, -0.5, 0.5);
-
-    this.mesh.rotation.x += (x - this.mesh.rotation.x) * 0.05;
-    this.mesh.rotation.y += (y - this.mesh.rotation.y) * 0.05;
+    this.mesh.rotation.x = 0;
+    this.mesh.rotation.y = 0;
   }
 
   clear() {
@@ -526,9 +537,15 @@ export default function ASCIIText({
 
               if (!cancelled) {
                 try {
-                  asciiRef.current = await createAndInit(containerRef.current, w, h);
-                  if (!cancelled && asciiRef.current) {
-                    asciiRef.current.load();
+                  const instance = await createAndInit(containerRef.current, w, h);
+                  if (cancelled) {
+                    instance.dispose();
+                    return;
+                  }
+
+                  asciiRef.current = instance;
+                  if (asciiRef.current) {
+                    instance.load();
                     attachResizeObserver();
                     onReady?.();
                   }
@@ -546,9 +563,15 @@ export default function ASCIIText({
       }
 
       try {
-        asciiRef.current = await createAndInit(containerRef.current, width, height);
-        if (!cancelled && asciiRef.current) {
-          asciiRef.current.load();
+        const instance = await createAndInit(containerRef.current, width, height);
+        if (cancelled) {
+          instance.dispose();
+          return;
+        }
+
+        asciiRef.current = instance;
+        if (asciiRef.current) {
+          instance.load();
           attachResizeObserver();
           onReady?.();
         }
@@ -584,41 +607,67 @@ export default function ASCIIText({
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap');
 
-        .ascii-text-container canvas {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          image-rendering: optimizeSpeed;
-          image-rendering: -moz-crisp-edges;
-          image-rendering: -o-crisp-edges;
-          image-rendering: -webkit-optimize-contrast;
-          image-rendering: optimize-contrast;
-          image-rendering: crisp-edges;
-          image-rendering: pixelated;
+        .ascii-text-container {
+          contain: paint;
+          isolation: isolate;
+          overflow: hidden;
+          pointer-events: none;
         }
 
-        .ascii-text-container pre {
-          margin: 0;
-          contain: strict;
-          overflow: hidden;
-          user-select: none;
-          padding: 0;
-          line-height: 1em;
-          white-space: pre;
-          width: 100%;
-          height: 100%;
-          text-align: left;
-          position: absolute;
+        .ascii-filter {
+          contain: paint;
+          isolation: isolate;
+          pointer-events: none;
+        }
+
+        .ascii-filter-pre {
+          color: oklch(74% 0.14 58);
+          font-kerning: none;
+          font-variant-ligatures: none;
+          font-weight: 500;
           left: 0;
+          line-height: 1em;
+          margin: 0;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
+          tab-size: 1;
+          text-align: left;
           top: 0;
-          background-image: radial-gradient(circle, #ff6188 0%, #fc9867 50%, #ffd866 100%);
-          background-attachment: fixed;
-          -webkit-text-fill-color: transparent;
-          -webkit-background-clip: text;
-          z-index: 9;
-          mix-blend-mode: difference;
+          transform: translate3d(0, 0, 0);
+          user-select: none;
+          white-space: pre;
+        }
+
+        .ascii-filter-pre-base {
+          color: oklch(97% 0.014 255 / 82%);
+          text-shadow:
+            0 0 7px oklch(98% 0.01 255 / 16%),
+            0 0 18px oklch(76% 0.13 178 / 8%);
+          z-index: 3;
+        }
+
+        .ascii-filter-pre-accent {
+          animation: ascii-rainbow-shift 5.5s linear infinite;
+          color: oklch(74% 0.18 335 / 74%);
+          filter: hue-rotate(0deg) saturate(1.55);
+          text-shadow:
+            -1px 0 0 oklch(72% 0.2 335 / 66%),
+            1px 0 0 oklch(82% 0.15 185 / 62%),
+            0 1px 0 oklch(88% 0.16 105 / 54%),
+            0 0 18px oklch(74% 0.18 335 / 30%),
+            0 0 28px oklch(76% 0.13 178 / 16%);
+          z-index: 2;
+        }
+
+        @keyframes ascii-rainbow-shift {
+          from {
+            filter: hue-rotate(0deg) saturate(1.55);
+          }
+
+          to {
+            filter: hue-rotate(360deg) saturate(1.55);
+          }
         }
       `}</style>
     </div>

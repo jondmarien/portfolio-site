@@ -1,6 +1,15 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
 
-import { calculateCanvasTextLayout, calculateFittedPlaneSize } from './ASCIIText.jsx';
+import {
+  calculateAsciiGridLayout,
+  calculateCanvasTextLayout,
+  calculateFittedPlaneSize,
+  calculateWordmarkLeftOffset,
+} from './ASCIIText.jsx';
+
+const asciiTextSource = readFileSync('src/components/ASCIIText.jsx', 'utf8');
+const heroSource = readFileSync('src/components/Hero.jsx', 'utf8');
 
 describe('ASCIIText sizing', () => {
   it('fits wide text inside the perspective camera view on narrow containers', () => {
@@ -63,5 +72,46 @@ describe('ASCIIText sizing', () => {
     });
 
     expect(layout.canvasWidth).toBeGreaterThanOrEqual(8 + 420 + 24);
+  });
+
+  it('calculates deterministic ASCII grid dimensions from font metrics', () => {
+    const layout = calculateAsciiGridLayout({
+      width: 420,
+      height: 126,
+      fontSize: 7,
+      charWidth: 4.375,
+    });
+
+    expect(layout).toEqual({
+      cols: 96,
+      rows: 18,
+      layerWidth: '420px',
+      layerHeight: '126px',
+    });
+  });
+
+  it('left-biases the wordmark inside the camera view instead of shrinking the ASCII grid', () => {
+    expect(calculateWordmarkLeftOffset({ viewWidth: 100, planeWidth: 80 })).toBeCloseTo(-9.2, 5);
+    expect(calculateWordmarkLeftOffset({ viewWidth: 80, planeWidth: 100 })).toBe(0);
+  });
+
+  it('keeps visible ASCII text layers local to the hero instead of scroll-fixed blended text', () => {
+    expect(asciiTextSource).not.toContain("backgroundAttachment = 'fixed'");
+    expect(asciiTextSource).not.toContain('background-attachment: fixed');
+    expect(asciiTextSource).not.toContain("mixBlendMode = 'difference'");
+    expect(asciiTextSource).not.toContain('mix-blend-mode: difference');
+    expect(asciiTextSource).toContain('ascii-filter-pre-base');
+    expect(asciiTextSource).toContain('ascii-filter-pre-accent');
+    expect(asciiTextSource).toContain("layer.style.fontWeight = '500'");
+    expect(asciiTextSource).toContain("layer.style.overflow = 'hidden'");
+    expect(asciiTextSource).toContain('calculateWordmarkLeftOffset');
+    expect(asciiTextSource).toContain('@keyframes ascii-rainbow-shift');
+    expect(asciiTextSource).toMatch(/\.ascii-filter-pre-base\s*\{[^}]*z-index: 3;/s);
+    expect(asciiTextSource).toMatch(/\.ascii-filter-pre-accent\s*\{[^}]*animation: ascii-rainbow-shift/s);
+  });
+
+  it('keeps the hero ASCII mark dense and static for cross-browser stability', () => {
+    expect(heroSource).toContain('enableWaves={false}');
+    expect(heroSource).toContain('asciiFontSize={7}');
   });
 });
