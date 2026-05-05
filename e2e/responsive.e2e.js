@@ -61,16 +61,7 @@ test.describe('responsive portfolio layout', () => {
     await page.goto('/');
     const viewport = page.viewportSize();
     await page.mouse.move(viewport.width / 2, viewport.height / 2);
-    for (let attempt = 0; attempt < 16; attempt += 1) {
-      await page.mouse.wheel(0, 100000);
-      const contactIsVisible = await page.evaluate(() => {
-        const contact = document.getElementById('contact');
-        return Boolean(contact && contact.getBoundingClientRect().top < window.innerHeight);
-      });
-      if (contactIsVisible) {
-        break;
-      }
-    }
+    await page.locator('#contact').scrollIntoViewIfNeeded();
     await expect
       .poll(() =>
         page.evaluate(() => {

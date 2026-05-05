@@ -21,9 +21,14 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: 'community' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'contact' })).toBeInTheDocument();
-    const profileBadges = screen.getByLabelText('Profile badges');
-    expect(profileBadges.textContent).toContain('Specialization');
-    expect(profileBadges.textContent).toContain('Security Engineering');
+    const profileBadges = within(screen.getByLabelText('Profile badges')).getAllByText(
+      /offensive security|full-stack typescript|security engineering/i,
+    );
+    expect(profileBadges).toHaveLength(3);
+    expect(screen.getByLabelText('Profile badges')).not.toHaveTextContent(/\brun\b/i);
+    expect(screen.getByLabelText('Profile badges')).toHaveTextContent('./offensive security');
+    expect(screen.getByText('It fits.')).toHaveClass('rich-text-accent');
+    expect(screen.getByText('chrono')).toHaveClass('inline-tag');
   });
 
   it('sorts projects from controls in the projects section header', () => {

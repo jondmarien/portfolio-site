@@ -12,7 +12,8 @@ describe('SecurityList', () => {
     expect(screen.getByText(/CVEs, exploit analysis, labs, and writeups/)).toBeInTheDocument();
     expect(screen.getByText('CVE-backed findings')).toBeInTheDocument();
     expect(screen.getByText('Hands-on labs')).toBeInTheDocument();
-    expect(container.querySelector('.security-summary-glow.border-glow-card')).toBeTruthy();
+    expect(container.querySelector('.security-summary')).toBeTruthy();
+    expect(container.querySelector('.security-summary-glow.border-glow-card')).toBeNull();
   });
 
   it('shows why high-value security entries matter', () => {

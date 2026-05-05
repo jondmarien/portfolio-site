@@ -71,6 +71,15 @@ describe('ProjectList', () => {
     expect(screen.getByText('Dev Lead / Core Organizer')).toBeInTheDocument();
   });
 
+  it('places project links above the details action for consistent scanning', () => {
+    const { container } = render(<ProjectList projects={[projects.find((project) => project.id === 'd-sports')]} />);
+
+    const actions = container.querySelector('.project-actions');
+
+    expect(actions?.children[0]).toHaveClass('project-links');
+    expect(actions?.children[1]).toHaveClass('project-info-toggle');
+  });
+
   it('shows repo-backed details for newly enriched project cards', () => {
     const hemostat = projects.find((project) => project.id === 'hemostat');
 
