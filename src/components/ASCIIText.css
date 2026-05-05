@@ -1,49 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap');
 
 .ascii-text-container {
+  contain: paint;
   height: 100%;
   inset: 0;
+  isolation: isolate;
   overflow: hidden;
-  position: absolute;
-  width: 100%;
-}
-
-.ascii-text-container canvas {
-  height: 100%;
-  image-rendering: optimizeSpeed;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -o-crisp-edges;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: optimize-contrast;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
-  left: 0;
   pointer-events: none;
   position: absolute;
-  top: 0;
   width: 100%;
 }
 
 .ascii-filter {
+  contain: paint;
   height: 100%;
+  isolation: isolate;
   left: 0;
+  pointer-events: none;
   position: absolute;
   top: 0;
   width: 100%;
 }
 
 .ascii-filter-pre {
-  color: var(--accent, #a78bfa);
+  color: oklch(74% 0.14 58);
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: 600;
   left: 0;
   line-height: 1em;
   margin: 0;
-  mix-blend-mode: normal;
+  overflow: hidden;
   padding: 0;
-  pointer-events: none;
   position: absolute;
+  tab-size: 1;
   text-align: left;
   top: 0;
+  transform: translate3d(0, 0, 0);
   user-select: none;
   white-space: pre;
-  z-index: 9;
+}
+
+.ascii-filter-pre-base {
+  color: oklch(97% 0.014 255 / 82%);
+  text-shadow:
+    0 0 7px oklch(98% 0.01 255 / 16%),
+    0 0 18px oklch(76% 0.13 178 / 8%);
+  z-index: 3;
+}
+
+.ascii-filter-pre-accent {
+  animation: ascii-rainbow-shift 5.5s linear infinite;
+  color: oklch(74% 0.18 335 / 74%);
+  filter: hue-rotate(0deg) saturate(1.55);
+  text-shadow:
+    -1px 0 0 oklch(72% 0.2 335 / 66%),
+    1px 0 0 oklch(82% 0.15 185 / 62%),
+    0 1px 0 oklch(88% 0.16 105 / 54%),
+    0 0 18px oklch(74% 0.18 335 / 30%),
+    0 0 28px oklch(76% 0.13 178 / 16%);
+  z-index: 2;
+}
+
+@keyframes ascii-rainbow-shift {
+  from {
+    filter: hue-rotate(0deg) saturate(1.55);
+  }
+
+  to {
+    filter: hue-rotate(360deg) saturate(1.55);
+  }
 }

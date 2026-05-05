@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
 
-import { calculateCanvasTextLayout, calculateFittedPlaneSize } from './ASCIIText.jsx';
+import { calculateAsciiGridLayout, calculateCanvasTextLayout, calculateFittedPlaneSize } from './ASCIIText.jsx';
+
+const asciiTextSource = readFileSync('src/components/ASCIIText.jsx', 'utf8');
+const heroSource = readFileSync('src/components/Hero.jsx', 'utf8');
 
 describe('ASCIIText sizing', () => {
   it('fits wide text inside the perspective camera view on narrow containers', () => {
@@ -63,5 +67,39 @@ describe('ASCIIText sizing', () => {
     });
 
     expect(layout.canvasWidth).toBeGreaterThanOrEqual(8 + 420 + 24);
+  });
+
+  it('calculates deterministic ASCII grid dimensions from font metrics', () => {
+    const layout = calculateAsciiGridLayout({
+      width: 420,
+      height: 126,
+      fontSize: 7,
+      charWidth: 4.375,
+    });
+
+    expect(layout).toEqual({
+      cols: 96,
+      rows: 18,
+      layerWidth: '420px',
+      layerHeight: '126px',
+    });
+  });
+
+  it('keeps visible ASCII text layers local to the hero instead of scroll-fixed blended text', () => {
+    expect(asciiTextSource).not.toContain("backgroundAttachment = 'fixed'");
+    expect(asciiTextSource).not.toContain('background-attachment: fixed');
+    expect(asciiTextSource).not.toContain("mixBlendMode = 'difference'");
+    expect(asciiTextSource).not.toContain('mix-blend-mode: difference');
+    expect(asciiTextSource).toContain('ascii-filter-pre-base');
+    expect(asciiTextSource).toContain('ascii-filter-pre-accent');
+    expect(asciiTextSource).toContain("layer.style.fontWeight = '600'");
+    expect(asciiTextSource).toContain('@keyframes ascii-rainbow-shift');
+    expect(asciiTextSource).toMatch(/\.ascii-filter-pre-base\s*\{[^}]*z-index: 3;/s);
+    expect(asciiTextSource).toMatch(/\.ascii-filter-pre-accent\s*\{[^}]*animation: ascii-rainbow-shift/s);
+  });
+
+  it('keeps the hero ASCII mark dense and static for cross-browser stability', () => {
+    expect(heroSource).toContain('enableWaves={false}');
+    expect(heroSource).toContain('asciiFontSize={7}');
   });
 });

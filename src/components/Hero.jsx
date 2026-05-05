@@ -5,22 +5,10 @@ import { RichText } from './RichText.jsx';
 
 export function Hero({ profile }) {
   const { hero } = profile;
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [asciiReady, setAsciiReady] = useState(false);
   const [expandedMedia, setExpandedMedia] = useState(null);
   const expandedMediaItem = expandedMedia ? expandedMedia.items[expandedMedia.index] : null;
   const canCycleExpandedMedia = expandedMedia ? expandedMedia.items.length > 1 : false;
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return undefined;
-
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
-    updatePreference();
-
-    mediaQuery.addEventListener('change', updatePreference);
-    return () => mediaQuery.removeEventListener('change', updatePreference);
-  }, []);
 
   useEffect(() => {
     if (!expandedMedia) {
@@ -78,7 +66,7 @@ export function Hero({ profile }) {
           <span className="hero-alias-ascii" aria-hidden="true">
             <ASCIIText
               text={hero.alias}
-              enableWaves={!prefersReducedMotion}
+              enableWaves={false}
               asciiFontSize={7}
               textFontSize={560}
               planeBaseHeight={18}

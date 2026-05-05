@@ -46,6 +46,12 @@ describe('global UX affordances', () => {
     expect(css).toMatch(/\.inline-tag\s*\{[^}]*linear-gradient\(135deg, oklch\(76% 0\.13 178 \/ 13%\), oklch\(72% 0\.13 305 \/ 10%\)\)[^}]*border-radius: 3px;/s);
   });
 
+  it('keeps the readable hero alias text layered above the ASCII texture', () => {
+    expect(css).toMatch(/\.hero h1 \.hero-alias-fallback\s*\{[^}]*opacity: 0\.95;/s);
+    expect(css).toMatch(/\.hero h1 \.hero-alias\.hero-alias--ascii-ready \.hero-alias-fallback\s*\{[^}]*opacity: 0;/s);
+    expect(css).toMatch(/\.hero h1 \.hero-alias-ascii\s*\{[^}]*z-index: 1;/s);
+  });
+
   it('uses full-width layout and page-level scrolling', () => {
     expect(css).toMatch(/html,\s*body,\s*#root\s*\{[^}]*min-height: 100%;[^}]*overflow-x: clip;/s);
     expect(css).not.toMatch(/html,\s*body,\s*#root\s*\{[^}]*overflow-x: hidden;/s);
