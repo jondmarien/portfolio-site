@@ -71,6 +71,13 @@ describe('global UX affordances', () => {
     expect(css).toMatch(/\.project-media\s*\{[^}]*height: 100%;[^}]*object-fit: contain;[^}]*width: 100%;/s);
   });
 
+  it('supports restrained media frames for security writeups', () => {
+    expect(css).toMatch(/\.writeup-media\s*\{[^}]*max-width: 520px;[^}]*overflow: hidden;/s);
+    expect(css).toMatch(/\.writeup-media img\s*\{[^}]*object-fit: cover;[^}]*width: 100%;/s);
+    expect(css).toMatch(/\.writeup-media-trigger\s*\{[^}]*cursor: pointer;[^}]*width: 100%;/s);
+    expect(css).toMatch(/\.writeup-media:hover,\s*\.writeup-media:focus-within\s*\{[^}]*border-color: var\(--sidebar-accent-dim\);/s);
+  });
+
   it('keeps contact links visually distinct between rest and interactive states', () => {
     expect(css).toMatch(/\.contact-value a\s*\{[^}]*color: var\(--accent-dim\);[^}]*transition: color 0\.15s;/s);
     expect(css).toMatch(/\.contact-value a:hover,\s*\.contact-value a:focus-visible\s*\{[^}]*color: var\(--accent\);/s);

@@ -1501,6 +1501,38 @@ button,
   margin-top: 6px;
 }
 
+.writeup-media {
+  background: oklch(10.5% 0.012 260);
+  border: 1px solid var(--border-dim);
+  border-radius: 5px;
+  margin-top: 10px;
+  max-width: 520px;
+  overflow: hidden;
+}
+
+.writeup-media-trigger {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.writeup-media:hover,
+.writeup-media:focus-within {
+  border-color: var(--sidebar-accent-dim);
+}
+
+.writeup-media img {
+  aspect-ratio: 16 / 9;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
 .community-list {
   display: flex;
   flex-direction: column;

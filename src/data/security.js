@@ -1,3 +1,5 @@
+const cccHeroImage = new URL('../../assets/raw/images/ccc-hero.png', import.meta.url).href;
+
 export const securityResearch = [
   {
     id: '7zip-cve-2024-11477',
@@ -52,5 +54,9 @@ export const securityResearch = [
     typeClass: 'blog',
     description: 'TryHackMe, HackTheBox, ISSessions CTF writeups — ongoing.',
     impact: 'Keeps the research trail visible beyond a single homepage section.',
+    media: {
+      src: cccHeroImage,
+      alt: "Chrono's Cyber Chronicles terminal homepage with an infinity hero image",
+    },
   },
 ];
