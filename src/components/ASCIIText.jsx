@@ -103,6 +103,11 @@ export function calculateAsciiGridLayout({ width, height, fontSize, charWidth })
   };
 }
 
+export function calculateWordmarkLeftOffset({ viewWidth, planeWidth, leftBias = 0.46 }) {
+  const availableSpace = Math.max(0, viewWidth - planeWidth);
+  return availableSpace === 0 ? 0 : -availableSpace * leftBias;
+}
+
 class AsciiFilter {
   constructor(renderer, { fontSize, fontFamily, charset, invert } = {}) {
     this.renderer = renderer;
@@ -149,7 +154,7 @@ class AsciiFilter {
   }
 
   reset() {
-    this.context.font = `600 ${this.fontSize}px ${this.fontFamily}`;
+    this.context.font = `500 ${this.fontSize}px ${this.fontFamily}`;
     const charWidth = this.context.measureText('A').width;
     const layout = calculateAsciiGridLayout({
       width: this.width,
@@ -172,7 +177,7 @@ class AsciiFilter {
     layer.style.fontSize = `${this.fontSize}px`;
     layer.style.fontKerning = 'none';
     layer.style.fontVariantLigatures = 'none';
-    layer.style.fontWeight = '600';
+    layer.style.fontWeight = '500';
     layer.style.height = layout.layerHeight;
     layer.style.left = '0';
     layer.style.lineHeight = '1em';
@@ -309,7 +314,7 @@ class CanvAscii {
   async init() {
     try {
       await document.fonts.load('600 200px "IBM Plex Mono"');
-      await document.fonts.load('600 12px "IBM Plex Mono"');
+      await document.fonts.load('500 12px "IBM Plex Mono"');
     } catch (e) {
       // Font loading failed, continue with fallback
     }
@@ -331,7 +336,7 @@ class CanvAscii {
     this.texture = new THREE.CanvasTexture(this.textCanvas.texture);
     this.texture.minFilter = THREE.NearestFilter;
 
-    const { width: planeW, height: planeH } = this.getFittedPlaneSize();
+    const { width: planeW, height: planeH, viewWidth } = this.getFittedPlaneSize();
 
     this.geometry = new THREE.PlaneGeometry(planeW, planeH, 24, 24);
     this.material = new THREE.ShaderMaterial({
@@ -347,6 +352,7 @@ class CanvAscii {
     });
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.position.x = calculateWordmarkLeftOffset({ viewWidth, planeWidth: planeW });
     this.scene.add(this.mesh);
   }
 
@@ -386,10 +392,11 @@ class CanvAscii {
     this.camera.updateProjectionMatrix();
 
     if (this.mesh) {
-      const { width: planeW, height: planeH } = this.getFittedPlaneSize();
+      const { width: planeW, height: planeH, viewWidth } = this.getFittedPlaneSize();
       const nextGeometry = new THREE.PlaneGeometry(planeW, planeH, 24, 24);
       this.mesh.geometry.dispose();
       this.mesh.geometry = nextGeometry;
+      this.mesh.position.x = calculateWordmarkLeftOffset({ viewWidth, planeWidth: planeW });
     }
 
     this.filter.setSize(w, h);
@@ -530,9 +537,15 @@ export default function ASCIIText({
 
               if (!cancelled) {
                 try {
-                  asciiRef.current = await createAndInit(containerRef.current, w, h);
-                  if (!cancelled && asciiRef.current) {
-                    asciiRef.current.load();
+                  const instance = await createAndInit(containerRef.current, w, h);
+                  if (cancelled) {
+                    instance.dispose();
+                    return;
+                  }
+
+                  asciiRef.current = instance;
+                  if (asciiRef.current) {
+                    instance.load();
                     attachResizeObserver();
                     onReady?.();
                   }
@@ -550,9 +563,15 @@ export default function ASCIIText({
       }
 
       try {
-        asciiRef.current = await createAndInit(containerRef.current, width, height);
-        if (!cancelled && asciiRef.current) {
-          asciiRef.current.load();
+        const instance = await createAndInit(containerRef.current, width, height);
+        if (cancelled) {
+          instance.dispose();
+          return;
+        }
+
+        asciiRef.current = instance;
+        if (asciiRef.current) {
+          instance.load();
           attachResizeObserver();
           onReady?.();
         }
@@ -605,7 +624,7 @@ export default function ASCIIText({
           color: oklch(74% 0.14 58);
           font-kerning: none;
           font-variant-ligatures: none;
-          font-weight: 600;
+          font-weight: 500;
           left: 0;
           line-height: 1em;
           margin: 0;

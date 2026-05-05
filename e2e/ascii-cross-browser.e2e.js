@@ -7,14 +7,16 @@ async function waitForAsciiLayer(page) {
     .poll(
       () =>
         page.evaluate(() => {
-          const base = document.querySelector('.ascii-filter-pre-base');
-          const accent = document.querySelector('.ascii-filter-pre-accent');
-          const fallback = document.querySelector('.hero-alias-fallback');
+          const filters = [...document.querySelectorAll('.ascii-filter')];
+          const liveFilter = filters.find((filter) => {
+            const base = filter.querySelector('.ascii-filter-pre-base');
+            const accent = filter.querySelector('.ascii-filter-pre-accent');
+            return Boolean(base?.textContent.trim()) && Boolean(accent?.textContent.trim());
+          });
+          const base = liveFilter?.querySelector('.ascii-filter-pre-base');
+          const accent = liveFilter?.querySelector('.ascii-filter-pre-accent');
 
-          return (
-            Boolean(base?.textContent.trim()) &&
-            base.textContent === accent?.textContent
-          ) || Number(getComputedStyle(fallback).opacity) > 0;
+          return Boolean(base?.textContent.trim()) && base.textContent === accent?.textContent;
         }),
       { timeout: 15000 },
     )
@@ -25,8 +27,13 @@ async function getAsciiAlignment(page) {
   return page.evaluate(() => {
     const alias = document.querySelector('.hero-alias');
     const fallback = document.querySelector('.hero-alias-fallback');
-    const base = document.querySelector('.ascii-filter-pre-base');
-    const accent = document.querySelector('.ascii-filter-pre-accent');
+    const liveFilter = [...document.querySelectorAll('.ascii-filter')].find((filter) => {
+      const baseLayer = filter.querySelector('.ascii-filter-pre-base');
+      const accentLayer = filter.querySelector('.ascii-filter-pre-accent');
+      return Boolean(baseLayer?.textContent.trim()) && Boolean(accentLayer?.textContent.trim());
+    });
+    const base = liveFilter?.querySelector('.ascii-filter-pre-base');
+    const accent = liveFilter?.querySelector('.ascii-filter-pre-accent');
     if (!alias || !fallback || !base || !accent) return null;
 
     const aliasRect = alias.getBoundingClientRect();
