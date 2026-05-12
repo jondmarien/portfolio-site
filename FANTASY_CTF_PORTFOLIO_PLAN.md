@@ -61,7 +61,7 @@ Inserted at the top of the array. Key fields:
 - Single CTA link: `https://ctf.chron0.tech` (`linkLabel: 'ctf.chron0.tech ↗'`)
 - No `logo` — intentionally omitted. The site is no longer a club service.
 - `media: fantasyCtfMedia`
-- 3 tags: TypeScript, security, CTF
+- 3 tags: TypeScript (`ts` → purple), security (`sec` → purple), self-hosted (`web` → green). The mix mirrors the existing `burpcord` / `memoryanalysis-powershell` pattern (language + `sec` + green `web` subject tag) so the row isn't visually all-purple.
 - `moreInfo.details` is a rich-text array with `'300+ attendee'` wrapped in
   `{ emphasis: 'strong' }` — that stat is the strongest credibility lever and
   must keep its bold treatment through any future edits.

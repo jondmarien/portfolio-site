@@ -194,7 +194,7 @@ const projectEntries = [
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'security', type: 'sec' },
-      { label: 'CTF', type: 'sec' },
+      { label: 'self-hosted', type: 'web' },
     ],
   },
   {
