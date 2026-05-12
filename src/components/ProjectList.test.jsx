@@ -15,12 +15,12 @@ describe('ProjectList', () => {
 
     const featuredNames = projects.filter((project) => project.featured).map((project) => project.name);
     expect(featuredNames).toEqual([
+      'FantasyCTF',
       'D-Sports',
       'Nexus C2',
       'Automotive Security Capstone',
       'MemoryAnalysis.Powershell',
       'Burpcord',
-      'CTFd Live Scoreboard',
       'BearHacks Web Portals',
     ]);
     expect(screen.queryByText('LinkCoder')).not.toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('ProjectList', () => {
     fireEvent.click(screen.getByRole('button', { name: `+ show more (${extraProjectCount} projects)` }));
 
     const archiveNames = projects.filter((project) => !project.featured).map((project) => project.name);
-    expect(archiveNames.slice(0, 3)).toEqual(['LinkCoder', 'QRCoder', 'MediaCoder']);
+    expect(archiveNames.slice(0, 4)).toEqual(['LinkCoder', 'QRCoder', 'MediaCoder', 'CTFd Live Scoreboard']);
     expect(screen.getByText('LinkCoder')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'linkcoder ↗' })).toHaveAttribute('href', 'https://link.chron0.tech');
     expect(screen.getByRole('link', { name: 'qrcoder ↗' })).toHaveAttribute('href', 'https://qrcoder.chron0.tech');
@@ -95,11 +95,39 @@ describe('ProjectList', () => {
     expect(screen.getByText('Redis pub/sub + shared state')).toBeInTheDocument();
   });
 
+  it('surfaces flagship FantasyCTF context and links on the default card', () => {
+    const fantasyCtf = projects.find((project) => project.id === 'fantasy-ctf');
+
+    render(<ProjectList projects={[fantasyCtf]} />);
+
+    expect(screen.getByText(/22-challenge high-fantasy CTF/)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'ctf.chron0.tech ↗' })).toHaveAttribute('href', 'https://ctf.chron0.tech');
+    expect(screen.getByRole('link', { name: 'challenges repo ↗' })).toHaveAttribute(
+      'href',
+      'https://github.com/jondmarien/fantasy_ctf_challs'
+    );
+    expect(screen.getByRole('link', { name: 'site repo ↗' })).toHaveAttribute(
+      'href',
+      'https://github.com/jondmarien/ctfd-live-scoreboard'
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /^Show details about FantasyCTF/i }));
+
+    expect(screen.getByText('Challenge designer / site builder / infra operator')).toBeInTheDocument();
+    expect(screen.getByText('300+ attendee')).toBeInTheDocument();
+    expect(screen.getByText('22 across crypto, prog, OSINT, rev, LLM, misc')).toBeInTheDocument();
+    expect(screen.getByText('Beginner → Mythic (100 → 2000 GP)')).toBeInTheDocument();
+    expect(screen.getByText('CTFd + custom theme + React 19 SPA')).toBeInTheDocument();
+    expect(screen.getByText('Hetzner CPX21 + Traefik + LiteLLM (~$10/mo)')).toBeInTheDocument();
+    expect(screen.getByText('BYO-key — zero shared quota, zero abuse vector')).toBeInTheDocument();
+  });
+
   it('surfaces event scale and reliability context for the CTFd scoreboard', () => {
     const scoreboard = projects.find((project) => project.id === 'ctfd-live-scoreboard');
 
     render(<ProjectList projects={[scoreboard]} />);
 
+    fireEvent.click(screen.getByRole('button', { name: /^\+ show more/i }));
     fireEvent.click(screen.getByRole('button', { name: /^Show details about CTFd Live Scoreboard/i }));
 
     expect(screen.getByText('300+ hybrid attendees')).toBeInTheDocument();
@@ -237,13 +265,13 @@ describe('ProjectList', () => {
   it('orders visible flagship projects by technical impressiveness', () => {
     const { container } = render(<ProjectList projects={projects} sortMode="impressive" />);
 
-    expect(projectNames(container).slice(0, 3)).toEqual(['D-Sports', 'Automotive Security Capstone', 'Nexus C2']);
+    expect(projectNames(container).slice(0, 3)).toEqual(['FantasyCTF', 'D-Sports', 'Automotive Security Capstone']);
   });
 
   it('orders visible flagship projects by recent activity in both directions', () => {
     const { container, rerender } = render(<ProjectList projects={projects} sortMode="date-desc" />);
 
-    expect(projectNames(container).slice(0, 3)).toEqual(['D-Sports', 'BearHacks Web Portals', 'MemoryAnalysis.Powershell']);
+    expect(projectNames(container).slice(0, 3)).toEqual(['FantasyCTF', 'D-Sports', 'BearHacks Web Portals']);
 
     rerender(<ProjectList projects={projects} sortMode="date-asc" />);
 
@@ -257,7 +285,7 @@ describe('ProjectList', () => {
 
     rerender(<ProjectList projects={projects} sortMode="alpha-desc" />);
 
-    expect(projectNames(container).slice(0, 3)).toEqual(['Nexus C2', 'MemoryAnalysis.Powershell', 'D-Sports']);
+    expect(projectNames(container).slice(0, 3)).toEqual(['Nexus C2', 'MemoryAnalysis.Powershell', 'FantasyCTF']);
   });
 
   it('keeps archive expansion available after changing sort mode', () => {

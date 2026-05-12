@@ -1,16 +1,17 @@
 const featuredProjectOrder = [
+  'fantasy-ctf',
   'd-sports',
   'nexus-c2',
   'automotive-security-capstone',
   'memoryanalysis-powershell',
   'burpcord',
-  'ctfd-live-scoreboard',
   'bearhacks-web-portals',
 ];
 
-const archiveProjectOrder = ['link-shortener', 'qrcoder', 'mediacoder'];
+const archiveProjectOrder = ['link-shortener', 'qrcoder', 'mediacoder', 'ctfd-live-scoreboard'];
 
 export const impressiveProjectOrder = [
+  'fantasy-ctf',
   'd-sports',
   'automotive-security-capstone',
   'nexus-c2',
@@ -135,7 +136,67 @@ const ctfdLiveScoreboardMedia = [
   },
 ];
 
+// Placeholder media for FantasyCTF — reuses the live scoreboard screenshots for now.
+// Swap these `src` references when fantasy-themed site screenshots are added.
+const fantasyCtfMedia = [
+  {
+    type: 'image',
+    src: ctfdLiveScoreboardQuestsImage,
+    alt: 'FantasyCTF quest board',
+    fit: 'contain',
+  },
+  {
+    type: 'image',
+    src: ctfdLiveScoreboardTopTeamsImage,
+    alt: 'FantasyCTF top adventurers',
+    fit: 'contain',
+  },
+];
+
 const projectEntries = [
+  {
+    id: 'fantasy-ctf',
+    name: 'FantasyCTF',
+    startDate: '2025-12-01',
+    updatedDate: '2026-05-11',
+    href: 'https://ctf.chron0.tech',
+    description:
+      '22-challenge high-fantasy CTF, permanently self-hosted at ctf.chron0.tech. Three-repo system: Dockerized challenges + CTFd infra, a React 19 SPA, and a custom CTFd theme — with BYO-key LLM challenges that carry zero shared quota or abuse cost.',
+    linkLabel: 'ctf.chron0.tech ↗',
+    links: [
+      { href: 'https://ctf.chron0.tech', label: 'ctf.chron0.tech ↗' },
+      { href: 'https://github.com/jondmarien/fantasy_ctf_challs', label: 'challenges repo ↗' },
+      { href: 'https://github.com/jondmarien/ctfd-live-scoreboard', label: 'site repo ↗' },
+    ],
+    logo: {
+      src: new URL('../../assets/raw/logos/issessions.svg', import.meta.url).href,
+      alt: 'FantasyCTF logo',
+    },
+    media: fantasyCtfMedia,
+    moreInfo: {
+      role: 'Challenge designer / site builder / infra operator',
+      status: 'Permanent self-hosted CTF',
+      details: [
+        'Permanent self-hosted CTF on my own domain. Originally designed for the ',
+        { text: '300+ attendee', emphasis: 'strong' },
+        ' ISSessions Fantasy 2026 hybrid event, then migrated off the club’s hosted CTFd to a personal Hetzner stack. Three repos in concert: a Dockerized challenge + CTFd infra monorepo, a React 19 SPA on Vercel, and a custom CTFd Jinja theme built on the same tavern design system.',
+      ],
+      stats: [
+        { label: 'Challenges', value: '22 across crypto, prog, OSINT, rev, LLM, misc' },
+        { label: 'Difficulty', value: 'Beginner → Mythic (100 → 2000 GP)' },
+        { label: 'Stack', value: 'CTFd + custom theme + React 19 SPA' },
+        { label: 'Infra', value: 'Hetzner CPX21 + Traefik + LiteLLM (~$10/mo)' },
+        { label: 'LLM design', value: 'BYO-key — zero shared quota, zero abuse vector' },
+      ],
+      screenshots: [],
+    },
+    featured: true,
+    tags: [
+      { label: 'TypeScript', type: 'ts' },
+      { label: 'security', type: 'sec' },
+      { label: 'CTF', type: 'sec' },
+    ],
+  },
   {
     id: 'd-sports',
     name: 'D-Sports',
@@ -513,7 +574,7 @@ const projectEntries = [
     updatedDate: '2026-02-15',
     href: 'https://github.com/jondmarien/ctfd-live-scoreboard',
     description:
-      'Real-time scoreboard overlay for CTFd. Used at ISSessions competitions — live-polls the CTFd API and renders rankings.',
+      'Real-time scoreboard for the 3-day ISSessions Fantasy CTF 2026 live event — live-polled CTFd, rendered rankings, and ran First Blood Discord webhooks. Repo has since evolved into the full FantasyCTF SPA — see the FantasyCTF project.',
     linkLabel: 'github ↗',
     links: [
       { href: 'https://github.com/jondmarien/ctfd-live-scoreboard', label: 'github ↗' },
@@ -545,7 +606,6 @@ const projectEntries = [
       ],
       screenshots: [],
     },
-    featured: true,
     tags: [
       { label: 'TypeScript', type: 'ts' },
       { label: 'CTF', type: 'sec' },
