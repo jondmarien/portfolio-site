@@ -14,13 +14,13 @@ describe('App', () => {
     profile.navigation.forEach((item) => {
       expect(within(navigation).getByRole('link', { name: new RegExp(item.label, 'i') })).toHaveAttribute('href', `#${item.id}`);
     });
-    expect(navigationLinks).toEqual(['~about', '⚑security', '⌥projects', '◈community', '@contact']);
+    expect(navigationLinks).toEqual(['~about', '⚑security', '⌥projects', '◈community', '▤resume']);
 
     const sectionHeadings = screen.getAllByRole('heading', { level: 2 }).map((heading) => heading.textContent);
-    expect(sectionHeadings).toEqual(['security research', 'projects', 'community', 'contact']);
+    expect(sectionHeadings).toEqual(['security research', 'projects', 'community', 'resume']);
 
-    expect(screen.getByRole('heading', { name: 'community' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'contact' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'community' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { level: 2, name: 'contact' })).not.toBeInTheDocument();
     const profileBadges = within(screen.getByLabelText('Profile badges')).getAllByText(
       /offensive security|full-stack typescript|security engineering/i,
     );
@@ -40,32 +40,35 @@ describe('App', () => {
     expect(projectNames(container).slice(0, 3)).toEqual(['Automotive Security Capstone', 'BearHacks Web Portals', 'Burpcord']);
   });
 
-  it('keeps a quick contact path visible in the sidebar', () => {
+  it('keeps full contact paths visible in the sidebar', () => {
     render(<App />);
 
-    const quickContact = screen.getByLabelText('Quick contact');
+    const sidebarContact = screen.getByLabelText('Contact');
 
-    expect(within(quickContact).getByRole('link', { name: /jon@d-sports.org/i })).toHaveAttribute(
+    expect(within(sidebarContact).getByRole('link', { name: /jon@d-sports.org/i })).toHaveAttribute(
       'href',
       'mailto:jon@d-sports.org',
     );
-    expect(within(quickContact).getByRole('link', { name: /linkedin/i })).toHaveAttribute(
+    expect(within(sidebarContact).getByText('linkedin').closest('.contact-row')?.querySelector('a')).toHaveAttribute(
       'href',
       'https://linkedin.com/in/jondmarien',
     );
+    expect(within(sidebarContact).getByText('personal email')).toBeInTheDocument();
+    expect(within(sidebarContact).getByText('blog')).toBeInTheDocument();
   });
 
-  it('scrolls the sidebar itself when wheel input starts there', () => {
+  it('scrolls the sidebar scroll region when wheel input starts on the sidebar', () => {
     render(<App />);
 
     const sidebar = screen.getByLabelText('Portfolio sidebar');
-    Object.defineProperty(sidebar, 'scrollHeight', { configurable: true, value: 1200 });
-    Object.defineProperty(sidebar, 'clientHeight', { configurable: true, value: 300 });
-    sidebar.scrollTop = 0;
+    const scrollRegion = sidebar.querySelector('.sidebar-desktop-content');
+    Object.defineProperty(scrollRegion, 'scrollHeight', { configurable: true, value: 1200 });
+    Object.defineProperty(scrollRegion, 'clientHeight', { configurable: true, value: 300 });
+    scrollRegion.scrollTop = 0;
 
     fireEvent.wheel(sidebar, { deltaY: 180 });
 
-    expect(sidebar.scrollTop).toBe(180);
+    expect(scrollRegion.scrollTop).toBe(180);
   });
 
   it('marks the active sidebar section and updates it when a nav link is clicked', () => {
@@ -91,6 +94,15 @@ describe('App', () => {
     expect(screen.getByText(/Render-hosted API for BearHacks 2026/)).toBeInTheDocument();
     expect(screen.getByAltText('Portrait of Jon Marien')).toBeInTheDocument();
     expect(screen.getByAltText('ISSessions Fantasy CTF team photo one')).toBeInTheDocument();
+  });
+
+  it('renders the resume section with download link and experience content', () => {
+    render(<App />);
+
+    expect(screen.getByRole('heading', { name: 'resume' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'download pdf' })).toHaveAttribute('href', '/resume/Jon_Marien_Resume.pdf');
+    expect(screen.getByText(/Founding CTO/)).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: /see projects/i }).length).toBeGreaterThan(0);
   });
 
   it('shows directional cursor classes while wheel scrolling', () => {

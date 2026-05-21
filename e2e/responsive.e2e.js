@@ -10,7 +10,7 @@ test.describe('responsive portfolio layout', () => {
     await expect(page.getByRole('heading', { level: 2, name: /security research/i })).toBeVisible();
     await expect(page.getByRole('heading', { level: 2, name: /projects/i })).toBeVisible();
     await expect(page.getByRole('heading', { level: 2, name: /community/i })).toBeVisible();
-    await expect(page.getByRole('heading', { level: 2, name: /contact/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 2, name: /resume/i })).toBeVisible();
 
     const asciiFitsHeroFrame = await page.evaluate(() => {
       const alias = document.querySelector('.hero-alias');
@@ -57,16 +57,16 @@ test.describe('responsive portfolio layout', () => {
     await expect(page.getByRole('navigation', { name: /primary navigation/i })).toBeVisible();
   });
 
-  test('activates contact navigation when scrolled to the document bottom', async ({ page }) => {
+  test('activates resume navigation when scrolled to the document bottom', async ({ page }) => {
     await page.goto('/');
     const viewport = page.viewportSize();
     await page.mouse.move(viewport.width / 2, viewport.height / 2);
-    await page.locator('#contact').scrollIntoViewIfNeeded();
+    await page.locator('#resume').scrollIntoViewIfNeeded();
     await expect
       .poll(() =>
         page.evaluate(() => {
-          const contact = document.getElementById('contact');
-          return Boolean(contact && contact.getBoundingClientRect().top < window.innerHeight);
+          const resume = document.getElementById('resume');
+          return Boolean(resume && resume.getBoundingClientRect().top < window.innerHeight);
         }),
       )
       .toBe(true);
@@ -75,14 +75,14 @@ test.describe('responsive portfolio layout', () => {
       const menuButton = page.getByRole('button', { name: 'Menu', exact: true });
       await expect(menuButton).toBeVisible();
       await page.evaluate(() => document.querySelector('.mobile-menu-toggle')?.click());
-      await expect(page.getByRole('navigation', { name: /mobile navigation/i }).getByRole('link', { name: /contact/i })).toHaveAttribute(
+      await expect(page.getByRole('navigation', { name: /mobile navigation/i }).getByRole('link', { name: /resume/i })).toHaveAttribute(
         'aria-current',
         'location',
       );
       return;
     }
 
-    await expect(page.getByRole('navigation', { name: /primary navigation/i }).getByRole('link', { name: /contact/i })).toHaveAttribute(
+    await expect(page.getByRole('navigation', { name: /primary navigation/i }).getByRole('link', { name: /resume/i })).toHaveAttribute(
       'aria-current',
       'location',
     );

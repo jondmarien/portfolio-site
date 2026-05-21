@@ -1,6 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 
 import { BrandIcon } from './BrandIcon.jsx';
+import { ContactList } from './ContactList.jsx';
 import { ExternalLink } from './ExternalLink.jsx';
 
 export function Sidebar({ profile }) {
@@ -104,7 +105,7 @@ export function Sidebar({ profile }) {
           </div>
         </div>
 
-        <QuickContact entries={profile.contact} />
+        <SidebarContact entries={profile.contact} />
       </div>
     </aside>
   );
@@ -125,7 +126,8 @@ function NavigationLinks({ activeSection, navigation, onNavigate }) {
 }
 
 function handleSidebarWheel(event) {
-  const sidebar = event.currentTarget;
+  const scrollRegion = event.currentTarget.querySelector('.sidebar-desktop-content');
+  const sidebar = scrollRegion ?? event.currentTarget;
 
   if (sidebar.scrollHeight <= sidebar.clientHeight) {
     return;
@@ -239,23 +241,11 @@ function useActiveSection(sectionIds) {
   return [activeSection, setActiveSection];
 }
 
-function QuickContact({ entries }) {
-  const quickContactIds = new Set(['work-email', 'linkedin', 'github']);
-  const quickContactEntries = entries.filter((entry) => quickContactIds.has(entry.id));
-
+function SidebarContact({ entries }) {
   return (
-    <div className="sidebar-section quick-contact" aria-label="Quick contact">
+    <div className="sidebar-section sidebar-contact" aria-label="Contact">
       <div className="sidebar-section-title">Contact</div>
-      <div className="quick-contact-links">
-        {quickContactEntries.map((entry) => (
-          <ExternalLink href={entry.href} key={entry.id}>
-            <span className="quick-contact-icon" aria-hidden="true">
-              <BrandIcon name={entry.icon ?? entry.id} />
-            </span>
-            <span>{entry.id === 'work-email' ? entry.text : entry.label}</span>
-          </ExternalLink>
-        ))}
-      </div>
+      <ContactList entries={entries} />
     </div>
   );
 }

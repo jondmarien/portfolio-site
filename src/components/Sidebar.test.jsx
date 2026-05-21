@@ -33,14 +33,13 @@ describe('Sidebar', () => {
     expect(dSportsLink.querySelector('.link-logo.is-zoomed')).toBeTruthy();
   });
 
-  it('adds brand icons to quick contact links', () => {
+  it('adds brand icons to sidebar contact links', () => {
     render(<Sidebar profile={profile} />);
 
-    const quickContact = screen.getByLabelText('Quick contact');
+    const sidebarContact = screen.getByLabelText('Contact');
 
-    expect(within(quickContact).getByRole('link', { name: /jon@d-sports\.org/i }).querySelector('.quick-contact-icon')).toBeTruthy();
-    expect(within(quickContact).getByRole('link', { name: /github/i }).querySelector('.quick-contact-icon')).toBeTruthy();
-    expect(within(quickContact).getByRole('link', { name: /linkedin/i }).querySelector('.quick-contact-icon')).toBeTruthy();
+    expect(within(sidebarContact).getByText('github').closest('.contact-row')?.querySelector('.contact-icon')).toBeTruthy();
+    expect(within(sidebarContact).getByText('work email').closest('.contact-row')?.querySelector('.contact-icon')).toBeTruthy();
   });
 
   it('syncs active navigation from viewport section positions during document scroll', () => {
@@ -68,7 +67,7 @@ describe('Sidebar', () => {
     profile.navigation.forEach((item) => document.getElementById(item.id)?.remove());
   });
 
-  it('marks contact active when the short final section is visible at scroll bottom', () => {
+  it('marks resume active when the final section is visible at scroll bottom', () => {
     Object.defineProperty(window, 'innerHeight', { configurable: true, value: 800 });
     profile.navigation.forEach((item) => {
       const section = document.createElement('section');
@@ -82,7 +81,7 @@ describe('Sidebar', () => {
     fireEvent.scroll(window);
 
     const navigation = screen.getByRole('navigation', { name: 'Primary navigation' });
-    expect(within(navigation).getByRole('link', { name: /contact/i })).toHaveAttribute('aria-current', 'location');
+    expect(within(navigation).getByRole('link', { name: /resume/i })).toHaveAttribute('aria-current', 'location');
     expect(within(navigation).getByRole('link', { name: /community/i })).not.toHaveAttribute('aria-current');
 
     profile.navigation.forEach((item) => document.getElementById(item.id)?.remove());
@@ -123,7 +122,7 @@ const sectionTopById = {
   security: -420,
   projects: 80,
   community: 720,
-  contact: 1320,
+  resume: 1320,
 };
 
 const sectionRectsAtBottom = {
@@ -131,5 +130,5 @@ const sectionRectsAtBottom = {
   security: { top: -1300, bottom: -800 },
   projects: { top: -800, bottom: -300 },
   community: { top: -300, bottom: 250 },
-  contact: { top: 360, bottom: 700 },
+  resume: { top: 360, bottom: 700 },
 };

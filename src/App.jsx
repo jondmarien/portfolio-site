@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 
 import { CommunityList } from './components/CommunityList.jsx';
-import { ContactList } from './components/ContactList.jsx';
 import { Hero } from './components/Hero.jsx';
 import { Layout } from './components/Layout.jsx';
 import { ProjectList } from './components/ProjectList.jsx';
+import { ResumeView } from './components/ResumeView.jsx';
 import { Section } from './components/Section.jsx';
 import { SecurityList } from './components/SecurityList.jsx';
 import { SegmentedControl } from './components/SegmentedControl.jsx';
 import { community } from './data/community.js';
 import { profile } from './data/profile.js';
 import { projectSortOptions, projects } from './data/projects.js';
+import { resume } from './data/resume.js';
 import { securityResearch } from './data/security.js';
 
 export default function App() {
@@ -83,8 +84,8 @@ export default function App() {
         <CommunityList entries={community} />
       </Section>
 
-      <Section id="contact" title="contact">
-        <ContactList entries={profile.contact} />
+      <Section id="resume" title="resume">
+        <ResumeView resume={resume} />
       </Section>
     </Layout>
   );

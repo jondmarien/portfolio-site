@@ -16,7 +16,7 @@ export const profile = {
     { id: 'security', label: 'security', icon: '⚑' },
     { id: 'projects', label: 'projects', icon: '⌥' },
     { id: 'community', label: 'community', icon: '◈' },
-    { id: 'contact', label: 'contact', icon: '@' },
+    { id: 'resume', label: 'resume', icon: '▤' },
   ],
   links: [
     { id: 'github', label: 'github', href: 'https://github.com/jondmarien', icon: 'github' },

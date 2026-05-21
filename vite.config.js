@@ -1,8 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+import { renderSeoHead } from './src/lib/renderSeoHead.js';
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'inject-seo-head',
+      transformIndexHtml(html) {
+        return html.replace('<!--seo-head-->', renderSeoHead());
+      },
+    },
+  ],
   build: {
     rolldownOptions: {
       output: {
