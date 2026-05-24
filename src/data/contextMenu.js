@@ -4,6 +4,7 @@ export function buildContextMenuGroups({ navigation }) {
   const navItems = navigation.map((item, index) => ({
     id: `nav-${item.id}`,
     label: item.label,
+    glyph: item.icon,
     shortcut: String(index + 1),
     action: { type: 'navigate', targetId: item.id },
   }));
@@ -15,12 +16,14 @@ export function buildContextMenuGroups({ navigation }) {
         {
           id: 'copy',
           label: 'Copy',
+          icon: 'copy',
           shortcut: formatShortcutLabel(['Mod', 'C']),
           action: { type: 'copy' },
         },
         {
           id: 'select-all',
           label: 'Select all',
+          icon: 'select-all',
           shortcut: formatShortcutLabel(['Mod', 'A']),
           action: { type: 'select-all' },
         },
@@ -36,18 +39,21 @@ export function buildContextMenuGroups({ navigation }) {
         {
           id: 'back',
           label: 'Back',
+          icon: 'back',
           shortcut: formatShortcutLabel(['Mod', '←']),
           action: { type: 'history', direction: 'back' },
         },
         {
           id: 'forward',
           label: 'Forward',
+          icon: 'forward',
           shortcut: formatShortcutLabel(['Mod', '→']),
           action: { type: 'history', direction: 'forward' },
         },
         {
           id: 'reload',
           label: 'Reload',
+          icon: 'reload',
           shortcut: formatShortcutLabel(['Mod', 'R']),
           action: { type: 'reload' },
         },

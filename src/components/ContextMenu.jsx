@@ -1,11 +1,30 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 
+import { ContextMenuLeading } from './ContextMenuIcons.jsx';
 import { useContextMenu } from '../hooks/useContextMenu.js';
 
-function ContextMenuItem({ active, item, onActivate, onHighlight, itemIndex }) {
+const menuVariants = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.12, ease: 'easeOut' },
+  },
+};
+
+function ContextMenuItem({ active, item, motionEnabled, onActivate, onHighlight, itemIndex, staggerDelay }) {
+  const ItemTag = motionEnabled ? motion.button : 'button';
+  const motionProps = motionEnabled
+    ? {
+      animate: { opacity: 1, y: 0 },
+      initial: { opacity: 0, y: 4 },
+      transition: { duration: 0.1, ease: 'easeOut', delay: staggerDelay },
+    }
+    : {};
+
   return (
-    <button
+    <ItemTag
       aria-label={item.label}
       className={`context-menu-item${active ? ' is-active' : ''}`}
       onClick={() => onActivate(item)}
@@ -13,15 +32,18 @@ function ContextMenuItem({ active, item, onActivate, onHighlight, itemIndex }) {
       role="menuitem"
       tabIndex={active ? 0 : -1}
       type="button"
+      {...motionProps}
     >
+      <ContextMenuLeading item={item} />
       <span className="context-menu-item-label">{item.label}</span>
       {item.shortcut ? <span className="context-menu-item-shortcut">{item.shortcut}</span> : null}
-    </button>
+    </ItemTag>
   );
 }
 
 export function ContextMenuProvider({ navigation }) {
   const prefersReducedMotion = useReducedMotion();
+  const motionEnabled = !prefersReducedMotion;
   const { activeIndex, activateItem, closeMenu, groups, menuRef, open, position, setActiveIndex } =
     useContextMenu({ navigation });
 
@@ -31,17 +53,27 @@ export function ContextMenuProvider({ navigation }) {
 
   let runningIndex = 0;
 
+  const menuMotionProps = motionEnabled
+    ? {
+      animate: 'visible',
+      initial: 'hidden',
+      variants: menuVariants,
+    }
+    : {
+      animate: { opacity: 1, scale: 1 },
+      initial: { opacity: 1, scale: 1 },
+    };
+
   return createPortal(
     open ? (
       <motion.div
-        animate={{ opacity: 1, scale: 1 }}
+        {...menuMotionProps}
         aria-label="Site context menu"
         className="context-menu"
-        initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.96 }}
         ref={menuRef}
         role="menu"
         style={{ top: position.y, left: position.x, transformOrigin: 'top left' }}
-        transition={{ duration: prefersReducedMotion ? 0 : 0.12, ease: 'easeOut' }}
+        transition={motionEnabled ? undefined : { duration: 0 }}
       >
         {groups.map((group, groupIndex) => (
           <div className="context-menu-group" key={group.id}>
@@ -56,8 +88,10 @@ export function ContextMenuProvider({ navigation }) {
                   item={item}
                   itemIndex={itemIndex}
                   key={item.id}
+                  motionEnabled={motionEnabled}
                   onActivate={activateItem}
                   onHighlight={setActiveIndex}
+                  staggerDelay={motionEnabled ? 0.03 + itemIndex * 0.02 : 0}
                 />
               );
             })}

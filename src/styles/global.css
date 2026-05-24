@@ -801,14 +801,14 @@ button,
 
 .context-menu {
   background: var(--bg-surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-dim);
   border-radius: 12px;
-  box-shadow: 0 10px 30px oklch(5% 0.01 260 / 45%);
-  min-width: 220px;
+  box-shadow: 0 10px 24px oklch(5% 0.01 260 / 40%);
+  min-width: 272px;
   padding: 6px;
   position: fixed;
   transform-origin: top left;
-  width: 248px;
+  width: 272px;
   z-index: 1000;
 }
 
@@ -821,7 +821,7 @@ button,
 .context-menu-separator {
   background: var(--border-dim);
   height: 1px;
-  margin: 4px 6px;
+  margin: 6px 8px;
 }
 
 .context-menu-item {
@@ -831,17 +831,22 @@ button,
   border-radius: 8px;
   color: var(--text);
   cursor: pointer;
-  display: flex;
+  display: grid;
   font-family: var(--mono);
   font-size: 12px;
-  gap: 12px;
-  justify-content: space-between;
-  padding: 8px 10px;
+  gap: 8px;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  padding: 9px 10px;
   text-align: left;
+  transition: background-color 120ms ease, color 120ms ease;
   width: 100%;
 }
 
-.context-menu-item:hover,
+.context-menu-item:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
 .context-menu-item.is-active,
 .context-menu-item:focus-visible {
   background: var(--bg-hover);
@@ -850,10 +855,46 @@ button,
   outline-offset: -2px;
 }
 
+.context-menu-item-leading-spacer {
+  display: block;
+  height: 16px;
+  width: 16px;
+}
+
+.context-menu-item-icon,
+.context-menu-item-glyph {
+  align-items: center;
+  color: var(--text-dim);
+  display: inline-flex;
+  height: 16px;
+  justify-content: center;
+  width: 16px;
+}
+
+.context-menu-item-glyph {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.context-menu-item:hover .context-menu-item-icon,
+.context-menu-item:hover .context-menu-item-glyph,
+.context-menu-item.is-active .context-menu-item-icon,
+.context-menu-item.is-active .context-menu-item-glyph {
+  color: var(--text-muted);
+}
+
+.context-menu-item-label {
+  min-width: 0;
+}
+
 .context-menu-item-shortcut {
   color: var(--text-dim);
-  font-size: 11px;
-  letter-spacing: 0.02em;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  min-width: 52px;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .context-menu-dismiss {

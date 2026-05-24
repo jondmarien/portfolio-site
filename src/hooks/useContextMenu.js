@@ -3,8 +3,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { buildContextMenuGroups, flattenContextMenuItems } from '../data/contextMenu.js';
 import { getPlatformModifier } from '../lib/keyboardShortcut.js';
 
-const MENU_WIDTH = 248;
-const MENU_HEIGHT_ESTIMATE = 320;
+const MENU_WIDTH = 272;
+const MENU_HEIGHT_ESTIMATE = 340;
 const MENU_MARGIN = 8;
 
 function getViewportScale() {
@@ -288,8 +288,7 @@ export function useContextMenu({ navigation }) {
 
   useEffect(() => {
     const handleContextMenu = (event) => {
-      const layout = document.querySelector('.layout');
-      if (!layout || !(event.target instanceof Node) || !layout.contains(event.target)) {
+      if (!(event.target instanceof Node)) {
         return;
       }
 

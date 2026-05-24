@@ -123,6 +123,15 @@ describe('App', () => {
     vi.useRealTimers();
   });
 
+  it('opens the custom context menu when right-clicking page margins outside the layout', () => {
+    render(<App />);
+
+    fireEvent.contextMenu(document.body, { clientX: 24, clientY: 180 });
+
+    expect(screen.getByRole('menu', { name: 'Site context menu' })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: 'Copy' })).toBeInTheDocument();
+  });
+
   it('opens profile and ISSessions images in a larger modal preview', () => {
     render(<App />);
 
