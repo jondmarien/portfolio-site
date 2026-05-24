@@ -1,9 +1,11 @@
 import { Sidebar } from './Sidebar.jsx';
 import { MobileFooter } from './MobileFooter.jsx';
+import { ContextMenuProvider } from './ContextMenu.jsx';
 
 export function Layout({ children, profile }) {
   return (
     <div className="layout">
+      <ContextMenuProvider navigation={profile.navigation} />
       <Sidebar profile={profile} />
       <main className="main">
         <Breadcrumb parts={profile.breadcrumb} />

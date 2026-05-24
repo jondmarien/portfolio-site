@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ASCIIText from './ASCIIText.jsx';
 import BorderGlow from './BorderGlow.jsx';
+import { ContributionsPanel } from './ContributionsPanel.jsx';
 import { RichText } from './RichText.jsx';
 
 export function Hero({ profile }) {
@@ -142,6 +143,7 @@ export function Hero({ profile }) {
           ))}
         </div>
       ) : null}
+      <ContributionsPanel />
       {expandedMediaItem ? (
         <div className="project-media-modal-backdrop" onClick={() => setExpandedMedia(null)} role="presentation">
           <div

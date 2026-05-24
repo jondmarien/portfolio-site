@@ -17,7 +17,7 @@ describe('App', () => {
     expect(navigationLinks).toEqual(['~about', '⚑security', '⌥projects', '◈community', '▤resume']);
 
     const sectionHeadings = screen.getAllByRole('heading', { level: 2 }).map((heading) => heading.textContent);
-    expect(sectionHeadings).toEqual(['security research', 'projects', 'community', 'resume']);
+    expect(sectionHeadings).toEqual(['# contributions', 'security research', 'projects', 'community', 'resume']);
 
     expect(screen.getByRole('heading', { level: 2, name: 'community' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { level: 2, name: 'contact' })).not.toBeInTheDocument();
