@@ -750,6 +750,87 @@ button,
   width: 100%;
 }
 
+.contributions-cell-button {
+  background: transparent;
+  cursor: default;
+  padding: 0;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.contributions-cell-button:hover,
+.contributions-cell-button:focus-visible {
+  border-color: oklch(76% 0.13 178 / 45%);
+  outline: none;
+}
+
+.contributions-cell-button:focus-visible {
+  box-shadow: 0 0 0 2px var(--focus-ring);
+}
+
+.contributions-cell-anchor {
+  anchor-name: --contributions-active-cell;
+}
+
+.contributions-popover {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px oklch(5% 0.01 260 / 42%);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  interest-delay: 0ms;
+  line-height: 1.4;
+  margin: 0;
+  margin-block-end: 6px;
+  max-width: min(280px, calc(100vw - 24px));
+  padding: 6px 10px;
+  pointer-events: none;
+  position: fixed;
+  position-anchor: --contributions-active-cell;
+  position-area: top;
+  position-try-fallbacks: flip-block;
+  white-space: nowrap;
+}
+
+.contributions-popover::after {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-dim);
+  border-right: 1px solid var(--border-dim);
+  bottom: -4px;
+  content: '';
+  height: 8px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+}
+
+@starting-style {
+  .contributions-popover:popover-open {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+.contributions-popover:popover-open {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease,
+    overlay 120ms ease allow-discrete,
+    display 120ms ease allow-discrete;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contributions-popover:popover-open {
+    transform: none;
+    transition: none;
+  }
+}
+
 .contributions-cell--level-0 {
   background: var(--bg-hover);
 }

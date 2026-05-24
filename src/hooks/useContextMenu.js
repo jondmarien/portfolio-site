@@ -47,6 +47,23 @@ function shouldUseNativeMenu(event) {
   return false;
 }
 
+function shouldUseNativeMenuForElement(element) {
+  if (!(element instanceof HTMLElement)) {
+    return true;
+  }
+
+  if (isEditableTarget(element)) {
+    return true;
+  }
+
+  const selection = window.getSelection();
+  if (selection && selection.toString().trim().length > 0) {
+    return true;
+  }
+
+  return false;
+}
+
 function clampPosition(x, y) {
   const scale = getViewportScale();
   const viewportWidth = window.innerWidth / scale;
@@ -150,26 +167,54 @@ export function useContextMenu({ navigation }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [context, setContext] = useState({ linkHref: null });
   const menuRef = useRef(null);
+  const invokerRef = useRef(null);
+  const openModeRef = useRef('pointer');
 
   const closeMenu = useCallback(() => {
+    const shouldRestoreFocus = openModeRef.current === 'keyboard';
+    const invoker = invokerRef.current;
+
     setOpen(false);
     setActiveIndex(0);
-  }, []);
 
-  const openMenu = useCallback((event) => {
-    if (shouldUseNativeMenu(event)) {
-      return;
+    if (shouldRestoreFocus && invoker instanceof HTMLElement && invoker.isConnected) {
+      invoker.focus({ preventScroll: true });
     }
 
-    event.preventDefault();
-    event.stopPropagation();
-    const pointer = getPointerPosition(event);
-    const nextPosition = clampPosition(pointer.x, pointer.y);
-    setPosition(nextPosition);
-    setContext({ linkHref: getLinkFromTarget(event.target) });
+    invokerRef.current = null;
+    openModeRef.current = 'pointer';
+  }, []);
+
+  const openMenuAt = useCallback(({ context: nextContext, invoker, mode, x, y }) => {
+    setPosition(clampPosition(x, y));
+    setContext(nextContext);
     setActiveIndex(0);
+    invokerRef.current = invoker ?? null;
+    openModeRef.current = mode;
     setOpen(true);
   }, []);
+
+  const openMenu = useCallback(
+    (event) => {
+      if (shouldUseNativeMenu(event)) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      const pointer = getPointerPosition(event);
+      const invoker = event.target instanceof HTMLElement ? event.target : null;
+
+      openMenuAt({
+        context: { linkHref: getLinkFromTarget(event.target) },
+        invoker,
+        mode: 'pointer',
+        x: pointer.x,
+        y: pointer.y,
+      });
+    },
+    [openMenuAt]
+  );
 
   const activateItem = useCallback(
     async (item) => {
@@ -287,6 +332,41 @@ export function useContextMenu({ navigation }) {
   }, [activateItem, activeIndex, closeMenu, items, open]);
 
   useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key !== 'F10' || !event.shiftKey || event.defaultPrevented) {
+        return;
+      }
+
+      const layout = document.querySelector('.layout');
+      const active = document.activeElement;
+
+      if (!layout || !(active instanceof HTMLElement) || !layout.contains(active)) {
+        return;
+      }
+
+      if (shouldUseNativeMenuForElement(active)) {
+        return;
+      }
+
+      event.preventDefault();
+      const scale = getViewportScale();
+      const rect = active.getBoundingClientRect();
+
+      openMenuAt({
+        context: { linkHref: getLinkFromTarget(active) },
+        invoker: active,
+        mode: 'keyboard',
+        x: rect.left / scale,
+        y: rect.bottom / scale,
+      });
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [openMenuAt]);
+
+  useEffect(() => {
     const handleContextMenu = (event) => {
       if (!(event.target instanceof Node)) {
         return;
@@ -321,4 +401,5 @@ export {
   isEditableTarget,
   runMenuAction,
   shouldUseNativeMenu,
+  shouldUseNativeMenuForElement,
 };

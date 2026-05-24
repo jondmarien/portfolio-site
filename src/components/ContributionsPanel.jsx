@@ -2,10 +2,12 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 
 import { githubConfig } from '../data/github.js';
-import { resolveMonthLabels } from '../lib/resolveMonthLabels.js';
-import { ExternalLink } from './ExternalLink.jsx';
+import { CONTRIBUTIONS_DAY_POPOVER_ID, useContributionDayPopover } from '../hooks/useContributionDayPopover.js';
 import { useKonamiCode } from '../hooks/useKonamiCode.js';
 import { usePrefetchSnake } from '../hooks/usePrefetchSnake.js';
+import { formatContributionDayLabel } from '../lib/formatContributionDayLabel.js';
+import { resolveMonthLabels } from '../lib/resolveMonthLabels.js';
+import { ExternalLink } from './ExternalLink.jsx';
 
 const LEVEL_CLASS_NAMES = [
   'contributions-cell--level-0',
@@ -15,36 +17,29 @@ const LEVEL_CLASS_NAMES = [
   'contributions-cell--level-4',
 ];
 
-function formatContributionDayLabel(day) {
-  if (!day?.date) {
-    return '';
-  }
-
-  const date = new Date(`${day.date}T00:00:00Z`);
-  const formattedDate = date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
-
-  if (!day.count) {
-    return `No contributions on ${formattedDate}.`;
-  }
-
-  const label = day.count === 1 ? 'contribution' : 'contributions';
-  return `${day.count} ${label} on ${formattedDate}.`;
-}
-
 function ContributionsHeatmap({ data }) {
   const weekCount = data.weeks.length;
   const monthLabels = useMemo(
     () => resolveMonthLabels(data.monthLabels ?? [], weekCount),
     [data.monthLabels, weekCount]
   );
+  const {
+    handleCellBlur,
+    handleCellFocus,
+    handleCellPointerEnter,
+    handleCellPointerLeave,
+    heatmapRef,
+    popoverRef,
+    useInterestInvokers,
+  } = useContributionDayPopover();
 
   return (
-    <div className="contributions-heatmap" role="img" aria-label="GitHub contribution activity heatmap">
+    <div
+      aria-label="GitHub contribution activity heatmap"
+      className="contributions-heatmap"
+      ref={heatmapRef}
+      role="group"
+    >
       <div
         aria-hidden="true"
         className="contributions-months"
@@ -60,15 +55,30 @@ function ContributionsHeatmap({ data }) {
         {data.weeks.map((week, weekIndex) => (
           <div className="contributions-week" key={`week-${weekIndex}`}>
             {week.map((day) => (
-              <span
-                className={`contributions-cell ${LEVEL_CLASS_NAMES[day.level] ?? LEVEL_CLASS_NAMES[0]}`}
+              <button
+                aria-label={formatContributionDayLabel(day)}
+                className={`contributions-cell contributions-cell-button ${LEVEL_CLASS_NAMES[day.level] ?? LEVEL_CLASS_NAMES[0]}`}
+                data-count={day.count}
+                data-date={day.date}
+                interestfor={useInterestInvokers ? CONTRIBUTIONS_DAY_POPOVER_ID : undefined}
                 key={day.date}
-                title={formatContributionDayLabel(day)}
+                onBlur={handleCellBlur}
+                onFocus={(event) => handleCellFocus(event.currentTarget, day)}
+                onMouseEnter={(event) => handleCellPointerEnter(event.currentTarget, day)}
+                onMouseLeave={handleCellPointerLeave}
+                type="button"
               />
             ))}
           </div>
         ))}
       </div>
+      <div
+        className="contributions-popover"
+        id={CONTRIBUTIONS_DAY_POPOVER_ID}
+        popover="hint"
+        ref={popoverRef}
+        role="tooltip"
+      />
     </div>
   );
 }

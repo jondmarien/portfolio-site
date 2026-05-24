@@ -1,7 +1,17 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, cleanup } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 
 import { ContributionsPanel } from './ContributionsPanel.jsx';
+import { CONTRIBUTIONS_DAY_POPOVER_ID } from '../hooks/useContributionDayPopover.js';
+import * as supportsInterestInvokersModule from '../lib/supportsInterestInvokers.js';
+
+vi.mock('../lib/supportsInterestInvokers.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    supportsInterestInvokers: vi.fn(() => false),
+  };
+});
 
 const samplePayload = {
   username: 'jondmarien',
@@ -15,8 +25,41 @@ const samplePayload = {
   ],
 };
 
+function installPopoverPolyfill() {
+  if (!HTMLElement.prototype.showPopover) {
+    HTMLElement.prototype.showPopover = vi.fn(function showPopover() {
+      this.setAttribute('data-popover-open', 'true');
+    });
+  }
+
+  if (!HTMLElement.prototype.hidePopover) {
+    HTMLElement.prototype.hidePopover = vi.fn(function hidePopover() {
+      this.removeAttribute('data-popover-open');
+    });
+  }
+
+  const originalMatches = HTMLElement.prototype.matches;
+  HTMLElement.prototype.matches = function matches(selector) {
+    if (selector === ':popover-open') {
+      return this.hasAttribute('data-popover-open');
+    }
+
+    return originalMatches.call(this, selector);
+  };
+
+  return () => {
+    HTMLElement.prototype.matches = originalMatches;
+  };
+}
+
 describe('ContributionsPanel', () => {
+  let restoreMatches;
+
   beforeEach(() => {
+    restoreMatches = installPopoverPolyfill();
+    supportsInterestInvokersModule.supportsInterestInvokers.mockReturnValue(false);
+    supportsInterestInvokersModule.resetSupportsInterestInvokersCacheForTests();
+
     vi.stubGlobal(
       'fetch',
       vi.fn(async (url) => {
@@ -36,15 +79,78 @@ describe('ContributionsPanel', () => {
   });
 
   afterEach(() => {
+    restoreMatches?.();
     vi.unstubAllGlobals();
+    vi.clearAllMocks();
+    supportsInterestInvokersModule.resetSupportsInterestInvokersCacheForTests();
   });
 
   it('renders contribution summary and heatmap by default', async () => {
     render(<ContributionsPanel />);
 
     expect(await screen.findByText('42 GitHub contributions in the last year')).toBeInTheDocument();
-    expect(screen.getByRole('img', { name: 'GitHub contribution activity heatmap' })).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'GitHub contribution activity heatmap' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: '@jondmarien' })).toHaveAttribute('href', 'https://github.com/jondmarien');
+  });
+
+  it('uses button cells without native title tooltips', async () => {
+    render(<ContributionsPanel />);
+
+    await screen.findByText('42 GitHub contributions in the last year');
+
+    const cells = screen.getAllByRole('button', { name: /contributions on May/i });
+    expect(cells.length).toBeGreaterThan(0);
+    cells.forEach((cell) => {
+      expect(cell).not.toHaveAttribute('title');
+    });
+  });
+
+  it('shows popover label on hover when interest invokers are unavailable', async () => {
+    render(<ContributionsPanel />);
+
+    await screen.findByText('42 GitHub contributions in the last year');
+
+    const activeCell = screen.getByRole('button', { name: '3 contributions on May 26th.' });
+    const popover = document.getElementById(CONTRIBUTIONS_DAY_POPOVER_ID);
+
+    expect(popover).toBeTruthy();
+    expect(activeCell).not.toHaveAttribute('interestfor');
+
+    fireEvent.mouseEnter(activeCell);
+
+    expect(popover).toHaveTextContent('3 contributions on May 26th.');
+    expect(popover).toHaveAttribute('data-popover-open', 'true');
+    expect(activeCell).toHaveClass('contributions-cell-anchor');
+  });
+
+  it('uses interest invokers when supported', async () => {
+    supportsInterestInvokersModule.supportsInterestInvokers.mockReturnValue(true);
+    supportsInterestInvokersModule.resetSupportsInterestInvokersCacheForTests();
+
+    render(<ContributionsPanel />);
+
+    await screen.findByText('42 GitHub contributions in the last year');
+
+    const activeCell = screen.getByRole('button', { name: '3 contributions on May 26th.' });
+    const popover = document.getElementById(CONTRIBUTIONS_DAY_POPOVER_ID);
+
+    expect(activeCell).toHaveAttribute('interestfor', CONTRIBUTIONS_DAY_POPOVER_ID);
+
+    popover.dispatchEvent(
+      Object.assign(new Event('interest', { bubbles: true }), { source: activeCell })
+    );
+
+    expect(popover).toHaveTextContent('3 contributions on May 26th.');
+  });
+
+  it('keeps legend squares non-interactive', async () => {
+    render(<ContributionsPanel />);
+
+    await screen.findByText('42 GitHub contributions in the last year');
+
+    const legend = document.querySelector('.contributions-legend');
+    expect(legend?.querySelectorAll('button')).toHaveLength(0);
+    expect(legend?.querySelectorAll('span.contributions-cell').length).toBeGreaterThan(0);
   });
 
   it('shows snake animation after konami code unlock', async () => {
@@ -104,7 +210,7 @@ describe('ContributionsPanel', () => {
     render(<ContributionsPanel />);
 
     expect(await screen.findByText('42 GitHub contributions in the last year')).toBeInTheDocument();
-    expect(screen.getByRole('img', { name: 'GitHub contribution activity heatmap' })).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'GitHub contribution activity heatmap' })).toBeInTheDocument();
     expect(screen.queryByLabelText('GitHub contribution snake animation')).not.toBeInTheDocument();
   });
 });

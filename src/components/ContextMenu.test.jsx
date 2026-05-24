@@ -1,9 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi, afterEach } from 'vitest';
 
+import { ContextMenuProvider } from './ContextMenu.jsx';
 import { ContextMenuLeading, ContextMenuIcon } from './ContextMenuIcons.jsx';
 import { buildContextMenuGroups, flattenContextMenuItems } from '../data/contextMenu.js';
-import { clampPosition, getPointerPosition, shouldUseNativeMenu } from '../hooks/useContextMenu.js';
+import {
+  clampPosition,
+  getPointerPosition,
+  shouldUseNativeMenu,
+  shouldUseNativeMenuForElement,
+} from '../hooks/useContextMenu.js';
+
+const navigation = [{ id: 'about', label: 'about', icon: '~' }];
 
 describe('context menu data', () => {
   it('builds navigation shortcuts from profile navigation', () => {
@@ -65,6 +73,68 @@ describe('shouldUseNativeMenu', () => {
     Object.defineProperty(event, 'target', { value: input });
 
     expect(shouldUseNativeMenu(event)).toBe(true);
+    expect(shouldUseNativeMenuForElement(input)).toBe(true);
+  });
+});
+
+describe('ContextMenuProvider keyboard', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  function renderMenu() {
+    return render(
+      <div className="layout">
+        <a href="https://example.com">Example link</a>
+        <input aria-label="Name" />
+        <ContextMenuProvider navigation={navigation} />
+      </div>
+    );
+  }
+
+  it('opens the custom menu on Shift+F10 when a layout link is focused', async () => {
+    renderMenu();
+
+    const link = screen.getByRole('link', { name: 'Example link' });
+    link.focus();
+
+    fireEvent.keyDown(window, { key: 'F10', shiftKey: true });
+
+    await waitFor(() => {
+      expect(screen.getByRole('menu', { name: 'Site context menu' })).toBeInTheDocument();
+    });
+  });
+
+  it('does not open the custom menu on Shift+F10 for editable targets', () => {
+    renderMenu();
+
+    const input = screen.getByRole('textbox', { name: 'Name' });
+    input.focus();
+
+    fireEvent.keyDown(window, { key: 'F10', shiftKey: true });
+
+    expect(screen.queryByRole('menu', { name: 'Site context menu' })).not.toBeInTheDocument();
+  });
+
+  it('restores focus to the invoker after Escape closes a keyboard-opened menu', async () => {
+    renderMenu();
+
+    const link = screen.getByRole('link', { name: 'Example link' });
+    link.focus();
+
+    fireEvent.keyDown(window, { key: 'F10', shiftKey: true });
+
+    await waitFor(() => {
+      expect(screen.getByRole('menu', { name: 'Site context menu' })).toBeInTheDocument();
+    });
+
+    fireEvent.keyDown(window, { key: 'Escape' });
+
+    await waitFor(() => {
+      expect(screen.queryByRole('menu', { name: 'Site context menu' })).not.toBeInTheDocument();
+    });
+
+    expect(document.activeElement).toBe(link);
   });
 });
 
