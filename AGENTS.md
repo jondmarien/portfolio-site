@@ -22,3 +22,11 @@
 - Project sorting uses accessible radio semantics. Preserve keyboard navigation and `aria-checked` behavior.
 - Contact and navigation links need visible hover/focus states. Do not make rest and interactive colors identical when a transition implies affordance.
 - Use `bun run test` for the full Vitest suite, targeted `bun run test -- <path>` while iterating, `bun run test:e2e` for Playwright, and `bun run build` before claiming production readiness.
+
+## Cursor Cloud specific instructions
+
+- **Runtime**: Bun is installed via `bun.sh` at `~/.bun/bin/bun`. The update script ensures it is on `PATH` and runs `bun install`.
+- **Single service**: The only dev service is `bun run dev` (Vite on port 5173). No databases, Docker, or external APIs are required.
+- **Playwright browsers**: The update script runs `bunx playwright install --with-deps` so E2E tests work immediately. Playwright auto-starts its own Vite server on port 5174 (configurable via `PLAYWRIGHT_PORT`).
+- **No linter config**: The repo has no ESLint or Prettier config. Use `bun run build` as the closest correctness gate beyond tests.
+- **Commands reference**: See `DEVELOPMENT.md` for setup/run and `TESTING.md` for the full verification workflow. Key commands: `bun run dev`, `bun run test`, `bun run test:e2e`, `bun run build`.
