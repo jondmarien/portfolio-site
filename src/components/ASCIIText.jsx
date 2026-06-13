@@ -424,6 +424,22 @@ class CanvAscii {
     animateFrame();
   }
 
+  pause() {
+    if (this.paused) {
+      return;
+    }
+    this.paused = true;
+    cancelAnimationFrame(this.animationFrameId);
+  }
+
+  resume() {
+    if (!this.paused) {
+      return;
+    }
+    this.paused = false;
+    this.animate();
+  }
+
   render() {
     const time = new Date().getTime() * 0.001;
 
@@ -498,6 +514,34 @@ export default function ASCIIText({
     let cancelled = false;
     let observer = null;
     let ro = null;
+    let visObserver = null;
+    let inView = true;
+
+    // stop the rAF loop (canvas texture upload + ASCII DOM rewrite per frame)
+    // whenever the effect is scrolled out of view or the tab is hidden
+    const syncRunning = () => {
+      const instance = asciiRef.current;
+      if (!instance) return;
+      if (inView && !document.hidden) {
+        instance.resume();
+      } else {
+        instance.pause();
+      }
+    };
+
+    const onVisibilityChange = () => syncRunning();
+
+    const attachVisibilityObserver = () => {
+      visObserver = new IntersectionObserver(
+        ([entry]) => {
+          inView = entry.isIntersecting;
+          syncRunning();
+        },
+        { threshold: 0 }
+      );
+      visObserver.observe(containerRef.current);
+      document.addEventListener('visibilitychange', onVisibilityChange);
+    };
 
     const createAndInit = async (container, w, h) => {
       const instance = new CanvAscii(
@@ -547,6 +591,7 @@ export default function ASCIIText({
                   if (asciiRef.current) {
                     instance.load();
                     attachResizeObserver();
+                    attachVisibilityObserver();
                     onReady?.();
                   }
                 } catch (error) {
@@ -573,6 +618,7 @@ export default function ASCIIText({
         if (asciiRef.current) {
           instance.load();
           attachResizeObserver();
+          attachVisibilityObserver();
           onReady?.();
         }
       } catch (error) {
@@ -587,6 +633,8 @@ export default function ASCIIText({
       cancelled = true;
       if (observer) observer.disconnect();
       if (ro) ro.disconnect();
+      if (visObserver) visObserver.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       if (asciiRef.current) {
         asciiRef.current.dispose();
         asciiRef.current = null;

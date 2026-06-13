@@ -10,7 +10,7 @@ export const resume = {
       id: 'd-sports',
       organization: 'D-Sports | Transforming the Digital Sports Fan Landscape',
       href: 'https://d-sports.org',
-      dateRange: { start: 'Oct 2025', end: 'Present' },
+      dateRange: { start: 'Apr 2025', end: 'Present' },
       roles: [
         {
           id: 'd-sports-cto',

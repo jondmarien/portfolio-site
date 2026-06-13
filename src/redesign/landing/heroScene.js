@@ -55,7 +55,7 @@ export function createHeroScene(canvas, { reducedMotion = false } = {}) {
     alpha: true,
     powerPreference: 'high-performance',
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
@@ -111,22 +111,35 @@ export function createHeroScene(canvas, { reducedMotion = false } = {}) {
   const raycaster = new THREE.Raycaster();
   const ndc = new THREE.Vector2();
   const hit = new THREE.Vector3();
+  const localHit = new THREE.Vector3();
+  let pendingPointer = null;
 
+  // pointermove can fire at 120+ Hz; just record the position here and do the
+  // raycast at most once per rendered frame
   function setPointer(clientX, clientY) {
+    pendingPointer = { x: clientX, y: clientY };
+  }
+
+  function resolvePointer() {
+    if (!pendingPointer) return;
+    const { x, y } = pendingPointer;
+    pendingPointer = null;
     const rect = canvas.getBoundingClientRect();
-    ndc.x = ((clientX - rect.left) / rect.width) * 2 - 1;
-    ndc.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+    if (rect.width === 0 || rect.height === 0) return;
+    ndc.x = ((x - rect.left) / rect.width) * 2 - 1;
+    ndc.y = -((y - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(ndc, camera);
     // transform plane into points' local space by inverse-rotating the ray is
     // overkill here; approximate with the tilted plane's world intersection.
     if (raycaster.ray.intersectPlane(raycastPlane, hit)) {
-      const local = hit.clone();
-      points.worldToLocal(local);
-      pointerTarget.set(local.x, local.y);
+      localHit.copy(hit);
+      points.worldToLocal(localHit);
+      pointerTarget.set(localHit.x, localHit.y);
     }
   }
 
   function clearPointer() {
+    pendingPointer = null;
     pointerTarget.set(999, 999);
   }
 
@@ -137,13 +150,15 @@ export function createHeroScene(canvas, { reducedMotion = false } = {}) {
   }
 
   let raf = 0;
+  let running = false;
   const startTime = performance.now();
 
   function frame() {
+    resolvePointer();
     uniforms.uTime.value = (performance.now() - startTime) / 1000;
     uniforms.uPointer.value.lerp(pointerTarget, 0.08);
     renderer.render(scene, camera);
-    if (!reducedMotion) {
+    if (running) {
       raf = requestAnimationFrame(frame);
     }
   }
@@ -154,15 +169,28 @@ export function createHeroScene(canvas, { reducedMotion = false } = {}) {
       renderer.render(scene, camera);
       return;
     }
+    resume();
+  }
+
+  function pause() {
+    if (!running) return;
+    running = false;
+    cancelAnimationFrame(raf);
+  }
+
+  function resume() {
+    if (running || reducedMotion) return;
+    running = true;
     raf = requestAnimationFrame(frame);
   }
 
   function dispose() {
+    running = false;
     cancelAnimationFrame(raf);
     geometry.dispose();
     material.dispose();
     renderer.dispose();
   }
 
-  return { start, resize, setPointer, clearPointer, dispose };
+  return { start, resize, setPointer, clearPointer, pause, resume, dispose };
 }

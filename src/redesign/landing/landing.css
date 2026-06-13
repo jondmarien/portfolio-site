@@ -24,9 +24,9 @@ body {
 /* film grain */
 .grain {
   position: fixed;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
+  inset: -25%;
+  width: 150%;
+  height: 150%;
   pointer-events: none;
   z-index: 60;
   opacity: 0.05;
@@ -192,7 +192,6 @@ body {
 
 .word {
   display: inline-block;
-  will-change: transform;
 }
 
 .hero-rule {
@@ -519,7 +518,6 @@ body {
   border: 1px solid var(--border);
   background: var(--bg-surface);
   aspect-ratio: 16 / 10;
-  will-change: clip-path;
 }
 
 .work-visual img {
@@ -527,7 +525,6 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  will-change: transform;
 }
 
 /* ---------- rich text bits ---------- */

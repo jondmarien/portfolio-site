@@ -87,7 +87,24 @@ export default function LandingApp() {
     scene.start();
     window.addEventListener('resize', onResize);
     const onPointer = (e) => scene.setPointer(e.clientX, e.clientY);
-    window.addEventListener('pointermove', onPointer);
+    window.addEventListener('pointermove', onPointer, { passive: true });
+
+    // render the particle field only while the hero is on screen and the tab is visible
+    let heroInView = true;
+    const syncHeroRunning = () => {
+      if (heroInView && !document.hidden) scene.resume();
+      else scene.pause();
+    };
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        heroInView = entry.isIntersecting;
+        syncHeroRunning();
+      },
+      { threshold: 0 }
+    );
+    heroObserver.observe(heroEl);
+    const onVisibility = () => syncHeroRunning();
+    document.addEventListener('visibilitychange', onVisibility);
 
     // --- lenis smooth scroll, driven by gsap ticker ---
     let lenis;
@@ -278,6 +295,8 @@ export default function LandingApp() {
       }
       window.removeEventListener('resize', onResize);
       window.removeEventListener('pointermove', onPointer);
+      heroObserver.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
       scene.dispose();
     };
   }, []);
