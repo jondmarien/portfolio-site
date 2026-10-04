@@ -1,99 +1,58 @@
 {
   "username": "jondmarien",
-  "totalContributions": 6763,
-  "generatedAt": "2026-10-03T10:58:51.345Z",
+  "totalContributions": 6764,
+  "generatedAt": "2026-10-04T11:40:53.384Z",
   "monthLabels": [
     {
-      "weekIndex": 0,
-      "label": "Oct"
-    },
-    {
-      "weekIndex": 4,
+      "weekIndex": 3,
       "label": "Nov"
     },
     {
-      "weekIndex": 9,
+      "weekIndex": 8,
       "label": "Dec"
     },
     {
-      "weekIndex": 13,
+      "weekIndex": 12,
       "label": "Jan"
     },
     {
-      "weekIndex": 18,
+      "weekIndex": 17,
       "label": "Feb"
     },
     {
-      "weekIndex": 22,
+      "weekIndex": 21,
       "label": "Mar"
     },
     {
-      "weekIndex": 26,
+      "weekIndex": 25,
       "label": "Apr"
     },
     {
-      "weekIndex": 30,
+      "weekIndex": 29,
       "label": "May"
     },
     {
-      "weekIndex": 35,
+      "weekIndex": 34,
       "label": "Jun"
     },
     {
-      "weekIndex": 39,
+      "weekIndex": 38,
       "label": "Jul"
     },
     {
-      "weekIndex": 43,
+      "weekIndex": 42,
       "label": "Aug"
     },
     {
-      "weekIndex": 48,
+      "weekIndex": 47,
       "label": "Sep"
     },
     {
-      "weekIndex": 52,
+      "weekIndex": 51,
       "label": "Oct"
     }
   ],
   "weeks": [
-    [
-      {
-        "date": "2025-09-28",
-        "level": 1,
-        "count": 5
-      },
-      {
-        "date": "2025-09-29",
-        "level": 1,
-        "count": 11
-      },
-      {
-        "date": "2025-09-30",
-        "level": 0,
-        "count": 0
-      },
-      {
-        "date": "2025-10-01",
-        "level": 0,
-        "count": 0
-      },
-      {
-        "date": "2025-10-02",
-        "level": 1,
-        "count": 1
-      },
-      {
-        "date": "2025-10-03",
-        "level": 1,
-        "count": 5
-      },
-      {
-        "date": "2025-10-04",
-        "level": 1,
-        "count": 1
-      }
-    ],
     [
       {
         "date": "2025-10-05",
@@ -2014,8 +1973,15 @@
       },
       {
         "date": "2026-10-03",
-        "level": 1,
-        "count": 23
+        "level": 2,
+        "count": 24
+      }
+    ],
+    [
+      {
+        "date": "2026-10-04",
+        "level": 0,
+        "count": 0
       }
     ]
   ]
